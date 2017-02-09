@@ -1,0 +1,24 @@
+{
+  "name": "bolster",
+  "version": "1.0.0",
+  "description": "A fun approach to finance and budgets",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theagilezebra/bolster.git"
+  },
+  "keywords": [
+    "finance",
+    "budgets",
+    "games"
+  ],
+  "author": "Colby Barthelmess, Scott Chao, Marc Maniez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theagilezebra/bolster/issues"
+  },
+  "homepage": "https://github.com/theagilezebra/bolster#readme"
+}
