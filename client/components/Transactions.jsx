@@ -4,8 +4,8 @@ import TransactionTable from './TransactionTable.jsx';
 
 const Transactions = props => ( // all transactions linked to a user
   <div>
-    <TransactionTable />
     <TransactionChart />
+    <TransactionTable />
   </div>
 );
 

@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
 import React from 'react';
+import { connect } from 'react-redux';
 import Signout from './Signout.jsx';
 
 const NavBar = props => ( // universal navbar renders according to user session status
@@ -13,6 +13,6 @@ const NavBar = props => ( // universal navbar renders according to user session 
   </div>
 );
 
-export default connect((state => ({
+export default connect(state => ({
   // allow signing out from any view the navbar is in, destroy the session here
-})))(NavBar);
+}))(NavBar);
