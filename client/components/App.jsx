@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // actions and other components
 
-import css from '.../styles/main.css';
+import css from '../styles/main.css';
 
 class App extends React.Component {
   render() {

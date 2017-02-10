@@ -1,12 +1,12 @@
 import React from 'react';
-import { signin } from '../actions/userActions';
+import { signinOrSignup } from '../actions/userActions';
 
 export default function Signin({ dispatch }) {
   let emailInput = null;
   let passwordInput = null;
 
   const submitHandler = (e) => {
-    dispatch(signin({
+    dispatch(signinOrSignup({
       email: emailInput.value,
       password: passwordInput.value,
     }));
