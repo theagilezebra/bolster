@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+// actions and other components
+
+import css from '.../styles/main.css';
 
 class App extends React.Component {
   render() {
@@ -8,4 +12,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(state => ({
+
+}))(App);
