@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddBank = props => (
+const AddBank = props => ( // loads up the plaid api and interaction
   <div>
     {/**/}
   </div>

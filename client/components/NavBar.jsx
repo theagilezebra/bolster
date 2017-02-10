@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Signout from './Signout.jsx';
 
-const NavBar = props => (
+const NavBar = props => ( // universal navbar renders according to user session status
   <div>
     {/*
       if session exists

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Jumbotron1 = props => (
+const Jumbotron1 = props => ( // top third of the landing page
   <div>
     {/**/}
   </div>

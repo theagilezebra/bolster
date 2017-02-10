@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BudgetGraph = props => (
+const BudgetGraph = props => ( // holds a 'linechart?' relating to a goal
   <div>
     {/**/}
   </div>
