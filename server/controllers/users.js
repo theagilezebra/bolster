@@ -24,7 +24,18 @@ module.exports = {
 
   login: (req, res) => {
     const { email, password } = req.body;
-    // if username does not exist
-      // send 
+    new User({ email }).fetch().then((userInstance) => {
+      console.log('email', email, 'password', password, 'hash', userInstance);
+      bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
+        if (match) {
+          // create session
+          res.redirect('/');
+        } else {
+          res.status(401).end('wrong username or password');
+        }
+      });
+    }).catch((err) => {
+      res.status(401).end('wrong username or password');
+    });
   },
 };
