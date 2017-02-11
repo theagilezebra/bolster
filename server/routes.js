@@ -5,6 +5,6 @@ const morgan = require('morgan');
 const routes = express.Router();
 
 routes.post('/users', users.createUser);
-routes.get('/users', () => {});
+routes.post('/users/login', users.login);
 
 module.exports = routes;
