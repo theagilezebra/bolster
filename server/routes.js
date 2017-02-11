@@ -13,7 +13,6 @@ routes.post('/users/login', users.login);
 routes.put('/users/update/:email', users.update);
 
 routes.post('/accounts/create', accounts.create);
-
 routes.post('/accounts', (req, res) => {
   plaidClient.exchangeToken(req.body.token, (exchangeErr, exchangeTokenRes) => {
     if (exchangeErr != null) {
