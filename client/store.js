@@ -18,11 +18,5 @@ const defaultState = {
         pointBackgroundColor: "#9B59B6"
         }]
       },
-    linedata: {
-        labels: ["Utilities","Food And Drink","Healthcare", "Car Payment", "Mortgage"],
-        datasets: [{
-        data: [300, 180, 200, 125, 800],
-        }]
-    }
 };
 export default createStore(reducer, defaultState, middleware);
