@@ -1,7 +1,21 @@
-const users = require('./users');
-const accounts = require('./accounts');
+const db = require('../database');
+
+const Account = require('./account');
+const Address = require('./address');
+const Budget = require('./budget');
+const User = require('./user');
+const Business = require('./business');
+const Category = require('./category');
+const Goal = require('./goal');
+const Transaction = require('./transaction');
 
 module.exports = {
-  users,
-  accounts,
+  Account,
+  Address,
+  Budget,
+  Business,
+  Category,
+  Goal,
+  Transaction,
+  User,
 };
