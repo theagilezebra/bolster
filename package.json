@@ -36,6 +36,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.1",
     "bookshelf": "^0.10.3",
     "chart.js": "^1.1.1",
