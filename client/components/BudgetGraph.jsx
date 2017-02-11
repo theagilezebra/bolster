@@ -1,8 +1,9 @@
 import React from 'react';
+import { Line } from 'react-chartjs'
 
-const BudgetGraph = props => ( // holds a 'linechart?' relating to a goal
+const BudgetGraph = props => (
   <div>
-    {/**/}
+    <Line data={props.data} height="450" width="900"/>
   </div>
 );
 
