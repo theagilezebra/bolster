@@ -1,11 +1,13 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
+const middleware = require('./middleware');
+const morgan = require('morgan');
 
 const app = express();
 
 app.listen(3000);
-app.use(express.static(path.join(__dirname, '../dist')));
-app.use('/api', routes);
 
-module.exports = app;
+middleware(app, express);
+app.use('/api', routes);
+app.use(express.static(path.join(__dirname, '../dist')));

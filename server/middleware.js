@@ -1,4 +1,8 @@
 const morgan = require('morgan');
-const app = require('./server');
+const bodyParser = require('body-parser');
 
-app.use(morgan('dev'));
+module.exports = (app, express) => {
+  app.use(morgan('dev'));
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+};
