@@ -6,6 +6,34 @@ const db = require('knex')({
   },
 });
 
+db.schema.hasTable('addresses').then((exists) => {
+  if (!exists) {
+    db.schema.createTable('addresses', (addresses) => {
+      addresses.increments('id').primary();
+      addresses.string('address', 50);
+      addresses.string('city', 35);
+      addresses.string('ZIP', 10);
+      addresses.string('state', 35);
+      addresses.string('country', 35);
+      addresses.timestamps();
+    }).then((addresses) => {
+      console.log('Created Table:', addresses);
+    });
+  }
+});
+
+db.schema.hasTable('categories').then((exists) => {
+  if (!exists) {
+    db.schema.createTable('categories', (categories) => {
+      categories.increments('id').primary();
+      categories.string('name', 35).notNullable();
+      categories.timestamps();
+    }).then((categories) => {
+      console.log('Created Table:', categories);
+    });
+  }
+});
+
 db.schema.hasTable('users').then((exists) => {
   if (!exists) {
     db.schema.createTable('users', (users) => {
@@ -44,27 +72,6 @@ db.schema.hasTable('accounts').then((exists) => {
   }
 });
 
-db.schema.hasTable('transactions').then((exists) => {
-  if (!exists) {
-    db.schema.createTable('transactions', (transactions) => {
-      transactions.increments('id').primary();
-      transactions.integer('amount').notNullable();
-      transactions.dateTime('date').notNullable();
-      transactions.integer('user_id').unsigned();
-      transactions.foreign('user_id').references('users.id');
-      transactions.integer('account_id').unsigned();
-      transactions.foreign('account_id').references('accounts.id');
-      transactions.integer('business_id').unsigned();
-      transactions.foreign('business_id').references('businesses.id');
-      transactions.integer('category_id').unsigned();
-      transactions.foreign('category_id').references('categories.id');
-      transactions.timestamps();
-    }).then((transactions) => {
-      console.log('Created Table:', transactions);
-    });
-  }
-});
-
 db.schema.hasTable('businesses').then((exists) => {
   if (!exists) {
     db.schema.createTable('businesses', (businesses) => {
@@ -78,22 +85,6 @@ db.schema.hasTable('businesses').then((exists) => {
       businesses.timestamps();
     }).then((businesses) => {
       console.log('Created Table:', businesses);
-    });
-  }
-});
-
-db.schema.hasTable('addresses').then((exists) => {
-  if (!exists) {
-    db.schema.createTable('addresses', (addresses) => {
-      addresses.increments('id').primary();
-      addresses.string('address', 50);
-      addresses.string('city', 35);
-      addresses.string('ZIP', 10);
-      addresses.string('state', 35);
-      addresses.string('country', 35);
-      addresses.timestamps();
-    }).then((addresses) => {
-      console.log('Created Table:', addresses);
     });
   }
 });
@@ -144,14 +135,23 @@ db.schema.hasTable('achievements').then((exists) => {
   }
 });
 
-db.schema.hasTable('categories').then((exists) => {
+db.schema.hasTable('transactions').then((exists) => {
   if (!exists) {
-    db.schema.createTable('categories', (categories) => {
-      categories.increments('id').primary();
-      categories.string('name', 35).notNullable();
-      categories.timestamps();
-    }).then((categories) => {
-      console.log('Created Table:', categories);
+    db.schema.createTable('transactions', (transactions) => {
+      transactions.increments('id').primary();
+      transactions.integer('amount').notNullable();
+      transactions.dateTime('date').notNullable();
+      transactions.integer('user_id').unsigned();
+      transactions.foreign('user_id').references('users.id');
+      transactions.integer('account_id').unsigned();
+      transactions.foreign('account_id').references('accounts.id');
+      transactions.integer('business_id').unsigned();
+      transactions.foreign('business_id').references('businesses.id');
+      transactions.integer('category_id').unsigned();
+      transactions.foreign('category_id').references('categories.id');
+      transactions.timestamps();
+    }).then((transactions) => {
+      console.log('Created Table:', transactions);
     });
   }
 });
