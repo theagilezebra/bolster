@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import users from './userReducer.js';
-import goals from './goalReducer.js';
-import transactions from './transReducer.js';
+import users from './userReducer';
+import goals from './goalReducer';
+import transactions from './transReducer';
+import accounts from './accountReducer';
 
 export default combineReducers({
-    users,
-    goals,
-    transactions
+  users,
+  goals,
+  transactions,
+  accounts,
 });
