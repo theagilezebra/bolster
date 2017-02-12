@@ -8,7 +8,7 @@ const accounts = require('./controllers/accounts');
 
 const routes = express.Router();
 
-routes.post('/users/signup', users.createUser);
+routes.post('/users/signup', users.create);
 routes.post('/users/login', users.login);
 routes.put('/users/update/:email', users.update);
 
