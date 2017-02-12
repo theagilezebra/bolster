@@ -39,6 +39,7 @@
     "body-parser": "^1.16.1",
     "bookshelf": "^0.10.3",
     "chart.js": "^1.1.1",
+    "css-loader": "^0.26.1",
     "express": "^4.14.1",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.28.0",

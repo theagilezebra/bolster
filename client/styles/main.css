@@ -1,3 +1,31 @@
-body {
-  /**/
+.lightgreenjumbo{
+  padding-top: 200px;
+  text-align: center;
+  height: 75vh;
+  background-color: #9CF3C9;
 }
+
+.greennav {
+  height: 80px;
+  background-color: #9CF3C9;
+}
+.moneyjumbo {
+  height: 100vh;
+  background-image: url('../assets/pencil_money.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.darkgreenjumbo {
+  height: 100vh;
+  background-color: seagreen;
+}
+
+.inputsize {
+  margin: auto;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 500px;
+  height: 60px;
+}
+

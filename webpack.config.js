@@ -27,7 +27,15 @@ module.exports = {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader'],
       },
-      { test: /\.(svg|ttf|woff|woff2|eot)$/, loader: 'url?limit=5000' },
+      { 
+        test: /\.(svg|ttf|woff|woff2|eot)$/, 
+        loader: 'url?limit=5000' 
+      },
+      {
+        test: /\.png$/,
+        loader: "url-loader",
+        query: { mimetype: "image/png" }
+      }
     ],
   },
 };
