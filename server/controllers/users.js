@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 const User = require('../../database/models/user');
 const Address = require('../../database/models/address');
+const helpers = require('../helpers');
 
 module.exports = {
   createUser: (req, res) => {
@@ -14,7 +15,7 @@ module.exports = {
         user.password = hash;
         new User(user).save()
         .then((userInstance) => {
-          res.status(201).json(userInstance);
+          helpers.createSession(req, res, userInstance);
         }).catch((error) => {
           res.status(500).json(error);
         });
@@ -28,8 +29,7 @@ module.exports = {
       console.log('email', email, 'password', password, 'hash', userInstance);
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
         if (match) {
-          // create session
-          res.redirect('/');
+          helpers.createSession(req, res, userInstance);
         } else {
           res.status(401).end('wrong username or password');
         }
