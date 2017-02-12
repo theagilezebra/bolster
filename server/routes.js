@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< HEAD
 const morgan = require('morgan');
 const plaid = require('plaid');
 const plaidClient = new plaid.Client(process.env.PLAID_CLIENT_ID, process.env.PLAID_SECRET, plaid.environments.tartan);
