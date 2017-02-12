@@ -33,7 +33,8 @@ db.schema.hasTable('accounts').then((exists) => {
       accounts.string('institutionName', 35).notNullable();
       accounts.string('institutionType', 35).notNullable();
       accounts.string('name', 35);
-      accounts.string('availableBalance', 35);
+      accounts.integer('availableBalance');
+      accounts.integer('currentBalance');
       accounts.integer('user_id').unsigned();
       accounts.foreign('user_id').references('users.id');
       accounts.timestamps();
