@@ -40,7 +40,7 @@ module.exports = {
   },
 
   update: (req, res) => {
-    new User({ email: req.params.email }).fetch({ require: true }).then((userInstance) => {
+    new User(req.params).fetch({ require: true }).then((userInstance) => {
       userInstance.save(req.body, { patch: true }).then((user) => {
         delete user.attributes.password;
         res.status(204).json(user);
