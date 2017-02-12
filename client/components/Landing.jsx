@@ -1,28 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NavBar from './NavBar.jsx';
-import Signin from './Signin.jsx';
-import Signup from './Signup.jsx';
 
+import JumbotronOne from './JumbotronOne.jsx';
+import JumbotronTwo from './JumbotronTwo.jsx';
+import JumbotronThree from './JumbotronThree.jsx';
+import NavigationBar from './NavBar.jsx';
+import css from '../styles/main.css';
 const Landing = props => (
   <div>
-    <nav>
-      <NavBar />
-    </nav>
-
-    <div>
-      <Jumbotron1 />
-    </div>
-
-    <div>
-      <Jumbotron2 />
-    </div>
-
-    <div>
-      {/*
-      <Signup /> or <Signin />
-      */}
-    </div>
+    <NavigationBar />
+    <JumbotronOne data={props.data}/>
+    <JumbotronTwo data={props.data}/>
+    <JumbotronThree />
   </div>
 );
 
