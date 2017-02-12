@@ -1,6 +1,6 @@
 import React from 'react';
 import { signinOrSignup } from '../actions/userActions';
-
+import { ControlLabel,FormGroup, FormControl } from 'react-bootstrap';
 export default function Signup({ dispatch }) {
   let emailInput = null;
   let passwordInput = null;
@@ -14,10 +14,12 @@ export default function Signup({ dispatch }) {
 
   return (
     <form action="#" onSubmit={submitHandler}>
-      <div>
-        <input placeholder="Email Address" ref={(ref) => { emailInput = ref; }} />
-        <input placeholder="Password" ref={(ref) => { passwordInput = ref; }} />
-      </div>
+      <FormGroup>
+        <ControlLabel>Sign Up </ControlLabel>
+        <FormControl className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }}/>
+        <FormControl className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }}/>
+      </FormGroup>      
     </form>
   );
 }
+
