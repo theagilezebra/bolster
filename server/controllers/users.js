@@ -38,4 +38,18 @@ module.exports = {
       res.status(401).end('wrong username or password');
     });
   },
+
+  update: (req, res) => {
+    new User({ email: req.params.email }).fetch({ require: true }).then((userInstance) => {
+      userInstance.save(req.body, { patch: true }).then((user) => {
+        delete user.attributes.password;
+        res.status(204).json(user);
+      }).catch((err) => {
+        res.status(404).json(err);
+      });
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+  },
 };
