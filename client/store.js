@@ -6,17 +6,17 @@ import reducer from './reducers/index';
 // import reducer from './reducers/userReducer.js';
 const middleware = applyMiddleware(logger(), thunk);
 const defaultState = {
-  radardata: {
-    labels: ['Utilities', 'Food And Drink', 'Healthcare', 'Car Payment', 'Mortgage'],
-    datasets: [{
-      data: [300, 180, 200, 125, 800],
-      fillColor: '#2ECC71',
-    },
-    {
-      data: [500, 100, 30, 100, 600],
-      fillColor: '#EFD002',
-      pointBackgroundColor: '#9B59B6',
-    }],
-  },
+    chartdata: {
+        labels: ["Utilities","Food And Drink","Healthcare", "Car Payment", "Mortgage"],
+        datasets: [{
+        data: [300, 180, 200, 125, 800],
+        fillColor: "#90EE90"
+        }, 
+        {
+        data: [500, 100, 30, 100, 600],
+        fillColor: "#2E8B57",
+        pointBackgroundColor: "#2E8B57"
+        }]
+      },
 };
 export default createStore(reducer, defaultState, middleware);
