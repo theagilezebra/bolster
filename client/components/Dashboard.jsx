@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AddBank from './AddBank.jsx';
 
 class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <div>Dashboard</div>
+        <h1>Add a bank account!</h1>
         <AddBank dispatch={this.props.dispatch} />
       </div>
     );
   }
 }
 
-export default Dashboard;
+export default connect(state => ({
+  accounts: state.accounts.accountData,
+}))(Dashboard);

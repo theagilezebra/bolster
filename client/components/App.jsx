@@ -6,6 +6,7 @@ import { Router, Route, hashHistory } from 'react-router';
 import JumbotronOne from './JumbotronOne.jsx';
 import JumbotronTwo from './JumbotronTwo.jsx';
 import SignIn from './Signin.jsx';
+import Dashboard from './Dashboard.jsx';
 import TransactionChart from './TransactionChart.jsx';
 import BudgetGraph from './BudgetGraph.jsx';
 
@@ -17,12 +18,17 @@ class App extends React.Component {
         <Route
           path="/budgetchart" component={() => (
             <JumbotronOne data={this.props.radardata} />
-        )}
+          )}
         />
         <Route
           path="/transactions" component={() => (
             <JumbotronTwo data={this.props.radardata} />
-        )}
+          )}
+        />
+        <Route
+          path="/dashboard" component={() => (
+            <Dashboard dispatch={this.props.dispatch} />
+          )}
         />
       </Router>
     );
