@@ -7,18 +7,11 @@ const plaidClient = new plaid.Client(process.env.PLAID_CLIENT_ID, process.env.PL
 
 module.exports = {
   create: (req, res) => {
-    if (req.body.user_id) {
-      new Account(req.body).save().then((account) => {
-        res.status(201).end('Account created successfully.');
-      })
-      .catch((err) => {
-        res.status(400).end(err);
-      });
-    } else {
-      res.status(400).end('Bad request: did you include a user_id?');
-    }
+    const { token, institutionName } = req.body;
+    console.log('public_token+++', token);
+    console.log('institution name+++', institutionName);
 
-    // plaidClient.exchangeToken(req.body.token, (exchangeErr, exchangeTokenRes) => {
+    // plaidClient.exchangeToken(token, (exchangeErr, exchangeTokenRes) => {
     //   if (exchangeErr != null) {
     //     console.log(exchangeErr);
     //   } else {
@@ -34,6 +27,17 @@ module.exports = {
     //     });
     //   }
     // });
+
+    // if (req.body.user_id) {
+    //   new Account(req.body).save().then((account) => {
+    //     res.status(201).end('Account created successfully.');
+    //   })
+    //   .catch((err) => {
+    //     res.status(400).end(err);
+    //   });
+    // } else {
+    //   res.status(400).end('Bad request: did you include a user_id?');
+    // }
   },
 
   get: (req, res) => {

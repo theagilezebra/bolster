@@ -3,15 +3,15 @@ import PlaidLink from 'react-plaid-link';
 import { linkAccount } from '../actions/accountActions';
 
 export default function AddBank({ dispatch }) {
-  const handleOnSuccess = (token) => {
-    dispatch(linkAccount({ token }));
+  const handleOnSuccess = (token, metadata) => {
+    dispatch(linkAccount(token, metadata.institution.name));
   };
 
   return (
     <div>
       <PlaidLink
         publicKey="test_key"
-        product="auth"
+        product="connect"
         env="tartan"
         clientName="Bolster"
         onSuccess={handleOnSuccess}
