@@ -5,8 +5,8 @@ import { Router, Route, hashHistory } from 'react-router';
 // import css from '../styles/main.css';
 import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
-import BudgetChart from './BudgetGraph.jsx';
-import TransactionChart from './TransactionChart.jsx';
+import BudgetGraph from './BudgetGraph.jsx';
+import Transactions from './Transactions.jsx';
 
 class App extends React.Component {
 
@@ -16,12 +16,12 @@ class App extends React.Component {
         <Route path="/" component={Landing} />
         <Route
           path="/budgetchart" component={() => (
-            <BudgetChart data={this.props.chartdata} />
+            <BudgetGraph data={this.props.chartdata} />
         )}
         />
         <Route
           path="/transactions" component={() => (
-            <TransactionChart data={this.props.chartdata} />
+            <Transactions data={this.props.chartdata} transdata={this.props.accountdata}/>
         )}
         />
         <Route
@@ -35,7 +35,6 @@ class App extends React.Component {
 }
 
 export default connect(state => ({
-
-    chartdata: state.chartdata
-
+    chartdata: state.chartdata,
+    accountdata: state.accountdata
 }))(App);
