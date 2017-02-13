@@ -5,8 +5,8 @@ import transactions from './transReducer';
 import accounts from './accountReducer';
 
 export default combineReducers({
-  users,
-  goals,
-  transactions,
-  accounts,
+  // users,
+  // goals,
+  // transactions,
+  // accounts,
 });

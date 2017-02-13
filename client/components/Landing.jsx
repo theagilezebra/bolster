@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import JumbotronOne from './JumbotronOne.jsx';
 import JumbotronTwo from './JumbotronTwo.jsx';
 import JumbotronThree from './JumbotronThree.jsx';
