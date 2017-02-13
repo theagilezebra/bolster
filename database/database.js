@@ -1,7 +1,9 @@
+require('dotenv').config({ path: `${__dirname}/../.env` });
+
 const db = require('knex')({
   client: 'pg',
   connection: {
-    user: 'Anais',
+    user: process.env.PG_USER,
     database: 'bolster',
   },
 });
@@ -16,7 +18,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   addresses.timestamps();
 }).then((addresses) => {
   console.log('Created Table:', addresses);
-  return db.schema.createTable('users', (users) => {
+  return db.schema.createTableIfNotExists('users', (users) => {
     users.increments('id').primary();
     users.string('accessToken', 128);
     users.string('firstName', 35).notNullable();
@@ -31,14 +33,14 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((users) => {
   console.log('Created Table:', users);
-  return db.schema.createTable('categories', (categories) => {
+  return db.schema.createTableIfNotExists('categories', (categories) => {
     categories.increments('id').primary();
     categories.string('name', 35).unique().notNullable();
     categories.timestamps();
   });
 }).then((categories) => {
   console.log('Created Table:', categories);
-  return db.schema.createTable('accounts', (accounts) => {
+  return db.schema.createTableIfNotExists('accounts', (accounts) => {
     accounts.increments('id').primary();
     accounts.string('institutionName', 35).notNullable();
     accounts.string('institutionType', 35).notNullable();
@@ -51,7 +53,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((accounts) => {
   console.log('Created Table:', accounts);
-  return db.schema.createTable('businesses', (businesses) => {
+  return db.schema.createTableIfNotExists('businesses', (businesses) => {
     businesses.increments('id').primary();
     businesses.string('name', 35).notNullable();
     businesses.specificType('coordinates', 'POINT');
@@ -63,7 +65,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((businesses) => {
   console.log('Created Table:', businesses);
-  return db.schema.createTable('budgets', (budgets) => {
+  return db.schema.createTableIfNotExists('budgets', (budgets) => {
     budgets.increments('id').primary();
     budgets.integer('category_id').unsigned();
     budgets.foreign('category_id').references('categories.id');
@@ -74,7 +76,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((budgets) => {
   console.log('Created Table:', budgets);
-  return db.schema.createTable('goals', (goals) => {
+  return db.schema.createTableIfNotExists('goals', (goals) => {
     goals.increments('id').primary();
     goals.string('name', 63).notNullable();
     goals.integer('amount', 63).notNullable();
@@ -85,7 +87,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((goals) => {
   console.log('Created Table:', goals);
-  return db.schema.createTable('achievements', (achievements) => {
+  return db.schema.createTableIfNotExists('achievements', (achievements) => {
     achievements.increments('id').primary();
     achievements.string('name', 63).notNullable();
     achievements.integer('user_id').unsigned();
@@ -94,7 +96,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((achievements) => {
   console.log('Created Table:', achievements);
-  return db.schema.createTable('transactions', (transactions) => {
+  return db.schema.createTableIfNotExists('transactions', (transactions) => {
     transactions.increments('id').primary();
     transactions.integer('amount').notNullable();
     transactions.dateTime('date').notNullable();

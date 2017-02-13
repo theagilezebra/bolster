@@ -11,6 +11,10 @@ node_modules
 client/compiled
 dist
 
+# environment variables
+
+.env
+
 # build artifacts
 
 npm-debug.log
@@ -19,3 +23,7 @@ npm-debug.log
 # occasionally auto-generated BAD ESLint file
 
 .eslintrc.js
+
+# database logfile
+
+server/logfile
