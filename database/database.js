@@ -87,7 +87,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
 }).then((goals) => {
   console.log('Created Table:', goals);
   return db.schema.createTableIfNotExists('achievements', (achievements) => {
-    achievements.increments('id').primary();
+    achievements.string('id', 50).primary();
     achievements.string('name', 63).notNullable();
     achievements.integer('user_id').unsigned();
     achievements.foreign('user_id').references('users.id');
