@@ -21,7 +21,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     users.string('accessToken', 128);
     users.string('firstName', 35).notNullable();
     users.string('lastName', 35).notNullable();
-    users.string('email', 50).notNullable();
+    users.string('email', 50).unique().notNullable();
     users.string('password', 128).notNullable();
     users.integer('address_id').unsigned();
     users.foreign('address_id').references('addresses.id');
@@ -33,7 +33,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', users);
   return db.schema.createTable('categories', (categories) => {
     categories.increments('id').primary();
-    categories.string('name', 35).notNullable();
+    categories.string('name', 35).unique().notNullable();
     categories.timestamps();
   });
 }).then((categories) => {
