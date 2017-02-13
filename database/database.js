@@ -98,7 +98,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   return db.schema.createTableIfNotExists('transactions', (transactions) => {
     transactions.increments('id').primary();
     transactions.integer('amount').notNullable();
-    transactions.dateTime('date').notNullable();
+    transactions.date('date').notNullable();
     transactions.integer('user_id').unsigned();
     transactions.foreign('user_id').references('users.id');
     transactions.integer('account_id').unsigned();
