@@ -13,6 +13,8 @@ routes.post('/users/login', users.login);
 routes.put('/users/update/:id', users.update);
 
 routes.post('/accounts/create', accounts.create);
+routes.get('/accounts', accounts.get);
+routes.get('/accounts/:id', accounts.getOne);
 // routes.post('/accounts', (req, res) => {
 //   plaidClient.exchangeToken(req.body.token, (exchangeErr, exchangeTokenRes) => {
 //     if (exchangeErr != null) {
