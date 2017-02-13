@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 const users = require('./controllers/users');
 const accounts = require('./controllers/accounts');
+const categories = require('./controllers/categories');
 
 const routes = express.Router();
 
@@ -33,5 +34,8 @@ routes.get('/accounts/:id', accounts.getOne);
 //     }
 //   });
 // });
+
+routes.post('/categories', categories.create);
+routes.get('/categories', categories.get);
 
 module.exports = routes;
