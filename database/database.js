@@ -104,6 +104,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.foreign('account_id').references('accounts.id');
     transactions.integer('business_id').unsigned();
     transactions.foreign('business_id').references('businesses.id');
+    transactions.dropForeign('business_id');
     transactions.integer('category_id').unsigned();
     transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
