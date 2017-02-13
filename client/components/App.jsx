@@ -9,6 +9,7 @@ import BudgetChart from './BudgetGraph.jsx';
 import TransactionChart from './TransactionChart.jsx';
 
 class App extends React.Component {
+
   render() {
     return (
       <Router history={hashHistory}>
@@ -34,5 +35,7 @@ class App extends React.Component {
 }
 
 export default connect(state => ({
-  chartdata: state.chartdata,
+
+    chartdata: state.chartdata
+
 }))(App);
