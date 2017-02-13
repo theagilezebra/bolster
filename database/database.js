@@ -42,6 +42,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     accounts.increments('id').primary();
     accounts.string('institutionName', 35).notNullable();
     accounts.string('institutionType', 35).notNullable();
+    accounts.string('plaidAccountId', 50);
     accounts.string('name', 35);
     accounts.integer('availableBalance');
     accounts.integer('currentBalance');
