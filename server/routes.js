@@ -5,14 +5,17 @@ const morgan = require('morgan');
 
 const users = require('./controllers/users');
 const accounts = require('./controllers/accounts');
+const categories = require('./controllers/categories');
 
 const routes = express.Router();
 
-routes.post('/users/signup', users.createUser);
+routes.post('/users/signup', users.create);
 routes.post('/users/login', users.login);
-routes.put('/users/update/:email', users.update);
+routes.put('/users/update/:id', users.update);
 
 routes.post('/accounts/create', accounts.create);
+routes.get('/accounts', accounts.get);
+routes.get('/accounts/:id', accounts.getOne);
 // routes.post('/accounts', (req, res) => {
 //   plaidClient.exchangeToken(req.body.token, (exchangeErr, exchangeTokenRes) => {
 //     if (exchangeErr != null) {
@@ -31,5 +34,8 @@ routes.post('/accounts/create', accounts.create);
 //     }
 //   });
 // });
+
+routes.post('/categories', categories.create);
+routes.get('/categories', categories.get);
 
 module.exports = routes;
