@@ -19,7 +19,7 @@ module.exports = {
       res.status(400).end('Bad request: did you include a user_id?');
     }
 
-    // plaidClient.exchangeToken(req.body.token, (exchangeErr, exchangeTokenRes) => {
+    // plaidClient.exchangeToken(token, (exchangeErr, exchangeTokenRes) => {
     //   if (exchangeErr != null) {
     //     console.log(exchangeErr);
     //   } else {
@@ -35,6 +35,17 @@ module.exports = {
     //     });
     //   }
     // });
+
+    // if (req.body.user_id) {
+    //   new Account(req.body).save().then((account) => {
+    //     res.status(201).end('Account created successfully.');
+    //   })
+    //   .catch((err) => {
+    //     res.status(400).end(err);
+    //   });
+    // } else {
+    //   res.status(400).end('Bad request: did you include a user_id?');
+    // }
   },
 
   get: (req, res) => {
