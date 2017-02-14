@@ -1,4 +1,5 @@
 const Account = require('../../database/models/account');
+const dummyData = require('../../database/samplePlaidData.json');
 const plaid = require('plaid');
 
 require('dotenv').config({ path: `${__dirname}/../../.env` });
@@ -41,11 +42,12 @@ module.exports = {
   },
 
   get: (req, res) => {
-    Account.forge().where(req.query).fetchAll().then((items) => {
-      res.json(items);
-    }).catch((err) => {
-      res.status(404).json(err);
-    });
+    res.json(dummyData);
+    // Account.forge().where(req.query).fetchAll().then((items) => {
+    //   res.json(items);
+    // }).catch((err) => {
+    //   res.status(404).json(err);
+    // });
   },
 
   getOne: (req, res) => {
