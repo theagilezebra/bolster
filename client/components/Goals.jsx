@@ -2,9 +2,9 @@ import React from 'react';
 import CreateGoal from './CreateGoal.jsx';
 import BudgetGraph from './BudgetGraph.jsx';
 
-const Goals = props => ( // all transactions linked to a user
+const Goals = props => (
   <div>
-    <CreateGoal /> {/* ONLY ALLOWING ONE GOAL FOR MVP */}
+    <CreateGoal dispatch={props.dispatch} />
   </div>
 );
 
