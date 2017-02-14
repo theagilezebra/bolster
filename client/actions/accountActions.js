@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-export function linkAccount(data) { // { userId, token, institutionName }) {
+export function linkAccount(data) {
   return dispatch => axios.post('/api/accounts/create', data)
-    // `/api/accounts/create?user_id=${userId}?token=${token}?institutionName=${institutionName}`)
     .then((response) => {
       console.log(JSON.stringify(response.data));
       dispatch({ type: 'LINK_ACCOUNT_SUCCESSFUL', payload: response.data });

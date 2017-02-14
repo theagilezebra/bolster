@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function createBudget({ userId }) {
-  return dispatch => axios.post(`/api/budgets/create?user_id=${userId}`)
+export function createBudget(data) {
+  return dispatch => axios.post('/api/budgets/create', data)
     .then((response) => {
       dispatch({ type: 'CREATE_BUDGET_SUCCESSFUL', payload: response.data });
     })
