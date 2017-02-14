@@ -23,6 +23,7 @@ module.exports = {
     //   if (exchangeErr != null) {
     //     console.log(exchangeErr);
     //   } else {
+    //     console.log('-HERE IS THE ACCESS TOKEN-', exchangeTokenRes.access_token);
     //     // - exchangeTokenRes.access_token (the Plaid access token - store somewhere persistent)
     //     // associate the access token with a specific user and use it to request all subsequent plaid api calls
     //     plaidClient.getConnectUser(exchangeTokenRes.access_token, (connectErr, connectRes) => {
