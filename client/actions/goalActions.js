@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export function createGoal(/*user_id*/) { // create a single goal
-  return dispatch => axios.post('/api/goals', /*user_id*/)
+export function createGoal(data) { // create a single goal
+  return dispatch => axios.post('/api/goals/create', data)
     .then((response) => {
-      dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: 'fillmein'/* expecting data*/ });
+      dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
       dispatch({ type: 'CREATE_GOAL_FAILED', payload: err });
