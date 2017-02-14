@@ -4,7 +4,7 @@ import { linkAccount } from '../actions/accountActions';
 
 export default function AddBank({ dispatch }) {
   const handleOnSuccess = (token, metadata) => {
-    dispatch(linkAccount({ token, institutionName: metadata.institution.name }));
+    dispatch(linkAccount({ /* userId,*/ token, institutionName: metadata.institution.name }));
   };
 
   return (
