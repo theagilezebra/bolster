@@ -42,8 +42,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     accounts.increments('id').primary();
     accounts.string('institutionName', 35).notNullable();
     accounts.string('institutionType', 35).notNullable();
-    accounts.string('plaidAccountId', 50);
     accounts.string('name', 35);
+    accounts.string('plaidAccountId', 50);
     accounts.integer('availableBalance');
     accounts.integer('currentBalance');
     accounts.integer('user_id').unsigned();
@@ -58,8 +58,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     businesses.specificType('coordinates', 'POINT');
     businesses.integer('address_id').unsigned();
     businesses.foreign('address_id').references('addresses.id');
-    businesses.integer('category_id').unsigned();
-    businesses.foreign('category_id').references('categories.id');
+    businesses.string('category_id', 127);
     businesses.timestamps();
   });
 }).then((businesses) => {
@@ -87,7 +86,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
 }).then((goals) => {
   console.log('Created Table:', goals);
   return db.schema.createTableIfNotExists('achievements', (achievements) => {
-    achievements.string('id', 50).primary();
+    achievements.increments('id').primary();
     achievements.string('name', 63).notNullable();
     achievements.integer('user_id').unsigned();
     achievements.foreign('user_id').references('users.id');
@@ -97,11 +96,11 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', achievements);
   return db.schema.createTableIfNotExists('transactions', (transactions) => {
     transactions.increments('id').primary();
-    transactions.integer('amount').notNullable();
+    transactions.decimal('amount').notNullable();
     transactions.date('date').notNullable();
     transactions.integer('user_id').unsigned();
     transactions.foreign('user_id').references('users.id');
-    transactions.integer('account_id').unsigned();
+    transactions.integer('account_id');
     transactions.foreign('account_id').references('accounts.id');
     transactions.integer('business_id').unsigned();
     transactions.foreign('business_id').references('businesses.id');
