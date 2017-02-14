@@ -16,12 +16,12 @@ class App extends React.Component {
         <Route path="/" component={Landing} />
         <Route
           path="/budgetchart" component={() => (
-            <BudgetGraph data={this.props.chartdata} />
+            <BudgetGraph data={this.props.accountdata} />
         )}
         />
         <Route
           path="/transactions" component={() => (
-            <Transactions data={this.props.chartdata} transdata={this.props.accountdata}/>
+            <Transactions data={this.props.accountdata} />
         )}
         />
         <Route
@@ -35,6 +35,5 @@ class App extends React.Component {
 }
 
 export default connect(state => ({
-    chartdata: state.chartdata,
     accountdata: state.accountdata
 }))(App);
