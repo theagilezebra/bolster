@@ -10,7 +10,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   addresses.increments('id').primary();
   addresses.string('address', 50).unique().notNullable();
   addresses.string('city', 35);
-  addresses.string('ZIP', 10);
+  addresses.string('zip', 10);
   addresses.string('state', 35);
   addresses.string('country', 35);
   addresses.timestamps();
@@ -54,11 +54,11 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', accounts);
   return db.schema.createTableIfNotExists('businesses', (businesses) => {
     businesses.increments('id').primary();
-    businesses.string('name', 35).notNullable();
+    businesses.string('name', 50).notNullable();
     businesses.specificType('coordinates', 'POINT');
     businesses.integer('address_id').unsigned();
     businesses.foreign('address_id').references('addresses.id');
-    businesses.string('category_id', 127);
+    businesses.string('category_id', 255);
     businesses.timestamps();
   });
 }).then((businesses) => {
@@ -105,12 +105,14 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.integer('business_id').unsigned();
     transactions.foreign('business_id').references('businesses.id');
     transactions.dropForeign('business_id');
-    transactions.integer('category_id').unsigned();
-    transactions.foreign('category_id').references('categories.id');
+    transactions.string('category_id', 50);
+    // transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
   });
 }).then((transactions) => {
   console.log('Created Table:', transactions);
+}).catch((err) => {
+  console.log(err);
 });
 
 module.exports = require('bookshelf')(db);
