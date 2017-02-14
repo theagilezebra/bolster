@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const users = require('./controllers/users');
 const accounts = require('./controllers/accounts');
 const categories = require('./controllers/categories');
+const transactions = require('./controllers/transactions');
 
 const routes = express.Router();
 
@@ -37,5 +38,7 @@ routes.get('/accounts/:id', accounts.getOne);
 
 routes.post('/categories', categories.create);
 routes.get('/categories', categories.get);
+
+routes.get('/transactions', transactions.get);
 
 module.exports = routes;
