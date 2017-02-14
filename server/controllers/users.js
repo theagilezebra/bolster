@@ -6,9 +6,9 @@ const helpers = require('../helpers');
 
 module.exports = {
   create: (req, res) => {
-    const { firstName, lastName, email, password, address, city, state, ZIP, country } = req.body;
+    const { firstName, lastName, email, password, address, city, state, zip, country } = req.body;
     const user = { firstName, lastName, email, password };
-    const physicalAddress = { address, city, state, ZIP, country };
+    const physicalAddress = { address, city, state, zip, country };
     return new Address(physicalAddress).save().then((addressInstance) => {
       user.address_id = addressInstance.id;
       bcrypt.hash((password), null, null, (err, hash) => {
