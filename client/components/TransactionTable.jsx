@@ -1,11 +1,11 @@
 import React from 'react';
-import css from 'bootstrap';
-import { mapAndRender } from '../helpers/transactionHelpers.jsx'
+import css from 'react-bootstrap';
+import { mapAndRender } from '../helpers/transactionHelpers.jsx';
 
 const TransactionTable = props => (
   <div className="transleft">
     <div className="container">
-      <table className="table"> 
+      <table className="table">
         <thead>
           <tr>
             <th>Category</th>
@@ -13,10 +13,10 @@ const TransactionTable = props => (
             <th>Budget</th>
             <th>Over/Under</th>
           </tr>
-        </thead>  
+        </thead>
         <tbody>
           {mapAndRender(props.data)}
-        </tbody> 
+        </tbody>
       </table>
     </div>
   </div>
