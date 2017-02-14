@@ -2,7 +2,7 @@ export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
   case 'CREATE_BUDGET_SUCCESSFUL': {
-    newState.accountData = action.payload;
+    newState.budgetData = action.payload;
     break;
   }
   case 'CREATE_BUDGET_FAILED': {
@@ -10,7 +10,7 @@ export default function reducer(state, action) {
     break;
   }
   case 'FETCH_BUDGETS_SUCCESSFUL': {
-    newState.accountData = action.payload;
+    newState.budgetData = action.payload;
     break;
   }
   case 'FETCH_BUDGETS_FAILED': {
