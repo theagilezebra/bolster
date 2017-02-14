@@ -1,5 +1,4 @@
 const Account = require('../../database/models/account');
-const dummyData = require('../../database/samplePlaidData.json');
 const plaid = require('plaid');
 
 require('dotenv').config({ path: `${__dirname}/../../.env` });
@@ -8,12 +7,13 @@ const plaidClient = new plaid.Client(process.env.PLAID_CLIENT_ID, process.env.PL
 
 module.exports = {
   create: (req, res) => {
-    const { token, institutionName } = req.body;
+    const { userId, token, institutionName } = req.body;
 
     // plaidClient.exchangeToken(token, (exchangeErr, exchangeTokenRes) => {
     //   if (exchangeErr != null) {
     //     console.log(exchangeErr);
     //   } else {
+    //     console.log('-HERE IS THE ACCESS TOKEN-', exchangeTokenRes.access_token);
     //     // - exchangeTokenRes.access_token (the Plaid access token - store somewhere persistent)
     //     // associate the access token with a specific user and use it to request all subsequent plaid api calls
     //     plaidClient.getConnectUser(exchangeTokenRes.access_token, (connectErr, connectRes) => {
