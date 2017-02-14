@@ -49,6 +49,7 @@ module.exports = {
   },
 
   get: (req, res) => {
+    // res.json(dummyData);
     Account.forge().where(req.query).fetchAll().then((items) => {
       res.json(items);
     }).catch((err) => {
