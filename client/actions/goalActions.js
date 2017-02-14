@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function createGoal(data) { // create a single goal
-  return dispatch => axios.post('/api/goals/create', data)
+export function createGoal({ userId }) { // create a single goal
+  return dispatch => axios.post(`/api/goals/create?user_id=${userId}`)
     .then((response) => {
       dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: response.data });
     })
@@ -10,25 +10,23 @@ export function createGoal(data) { // create a single goal
     });
 }
 
-export function fetchGoals(/*user_id*/) { // provide all goals specific to user
-  return dispatch => axios.get('/api/goals', /*user_id*/)
+export function fetchGoals({ userId }) { // provide all goals specific to user
+  return dispatch => axios.get(`/api/goals?user_id=${userId}`)
     .then((response) => {
-      dispatch({ type: 'FETCH_GOALS_SUCCESSFUL', payload: 'fillmein'/* expecting data*/ });
+      dispatch({ type: 'FETCH_GOALS_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
       dispatch({ type: 'FETCH_GOALS_FAILED', payload: err });
     });
 }
 
-export function updateGoal(/*user_id, goal_id*/) { // update a single goal
-  return dispatch => axios.put('/api/goals', /*user_id, goal_id*/)
+export function updateGoal({ userId, goalId }) { // update a single goal
+  return dispatch => axios.put(`/api/goals?user_id=${userId}?goal_id=${goalId}`)
     .then((response) => {
-      dispatch({ type: 'UPDATE_GOAL_SUCCESSFUL', payload: 'fillmein'/* expecting data*/ });
+      dispatch({ type: 'UPDATE_GOAL_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
       dispatch({ type: 'UPDATE_GOAL_FAILED', payload: err });
     });
 }
 
-// maybe allow users to delete goals?
-// 'After thinking about it, I don't need those Vintage Elvis Presley socks after all.'

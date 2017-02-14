@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function linkAccount(data) {
-  return dispatch => axios.post('/api/budgets/create', data)
+export function createBudget({ userId }) {
+  return dispatch => axios.post(`/api/budgets/create?user_id=${userId}`)
     .then((response) => {
       dispatch({ type: 'CREATE_BUDGET_SUCCESSFUL', payload: response.data });
     })
@@ -10,8 +10,8 @@ export function linkAccount(data) {
     });
 }
 
-export function fetchAccounts() {
-  return dispatch => axios.get('/api/accounts')
+export function fetchBudgets({ userId }) {
+  return dispatch => axios.get(`/api/budgets?user_id=${userId}`)
     .then((response) => {
       dispatch({ type: 'FETCH_BUDGETS_SUCCESSFUL', payload: response.data });
     })
