@@ -9,8 +9,6 @@ const plaidClient = new plaid.Client(process.env.PLAID_CLIENT_ID, process.env.PL
 module.exports = {
   create: (req, res) => {
     const { token, institutionName } = req.body;
-    console.log('public_token+++', token);
-    console.log('institution name+++', institutionName);
 
     // plaidClient.exchangeToken(token, (exchangeErr, exchangeTokenRes) => {
     //   if (exchangeErr != null) {
@@ -42,12 +40,11 @@ module.exports = {
   },
 
   get: (req, res) => {
-    res.json(dummyData);
-    // Account.forge().where(req.query).fetchAll().then((items) => {
-    //   res.json(items);
-    // }).catch((err) => {
-    //   res.status(404).json(err);
-    // });
+    Account.forge().where(req.query).fetchAll().then((items) => {
+      res.json(items);
+    }).catch((err) => {
+      res.status(404).json(err);
+    });
   },
 
   getOne: (req, res) => {
