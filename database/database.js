@@ -43,7 +43,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     accounts.string('institutionName', 35).notNullable();
     accounts.string('institutionType', 35).notNullable();
     accounts.string('name', 35);
-    accounts.string('plaidAccountId', 50);
+    accounts.string('plaidAccountId', 50).unique();
     accounts.decimal('availableBalance');
     accounts.decimal('currentBalance');
     accounts.integer('user_id').unsigned();
