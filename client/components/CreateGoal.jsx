@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createGoal } from '../actions/goalActions.js';
 
-export default function CreateGoal({ dispatch }) {
-
 const CreateGoal = ({ dispatch }) => {
   let goalName = null;
   let goalAmount = null;
