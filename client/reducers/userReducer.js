@@ -3,6 +3,7 @@ export default function reducer(state, action) {
   switch (action.type) {
   case 'SIGNIN_OR_SIGNUP_SUCCESSFUL': {
     newState.sessionActive = true;
+    newState.userData = action.payload;
     break;
   }
   case 'SIGNIN_OR_SIGNUP_FAILED': {
