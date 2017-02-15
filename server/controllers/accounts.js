@@ -1,4 +1,5 @@
 const Account = require('../../database/models/account');
+const helpers = require('../helpers');
 
 module.exports = {
   create: (req, res) => {
@@ -35,8 +36,7 @@ module.exports = {
       reject('Please provide user_id');
     }
     return Promise.all(accounts.map((account) => {
-      console.log(account);
-      const acountAttributes = {
+      const accountAttributes = {
         user_id: userId,
         availableBalance: account.balance.available,
         currentBalance: account.balance.current,
@@ -45,15 +45,13 @@ module.exports = {
         plaidAccountId: account._id,
         name: account.institution_type,
       };
-      return Account.forge(acountAttributes).save();
-    })
+      return helpers.findOrCreate(Account, accountAttributes);
+    }))
     .then((records) => {
-      console.log('THIS IS ALL THE RECORDS!!!', records);
-      return records;
+      resolve(records);
     })
     .catch((err) => {
-      console.log('YOU HAD AN ERROR BRO!!');
       reject(err);
-    }));
+    });
   }),
 };
