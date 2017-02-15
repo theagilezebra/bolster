@@ -12,7 +12,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   addresses.increments('id').primary();
   addresses.string('address', 50).unique().notNullable();
   addresses.string('city', 35);
-  addresses.string('ZIP', 10);
+  addresses.string('zip', 10);
   addresses.string('state', 35);
   addresses.string('country', 35);
   addresses.timestamps();
@@ -45,8 +45,9 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     accounts.string('institutionName', 35).notNullable();
     accounts.string('institutionType', 35).notNullable();
     accounts.string('name', 35);
-    accounts.integer('availableBalance');
-    accounts.integer('currentBalance');
+    accounts.string('plaidAccountId', 50).unique();
+    accounts.decimal('availableBalance');
+    accounts.decimal('currentBalance');
     accounts.integer('user_id').unsigned();
     accounts.foreign('user_id').references('users.id');
     accounts.timestamps();
@@ -55,12 +56,11 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', accounts);
   return db.schema.createTableIfNotExists('businesses', (businesses) => {
     businesses.increments('id').primary();
-    businesses.string('name', 35).notNullable();
+    businesses.string('name', 50).notNullable();
     businesses.specificType('coordinates', 'POINT');
     businesses.integer('address_id').unsigned();
     businesses.foreign('address_id').references('addresses.id');
-    businesses.integer('category_id').unsigned();
-    businesses.foreign('category_id').references('categories.id');
+    businesses.string('category_id', 255);
     businesses.timestamps();
   });
 }).then((businesses) => {
@@ -98,20 +98,23 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', achievements);
   return db.schema.createTableIfNotExists('transactions', (transactions) => {
     transactions.increments('id').primary();
-    transactions.integer('amount').notNullable();
-    transactions.dateTime('date').notNullable();
+    transactions.decimal('amount').notNullable();
+    transactions.date('date').notNullable();
     transactions.integer('user_id').unsigned();
     transactions.foreign('user_id').references('users.id');
-    transactions.integer('account_id').unsigned();
+    transactions.integer('account_id');
     transactions.foreign('account_id').references('accounts.id');
     transactions.integer('business_id').unsigned();
     transactions.foreign('business_id').references('businesses.id');
-    transactions.integer('category_id').unsigned();
-    transactions.foreign('category_id').references('categories.id');
+    transactions.dropForeign('business_id');
+    transactions.string('category_id', 50);
+    // transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
   });
 }).then((transactions) => {
   console.log('Created Table:', transactions);
+}).catch((err) => {
+  console.log(err);
 });
 
 module.exports = require('bookshelf')(db);
