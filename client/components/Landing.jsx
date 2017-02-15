@@ -8,8 +8,8 @@ import css from '../styles/main.css';
 const Landing = props => (
   <div>
     <NavigationBar />
-    <JumbotronOne data={props.data}/>
-    <JumbotronTwo data={props.data}/>
+    <JumbotronOne data={props.data} />
+    <JumbotronTwo data={props.data} />
     <JumbotronThree />
   </div>
 );
