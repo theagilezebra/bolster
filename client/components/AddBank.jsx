@@ -1,10 +1,11 @@
 import React from 'react';
 import PlaidLink from 'react-plaid-link';
+import { connect } from 'react-redux';
 import { linkAccount } from '../actions/accountActions';
 
-export default function AddBank({ dispatch }) {
+const AddBank = ({ userId, dispatch }) => {
   const handleOnSuccess = (token, metadata) => {
-    dispatch(linkAccount({ /* userId,*/ token, institutionName: metadata.institution.name }));
+    dispatch(linkAccount({ userId, token, institutionName: metadata.institution.name }));
   };
 
   return (
@@ -18,4 +19,8 @@ export default function AddBank({ dispatch }) {
       />
     </div>
   );
-}
+};
+
+export default connect(state => ({
+  userId: state.user.userId,
+}))(AddBank);
