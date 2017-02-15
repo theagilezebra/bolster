@@ -1,8 +1,4 @@
 import React from 'react';
-<<<<<<< ff9234de2075d0a357c4992f04b0bc7588108b38
-
-=======
->>>>>>> remove import of bootstrap
 import { mapAndRender } from '../helpers/transactionHelpers.jsx';
 
 const TransactionTable = props => (
