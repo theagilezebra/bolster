@@ -9,6 +9,14 @@ export default function reducer(state, action) {
     console.log('Link account failed.');
     break;
   }
+  case 'FETCH_ACCOUNTS_SUCCESSFUL': {
+    newState.accountData = action.payload;
+    break;
+  }
+  case 'FETCH_ACCOUNTS_FAILED': {
+    console.log('Fetch accounts failed.');
+    break;
+  }
   // no default case
   }
   return newState;
