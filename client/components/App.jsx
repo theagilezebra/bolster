@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
+
 // actions and other components
 // import css from '../styles/main.css';
 import Landing from './Landing.jsx';
@@ -9,7 +10,6 @@ import BudgetGraph from './BudgetGraph.jsx';
 import Transactions from './Transactions.jsx';
 
 class App extends React.Component {
-
   render() {
     return (
       <Router history={hashHistory}>
@@ -35,5 +35,5 @@ class App extends React.Component {
 }
 
 export default connect(state => ({
-    accountdata: state.accountdata
+  accountdata: state.accountdata,
 }))(App);
