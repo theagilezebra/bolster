@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export function fetchTransactions(/*user_id*/) { // provide all transactions specific to user
-  return dispatch => axios.get('/api/transactions', /*user_id*/)
+export function fetchTransactions({ userId }) {
+  return dispatch => axios.get(`/api/transactions?user_id=${userId}`)
     .then((response) => {
-      dispatch({ type: 'FETCH_TRANSACTIONS_SUCCESSFUL', payload: 'fillmein'/* expecting data*/ });
+      dispatch({ type: 'FETCH_TRANSACTIONS_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
       dispatch({ type: 'FETCH_TRANSACTIONS_FAILED', payload: err });

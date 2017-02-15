@@ -7,21 +7,13 @@ const plaidClient = new plaid.Client(process.env.PLAID_CLIENT_ID, process.env.PL
 
 module.exports = {
   create: (req, res) => {
-    if (req.body.user_id) {
-      new Account(req.body).save().then((account) => {
-        res.status(201).end('Account created successfully.');
-      })
-      .catch((err) => {
-        res.status(400).end(err);
-      });
-    } else {
-      res.status(400).end('Bad request: did you include a user_id?');
-    }
+    const { userId, token, institutionName } = req.body;
 
-    // plaidClient.exchangeToken(req.body.token, (exchangeErr, exchangeTokenRes) => {
+    // plaidClient.exchangeToken(token, (exchangeErr, exchangeTokenRes) => {
     //   if (exchangeErr != null) {
     //     console.log(exchangeErr);
     //   } else {
+    //     console.log('-HERE IS THE ACCESS TOKEN-', exchangeTokenRes.access_token);
     //     // - exchangeTokenRes.access_token (the Plaid access token - store somewhere persistent)
     //     // associate the access token with a specific user and use it to request all subsequent plaid api calls
     //     plaidClient.getConnectUser(exchangeTokenRes.access_token, (connectErr, connectRes) => {
@@ -34,6 +26,17 @@ module.exports = {
     //     });
     //   }
     // });
+
+    // if (req.body.user_id) {
+    //   new Account(req.body).save().then((account) => {
+    //     res.status(201).end('Account created successfully.');
+    //   })
+    //   .catch((err) => {
+    //     res.status(400).end(err);
+    //   });
+    // } else {
+    //   res.status(400).end('Bad request: did you include a user_id?');
+    // }
   },
 
   get: (req, res) => {
