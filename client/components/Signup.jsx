@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { signinOrSignup } from '../actions/userActions';
-import { ControlLabel,FormGroup, FormControl } from 'react-bootstrap';
-export default function Signup({ dispatch }) {
+
+const Signup = ({ dispatch }) => {
   let emailInput = null;
   let passwordInput = null;
 
   const submitHandler = (e) => {
+    e.preventDefault();
     dispatch(signinOrSignup({
       email: emailInput.value,
       password: passwordInput.value,
@@ -14,12 +16,11 @@ export default function Signup({ dispatch }) {
 
   return (
     <form action="#" onSubmit={submitHandler}>
-      <FormGroup>
-        <ControlLabel>Sign Up </ControlLabel>
-        <FormControl className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }}/>
-        <FormControl className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }}/>
-      </FormGroup>      
+      <input className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
+      <input className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
+      <button type="submit">Submit</button>
     </form>
   );
-}
+};
 
+export default connect(null)(Signup);

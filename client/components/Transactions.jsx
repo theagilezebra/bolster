@@ -1,13 +1,24 @@
 import React from 'react';
 import TransactionChart from './TransactionChart.jsx';
 import TransactionTable from './TransactionTable.jsx';
-
-const Transactions = props => ( 
-  <div className="topmargin">
-    <section className="transcontainer">
-      <TransactionChart data={props.data} />
-      <TransactionTable  data={props.data} />
-    </section>
+import NavBar from './NavBar.jsx';
+const Transactions = props => (
+  <div>
+    <NavBar />
+    <div className="container centertext topmargin">
+      <div className="row ">
+        <div className="col-md-12" >
+          <TransactionChart data={props.data} />
+        </div>
+      </div>
+    </div>
+    <div className="container topmargin">
+      <div className="row">
+        <div className="col-md-12">
+          <TransactionTable data={props.data} />
+        </div>
+      </div>
+    </div>
   </div>
 );
 

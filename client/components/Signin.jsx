@@ -1,8 +1,8 @@
 import React from 'react';
-import { ControlLabel, FormGroup, FormControl } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { signinOrSignup } from '../actions/userActions';
 
-export default function Signin({ dispatch }) {
+const Signin = ({ dispatch }) => {
   let emailInput = null;
   let passwordInput = null;
 
@@ -16,12 +16,11 @@ export default function Signin({ dispatch }) {
 
   return (
     <form action="#" onSubmit={submitHandler}>
-      <FormGroup>
-        <ControlLabel>Sign In </ControlLabel>
-        <FormControl className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
-        <FormControl className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
-        <button type="submit">Submit</button>
-      </FormGroup>
+      <input className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
+      <input className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
+      <button type="submit">Submit</button>
     </form>
   );
-}
+};
+
+export default connect(null)(Signin);

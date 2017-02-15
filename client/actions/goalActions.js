@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function createGoal({ userId }) { // create a single goal
-  return dispatch => axios.post(`/api/goals/create?user_id=${userId}`)
+export function createGoal(data) { // create a single goal
+  return dispatch => axios.post('/api/goals/create', data)
     .then((response) => {
       dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: response.data });
     })
@@ -20,8 +20,8 @@ export function fetchGoals({ userId }) { // provide all goals specific to user
     });
 }
 
-export function updateGoal({ userId, goalId }) { // update a single goal
-  return dispatch => axios.put(`/api/goals?user_id=${userId}?goal_id=${goalId}`)
+export function updateGoal(data) { // update a single goal
+  return dispatch => axios.put('/api/goals/update', data)
     .then((response) => {
       dispatch({ type: 'UPDATE_GOAL_SUCCESSFUL', payload: response.data });
     })
@@ -29,4 +29,3 @@ export function updateGoal({ userId, goalId }) { // update a single goal
       dispatch({ type: 'UPDATE_GOAL_FAILED', payload: err });
     });
 }
-
