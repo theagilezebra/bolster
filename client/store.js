@@ -8,7 +8,7 @@ const middleware = applyMiddleware(logger(), thunk);
 const defaultState = {
   user: {
     sessionActive: null,
-    user_id: null,
+    userId: null,
   },
   accountdata: {
     accounts: [
