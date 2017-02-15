@@ -35,7 +35,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', users);
   return db.schema.createTableIfNotExists('categories', (categories) => {
     categories.increments('id').primary();
-    categories.string('name', 35).unique().notNullable();
+    categories.string('name', 50).unique().notNullable();
     categories.timestamps();
   });
 }).then((categories) => {
