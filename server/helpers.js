@@ -14,7 +14,7 @@ module.exports = {
   }),
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
-    model.forge(criteria).fetch().then((instance) => {
+    model.forge().where(criteria).fetchAll().then((instance) => {
       if (instance) {
         resolve(instance);
       } else {
