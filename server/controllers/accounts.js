@@ -29,4 +29,31 @@ module.exports = {
       res.status(404).json(err);
     });
   },
+
+  bulkCreate: (accounts, userId) => new Promise((resolve, reject) => {
+    if (!userId) {
+      reject('Please provide user_id');
+    }
+    return Promise.all(accounts.map((account) => {
+      console.log(account);
+      const acountAttributes = {
+        user_id: userId,
+        availableBalance: account.balance.available,
+        currentBalance: account.balance.current,
+        institutionName: account.institution_type,
+        institutionType: account.type,
+        plaidAccountId: account._id,
+        name: account.institution_type,
+      };
+      return Account.forge(acountAttributes).save();
+    })
+    .then((records) => {
+      console.log('THIS IS ALL THE RECORDS!!!', records);
+      return records;
+    })
+    .catch((err) => {
+      console.log('YOU HAD AN ERROR BRO!!');
+      reject(err);
+    }));
+  }),
 };
