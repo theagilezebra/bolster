@@ -1,5 +1,4 @@
 import React from 'react';
-import css from 'react-bootstrap';
 import { mapAndRender } from '../helpers/transactionHelpers.jsx';
 
 const TransactionTable = props => (
