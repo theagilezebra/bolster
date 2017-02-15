@@ -44,8 +44,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     accounts.string('institutionType', 35).notNullable();
     accounts.string('name', 35);
     accounts.string('plaidAccountId', 50);
-    accounts.integer('availableBalance');
-    accounts.integer('currentBalance');
+    accounts.decimal('availableBalance');
+    accounts.decimal('currentBalance');
     accounts.integer('user_id').unsigned();
     accounts.foreign('user_id').references('users.id');
     accounts.timestamps();
