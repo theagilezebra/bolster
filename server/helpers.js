@@ -1,3 +1,5 @@
+const Transaction = require('../database/models/transaction');
+
 module.exports = {
   checkUser: (req, res, next) => {
     if (req.session ? !!req.session.user : false) {
@@ -14,16 +16,8 @@ module.exports = {
   }),
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
-    model.forge().where(criteria).fetchAll().then((instance) => {
-      if (instance) {
-        resolve(instance);
-      } else {
-        model.forge(criteria).save().then((instance) => {
-          resolve(instance);
-        }).catch((err) => {
-          reject(err);
-        });
-      }
+    model.forge(criteria).fetch().then((category) => {
+      resolve(category || model.forge(criteria).save());
     });
   }),
 };
