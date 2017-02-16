@@ -6,6 +6,7 @@ import businesses from './businessReducer';
 import budgets from './budgetReducer';
 import goals from './goalReducer';
 import categories from './categoryReducer';
+import render from './renderReducer';
 
 export default combineReducers({
   user,
@@ -15,4 +16,5 @@ export default combineReducers({
   budgets,
   goals,
   categories,
+  render,
 });

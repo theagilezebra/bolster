@@ -11,7 +11,7 @@ const renderRows = function (mappedObj) {
   const elements = [];
   for (const key in mappedObj) {
     elements.push(
-      <tr>
+      <tr key={key}>
         <td>{key}</td>
         <td>{mappedObj[key]}</td>
         <td>{budget[key]}</td>
@@ -23,17 +23,18 @@ const renderRows = function (mappedObj) {
 };
 
 // this function does not add transactions that lack a category. it ignores.
-const mapCategories = function (data) {
+const mapCategories = function (transactions) {
   const mapped = {};
-  data.transactions.forEach((item) => {
-    if (item.category && item.category[0] != 'Transfer' && item.category[0] != 'Interest') {
-      if (mapped[item.category[0]] === undefined) {
-        mapped[item.category[0]] = 0;
+  for (const key in transactions) {
+    const trans = transactions[key];
+    if (trans.category && trans.category[0] !== 'Transfer' && trans.category[0] !== 'Interest') {
+      if (mapped[trans.category[0]] === undefined) {
+        mapped[trans.category[0]] = 0;
       } else {
-        mapped[item.category[0]] = Math.round(mapped[item.category[0]] + item.amount);
+        mapped[trans.category[0]] = Math.round(mapped[trans.category[0]] + trans.amount);
       }
     }
-  });
+  }
   return mapped;
 };
 
@@ -41,15 +42,16 @@ const mapAndRender = function (data) {
   return renderRows(mapCategories(data));
 };
 
-const labelize = function (data) {
+const labelize = function (transactions) {
   const labels = [];
-  data.transactions.forEach((item) => {
-    if (item.category && item.category[0] != 'Transfer' && item.category[0] != 'Interest') {
-      if (labels.includes(item.category[0]) === false) {
-        labels.push(item.category[0]);
+  for (const key in transactions) {
+    const trans = transactions[key];
+    if (trans.category && trans.category[0] !== 'Transfer' && trans.category[0] !== 'Interest') {
+      if (labels.includes(trans.category[0]) === false) {
+        labels.push(trans.category[0]);
       }
     }
-  });
+  }
   return labels;
 };
 

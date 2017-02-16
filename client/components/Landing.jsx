@@ -5,16 +5,23 @@ import JumbotronTwo from './JumbotronTwo.jsx';
 import JumbotronThree from './JumbotronThree.jsx';
 import NavigationBar from './NavBar.jsx';
 import css from '../styles/main.css';
-const Landing = props => (
-  <div>
-    <NavigationBar />
-    <JumbotronOne data={props.data} />
-    <JumbotronTwo data={props.data} />
-    <JumbotronThree />
-  </div>
-);
+
+class Landing extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <NavigationBar landing />
+        <JumbotronOne data={this.props.data} />
+        <JumbotronTwo data={this.props.data} />
+        <JumbotronThree formType={this.props.signForm} />
+      </div>
+    );
+  }
+}
 
 export default connect(state => ({
+  signForm: state.render.signForm,
   // some stuff to connect a session to this user
   // accept user's input to create a session
 }))(Landing);
