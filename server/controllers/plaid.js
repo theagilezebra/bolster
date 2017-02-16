@@ -27,7 +27,10 @@ module.exports = {
           categories[data.data[i].hierarchy[n]] = null;
         }
       }
-      return Promise.all(Object.keys(categories).map(category => helpers.findOrCreate(Category, { name: category })));
+      return Promise.all(Object.keys(categories).map(category => helpers.findOrCreate(Category, { name: category })))
+      .then(() => {
+        Category.forge({ name: 'Account Transfer' }).save();
+      });
     })
     .catch((err) => {
       console.log(err);
