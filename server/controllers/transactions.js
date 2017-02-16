@@ -10,20 +10,16 @@ const helpers = require('../helpers');
 module.exports = {
   get: (req, res) => Transaction.forge().where(req.query).fetchAll()
     .then(transactions => Promise.all(transactions.models.map(transaction => Business.forge({ id: transaction.attributes.business_id }).fetch()
-      .then((business) => {
-        transaction.attributes.name = business.attributes.name;
-        delete transaction.attributes.business_id;
-        return transaction;
-      }))))
-    .then(transactions => Promise.all(transactions.map((transaction) => {
-      transaction.attributes.categories = [];
-      return Promise.all((JSON.parse(transaction.attributes.category_id).map(id => Category.forge({ id }).fetch()
-      .then((category) => {
-        transaction.attributes.categories.push(category.attributes.name);
-        delete transaction.attributes.category_id;
-      }))))
-      .then(() => transaction);
-    })))
+    .then((business) => {
+      transaction.attributes.name = business.attributes.name;
+      delete transaction.attributes.business_id;
+      return transaction;
+    }))))
+    .then(transactions => Promise.all(transactions.map(transaction => Category.forge({ id: transaction.id }).fetch()
+    .then((category) => {
+      transaction.attributes.category = category.attributes.name;
+      return transaction;
+    }))))
     .then((transactions) => {
       res.json(transactions);
     })
