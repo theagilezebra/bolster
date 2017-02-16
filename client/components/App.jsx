@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
 
 // actions and other components
-// import css from '../styles/main.css';
 import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
 import BudgetGraph from './BudgetGraph.jsx';
