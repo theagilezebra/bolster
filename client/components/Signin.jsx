@@ -19,7 +19,7 @@ const Signin = ({ dispatch }) => {
       <h3>{'Already have an account? Sign in here!'}</h3>
       <input className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
       <input className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
-      <button type="submit">Signin</button>
+      <button type="submit" className="btn btn-success submitbutton green">Signin</button>
     </form>
   );
 };
