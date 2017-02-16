@@ -10,20 +10,16 @@ const helpers = require('../helpers');
 module.exports = {
   get: (req, res) => Transaction.forge().where(req.query).fetchAll()
     .then(transactions => Promise.all(transactions.models.map(transaction => Business.forge({ id: transaction.attributes.business_id }).fetch()
-      .then((business) => {
-        transaction.attributes.name = business.attributes.name;
-        delete transaction.attributes.business_id;
-        return transaction;
-      }))))
-    .then(transactions => Promise.all(transactions.map((transaction) => {
-      transaction.attributes.categories = [];
-      return Promise.all((JSON.parse(transaction.attributes.category_id).map(id => Category.forge({ id }).fetch()
-      .then((category) => {
-        transaction.attributes.categories.push(category.attributes.name);
-        delete transaction.attributes.category_id;
-      }))))
-      .then(() => transaction);
-    })))
+    .then((business) => {
+      transaction.attributes.name = business.attributes.name;
+      delete transaction.attributes.business_id;
+      return transaction;
+    }))))
+    .then(transactions => Promise.all(transactions.map(transaction => Category.forge({ id: transaction.id }).fetch()
+    .then((category) => {
+      transaction.attributes.category = category.attributes.name;
+      return transaction;
+    }))))
     .then((transactions) => {
       res.json(transactions);
     })
@@ -32,23 +28,26 @@ module.exports = {
     }),
 
   bulkCreate: (transactions, userId) => Promise.all(transactions.map((transaction) => {
-    let categoryIds;
+    let categoryId;
     let businessId;
-    transaction.category = transaction.category || ['Uncategorized'];
-    return Promise.all(transaction.category.map(name => helpers.findOrCreate(Category, { name })))
-    .then(records => categoryIds = records.map(record => record.id))
-    .then((records) => {
+    const name = transaction.category ? transaction.category[transaction.category.length - 1] : 'Uncategorized';
+    return helpers.findOrCreate(Category, { name })
+    .then((record) => {
+      categoryId = record;
       if (transaction.meta.location.coordinates) {
         delete transaction.meta.location.coordinates;
       }
-      return helpers.findOrCreate(Address, transaction.meta.location);
+      return transaction.meta.location.address ? helpers.findOrCreate(Address, transaction.meta.location) : transaction;
     })
     .then((address) => {
       const businessAttributes = {
         name: transaction.name,
         address_id: address.id,
-        category_id: JSON.stringify(categoryIds),
+        category_id: categoryId.id,
       };
+      if (!address.address) {
+        delete businessAttributes.address_id;
+      }
       return helpers.findOrCreate(Business, businessAttributes);
     }).then((business) => {
       businessId = business.id;
@@ -58,11 +57,11 @@ module.exports = {
         user_id: userId,
         account_id: account.id,
         business_id: businessId,
-        category_id: JSON.stringify(categoryIds),
+        category_id: categoryId.id,
         amount: transaction.amount,
         date: transaction.date,
       };
-      if (categoryIds.includes('transfer') || categoryIds.includes('withdrawal')) {
+      if (categoryId === 'transfer' || categoryId === 'withdrawal') {
         delete transactionAttributes.business_id;
       }
       return helpers.findOrCreate(Transaction, transactionAttributes);
