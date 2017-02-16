@@ -16,9 +16,10 @@ const Signin = ({ dispatch }) => {
 
   return (
     <form action="#" onSubmit={submitHandler}>
+      <h3>{'Already have an account? Sign in here!'}</h3>
       <input className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
       <input className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
-      <button type="submit">Submit</button>
+      <button type="submit">Signin</button>
     </form>
   );
 };
