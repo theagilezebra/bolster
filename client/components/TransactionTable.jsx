@@ -2,7 +2,7 @@ import React from 'react';
 import { mapAndRender } from '../helpers/transactionHelpers.jsx';
 
 const TransactionTable = props => (
-  <div className="transleft">
+  <div className="quicksand">
     <div className="container">
       <table className="table">
         <thead>
