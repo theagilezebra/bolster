@@ -60,7 +60,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     businesses.specificType('coordinates', 'POINT');
     businesses.integer('address_id').unsigned();
     businesses.foreign('address_id').references('addresses.id');
-    businesses.string('category_id', 255);
+    businesses.dropForeign('address_id');
+    businesses.integer('category_id');
     businesses.timestamps();
   });
 }).then((businesses) => {
@@ -107,7 +108,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.integer('business_id').unsigned();
     transactions.foreign('business_id').references('businesses.id');
     transactions.dropForeign('business_id');
-    transactions.string('category_id', 50);
+    transactions.integer('category_id');
     // transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
   });
