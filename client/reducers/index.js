@@ -8,12 +8,12 @@ import goals from './goalReducer';
 import categories from './categoryReducer';
 
 export default combineReducers({
-  user,
-  accounts,
-  transactions,
-  businesses,
-  budgets,
-  goals,
-  categories,
+  // user,
+  // accounts,
+  // transactions,
+  // businesses,
+  // budgets,
+  // goals,
+  // categories,
 });
 
