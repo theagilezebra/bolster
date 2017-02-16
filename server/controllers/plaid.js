@@ -21,7 +21,6 @@ module.exports = {
     get: () => axios.get('https://tartan.plaid.com/categories')
     .then((data) => {
       const categories = {};
-      console.log(typeof data);
       for (let i = 0; i < data.data.length; i += 1) {
         for (let n = 0; n < data.data[i].hierarchy.length; n += 1) {
           categories[data.data[i].hierarchy[n]] = null;
