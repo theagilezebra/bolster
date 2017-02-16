@@ -9,7 +9,7 @@ const BudgetGraph = props => (
     <div >
       <Goals />
     </div>
-    <Line data={populateChart(props.data)} height="450" width="900" />
+    <Line data={populateChart(props.data)} height={450} width={900} />
   </div>
 );
 
