@@ -2,10 +2,12 @@ import React from 'react';
 import Chart from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import Goals from './Goals.jsx';
+import NavigationBar from './NavBar.jsx';
 import { populateChart } from '../helpers/budgetHelpers.jsx';
 
 const BudgetGraph = props => (
   <div>
+    <NavigationBar landing={false} />
     <div >
       <Goals />
     </div>

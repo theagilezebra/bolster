@@ -11,7 +11,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div>
-        <NavigationBar />
+        <NavigationBar landing />
         <JumbotronOne data={this.props.data} />
         <JumbotronTwo data={this.props.data} />
         <JumbotronThree formType={this.props.signForm} />
