@@ -14,7 +14,7 @@ const NavigationBar = ({ landing, dispatch }) => (
           <a href="#" className="logo">Bolster</a>
         </Navbar.Brand>
       </Navbar.Header>
-      <Nav bsStyle="pills">
+      <Nav bsStyle="pills" className="quicksand">
         {
           landing ?
             <div>
