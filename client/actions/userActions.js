@@ -10,7 +10,9 @@ export function signinOrSignup(credentials) {
     });
 }
 
-export const signout = { type: 'SIGNOUT' };
+export function signout() {
+  return dispatch => dispatch({ type: 'SIGNOUT' });
+}
 
 // export function checkAuth() {
 
