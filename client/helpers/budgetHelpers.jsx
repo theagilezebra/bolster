@@ -1,17 +1,18 @@
 import React from 'react';
 
-const mapCategories = function (data) {
+const mapCategories = function (transactions) {
   let total = 0;
   const mapped = {};
-  data.transactions.forEach((item) => {
-    if (item.category && item.category[0] != 'Transfer' && item.category[0] != 'Interest') {
-      if (mapped[item.date] === undefined) {
-        mapped[item.date] = Math.round(total += item.amount);
+  for (const key in transactions) {
+    const trans = transactions[key];
+    if (trans.category && trans.category[0] !== 'Transfer' && trans.category[0] !== 'Interest') {
+      if (!mapped[trans.date]) {
+        mapped[trans.date] = Math.round(total += trans.amount);
       } else {
-        mapped[item.date] = Math.round(mapped[item.date] + item.amount);
+        mapped[trans.date] = Math.round(mapped[trans.date] + trans.amount);
       }
     }
-  });
+  }
   return mapped;
 };
 
