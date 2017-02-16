@@ -41,6 +41,7 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
     "bookshelf": "^0.10.3",
+    "bootstrap": "^3.3.7",
     "chart.js": "^2.5.0",
     "css-loader": "^0.26.1",
     "express": "^4.14.1",
