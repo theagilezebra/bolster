@@ -18,7 +18,7 @@ const Signup = ({ dispatch }) => {
     <form action="#" onSubmit={submitHandler}>
       <input className="inputsize" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
       <input className="inputsize" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
-      <button type="submit">Submit</button>
+      <button type="submit" className="btn btn-success submitbutton green">Submit</button>
     </form>
   );
 };

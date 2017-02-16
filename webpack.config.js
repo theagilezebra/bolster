@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.(svg|ttf|woff|woff2|eot)$/,
-        loader: 'url?limit=5000',
+        loader: 'url-loader?limit=5000',
       },
       {
         test: /\.png$/,

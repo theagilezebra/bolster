@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Quicksand');
+
+.logo {
+  font-size: 40px;
+  font-family: 'Pacifico', 'cursive';
+}
+
+.quicksand {
+  font-family: 'Quicksand', 'sans-serif';
+}
+
+.navchoice {
+  font-size: 25px;
+  font-family: 'Quicksand', 'sans-serif';
+}
 .centertext {
   /*margin-right: 200px;*/
   text-align: center;
@@ -21,6 +36,7 @@
 }
 
 .greennav {
+  padding-top: 10px;
   height: 80px;
   background-color: #9CF3C9;
 }
@@ -32,6 +48,7 @@
   width: 500px;
   height: 60px;
 }
+
 
 .inputmargin {
   margin-right: 10px;
@@ -61,6 +78,7 @@
   }
 
 .submitbutton {
+  font-family: 'Quicksand', 'sans-serif';
   margin-left: 10px;
   height: 60px;
   width: 120px;

@@ -9,11 +9,11 @@ const LandingNav = props => ( // universal navbar renders according to user sess
     <Navbar className="greennav" >
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#"> Bolster</a>
+          <a href="#" className="logo"> Bolster</a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav bsStyle="pills" >
-        <NavItem onSelect={toBottom}>SignIn</NavItem>
+        <NavItem onSelect={toBottom} className="navchoice">SignIn</NavItem>
       </Nav>
     </Navbar>
   </div>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export function createGoal(data) { // create a single goal
   return dispatch => axios.post('/api/goals/create', data)
     .then((response) => {
