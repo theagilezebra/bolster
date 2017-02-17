@@ -11,7 +11,7 @@ const defaultState = {
   },
   user: {
     sessionActive: null,
-    userId: null,
+    id: null,
   },
   accounts: [
     {
