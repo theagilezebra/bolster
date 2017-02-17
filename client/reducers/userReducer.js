@@ -16,8 +16,6 @@ export default function reducer(state, action) {
     newState.sessionActive = false;
     break;
   }
-  default:
-    return state;
   }
   return newState;
 }
