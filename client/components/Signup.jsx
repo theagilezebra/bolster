@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signinOrSignup } from '../actions/userActions';
+import { signup } from '../actions/userActions';
 
 const Signup = ({ dispatch }) => {
   let emailInput = null;
@@ -10,7 +10,7 @@ const Signup = ({ dispatch }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signinOrSignup({
+    dispatch(signup({
       email: emailInput.value,
       password: passwordInput.value,
       firstName: firstNameInput.value,
