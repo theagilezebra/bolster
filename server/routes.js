@@ -10,7 +10,7 @@ const goals = require('./controllers/goals');
 
 routes.post('/users/signup', users.signup);
 routes.post('/users/signin', users.signin);
-routes.put('/users/update/:id', users.update);
+routes.put('/users/:id', users.update);
 
 routes.post('/accounts/create', accounts.create);
 routes.get('/accounts', accounts.get);
