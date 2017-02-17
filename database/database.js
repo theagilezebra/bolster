@@ -20,7 +20,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', addresses);
   return db.schema.createTableIfNotExists('users', (users) => {
     users.increments('id').primary();
-    users.string('accessToken', 128);
+    users.string('publicToken', 128);
+    users.string('privateToken', 128);
     users.string('firstName', 35).notNullable();
     users.string('lastName', 35).notNullable();
     users.string('email', 50).unique().notNullable();
