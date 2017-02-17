@@ -1,12 +1,22 @@
 import axios from 'axios';
 
-export function signinOrSignup(credentials) {
-  return dispatch => axios.post('/api/users', credentials)
+export function signin(credentials) {
+  return dispatch => axios.post('/api/users/signin', credentials)
     .then((response) => {
-      dispatch({ type: `SIGN${response.status === 201 ? 'IN' : 'UP'}_SUCCESSFUL`, payload: response.data });
+      dispatch({ type: 'SIGNIN_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'SIGNIN_OR_SIGNUP_FAILED', payload: err });
+      dispatch({ type: 'SIGNIN_FAILED', payload: err });
+    });
+}
+
+export function signup(credentials) {
+  return dispatch => axios.post('/api/users/signup', credentials)
+    .then((response) => {
+      dispatch({ type: 'SIGNUP_SUCCESSFUL', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'SIGNUP_FAILED', payload: err });
     });
 }
 
