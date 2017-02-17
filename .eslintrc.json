@@ -11,7 +11,8 @@
         "no-param-reassign": [0, { "props": false }],
         "max-len": ["error", 140],
         "newline-per-chained-call": 0,
-        "no-underscore-dangle": 0
+        "no-underscore-dangle": 0,
+        "default-case": 0
     },
     "settings": {
         "import/resolver": {
