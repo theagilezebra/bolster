@@ -11,8 +11,8 @@ export function createGoal(data) { // create a single goal
     });
 }
 
-export function fetchGoals({ userId }) { // provide all goals specific to user
-  return dispatch => axios.get(`/api/goals?user_id=${userId}`)
+export function fetchGoals({ user_id }) { // provide all goals specific to user
+  return dispatch => axios.get(`/api/goals?user_id=${user_id}`)
     .then((response) => {
       dispatch({ type: 'FETCH_GOALS_SUCCESSFUL', payload: response.data });
     })
