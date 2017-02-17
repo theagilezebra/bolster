@@ -3,9 +3,11 @@ export default function reducer(state, action) {
   switch (action.type) {
   case 'SIGNUP_FAILED': {
     newState.signup = action.payload;
+    break;
   }
   case 'SIGNIN_FAILED': {
     newState.signin = action.payload;
+    break;
   }
   // no default case
   }

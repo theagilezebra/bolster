@@ -558,5 +558,5 @@ const defaultState = {
     },
   ],
 };
-export default createStore(reducer, defaultState, middleware);
 
+export default createStore(reducer, defaultState, middleware);

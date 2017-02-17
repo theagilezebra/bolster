@@ -17,8 +17,6 @@ export default function reducer(state, action) {
       console.log('Fetch categories failed.');
       break;
     }
-    default:
-      return state;
   }
   return newState;
 }
