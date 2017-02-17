@@ -3,8 +3,12 @@ export default function reducer(state, action) {
   switch (action.type) {
   case 'SIGNIN_SUCCESSFUL':
   case 'SIGNUP_SUCCESSFUL': {
+    const { firstName, lastName, id, email } = action.payload.data;
     newState.sessionActive = true;
-    newState.userData = action.payload;
+    newState.firstName = firstName;
+    newState.lastName = lastName;
+    newState.email = email;
+    newState.id = id;
     break;
   }
   case 'SIGNIN_OR_SIGNUP_FAILED': {
