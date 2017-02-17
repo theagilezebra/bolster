@@ -1,16 +1,12 @@
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const expressJWT = require('express-jwt');
 
 const helpers = require('./helpers');
 
 module.exports = (app, express) => {
   app.use(morgan('dev'));
-  app.use(session({
-    secret: 'lets make this an environment variable soon, ok?',
-    resave: false,
-    saveUninitialized: true,
-  }));
+  app.use(expressJWT({ secret: process.env.JWT_SECRET || 'super secret' }).unless({ path: ['/'] }));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 };
