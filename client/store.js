@@ -11,7 +11,11 @@ const defaultState = {
   },
   user: {
     sessionActive: null,
-    userId: null,
+    id: null,
+  },
+  error: {
+    signup: '',
+    signin: '',
   },
   accounts: [
     {

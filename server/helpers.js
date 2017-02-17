@@ -12,12 +12,12 @@ module.exports = {
   createSession: (req, res, newUser) => req.session.regenerate(() => {
     delete newUser.attributes.password;
     req.session.user = newUser.attributes;
-    res.redirect('/');
+    res.json(newUser);
   }),
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
     model.forge(criteria).fetch().then((category) => {
-      resolve(category || model.forge(criteria).save());
+      resolve(category || model.forge(criteria).save(null, { method: 'insert' }));
     });
   }),
 };

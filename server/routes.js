@@ -8,8 +8,8 @@ const transactions = require('./controllers/transactions');
 const businesses = require('./controllers/businesses');
 const goals = require('./controllers/goals');
 
-routes.post('/users/signup', users.create);
-routes.post('/users/login', users.login);
+routes.post('/users/signup', users.signup);
+routes.post('/users/signin', users.signin);
 routes.put('/users/update/:id', users.update);
 
 routes.post('/accounts/create', accounts.create);

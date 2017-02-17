@@ -34,8 +34,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
 }).then((users) => {
   console.log('Created Table:', users);
   return db.schema.createTableIfNotExists('categories', (categories) => {
-    categories.increments('id').primary();
-    categories.string('name', 50).unique().notNullable();
+    categories.string('id').primary();
+    categories.string('categories', 128).unique().notNullable();
     categories.timestamps();
   });
 }).then((categories) => {
@@ -61,14 +61,14 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     businesses.integer('address_id').unsigned();
     businesses.foreign('address_id').references('addresses.id');
     businesses.dropForeign('address_id');
-    businesses.integer('category_id');
+    businesses.string('category_id');
     businesses.timestamps();
   });
 }).then((businesses) => {
   console.log('Created Table:', businesses);
   return db.schema.createTableIfNotExists('budgets', (budgets) => {
     budgets.increments('id').primary();
-    budgets.integer('category_id').unsigned();
+    budgets.string('category_id').unsigned();
     budgets.foreign('category_id').references('categories.id');
     budgets.dropForeign('category_id');
     budgets.integer('average');
@@ -108,7 +108,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.integer('business_id').unsigned();
     transactions.foreign('business_id').references('businesses.id');
     transactions.dropForeign('business_id');
-    transactions.integer('category_id');
+    transactions.string('category_id');
     // transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
   });
