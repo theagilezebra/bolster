@@ -13,6 +13,9 @@ const defaultState = {
     sessionActive: null,
     id: null,
   },
+  error: {
+    signup: '',
+  },
   accounts: [
     {
       _id: 'QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK',
