@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signup } from '../actions/userActions';
 
-const Signup = ({ dispatch }) => {
+const Signup = ({ dispatch, error }) => {
   let emailInput = null;
   let passwordInput = null;
   let firstNameInput = null;
@@ -62,9 +62,12 @@ const Signup = ({ dispatch }) => {
           ref={(ref) => { lastNameInput = ref; }}
         />
       </div>
+      <p className="error-message">{error}</p>
       <button type="submit" className="btn btn-success submitbutton green">Signup</button>
     </form>
   );
 };
 
-export default connect(null)(Signup);
+export default connect((state => ({
+  error: state.error.signup,
+})), null)(Signup);

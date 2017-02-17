@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signin } from '../actions/userActions';
 
-const Signin = ({ dispatch }) => {
+const Signin = ({ dispatch, error }) => {
   let emailInput = null;
   let passwordInput = null;
 
@@ -35,9 +35,12 @@ const Signin = ({ dispatch }) => {
           ref={(ref) => { passwordInput = ref; }}
         />
       </div>
+      <p className="error-message">{error}</p>
       <button type="submit" className="btn btn-success submitbutton green">Signin</button>
     </form>
   );
 };
 
-export default connect(null)(Signin);
+export default connect(state => ({
+  error: state.error.signin,
+}), null)(Signin);
