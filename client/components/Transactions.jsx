@@ -9,14 +9,14 @@ const Transactions = props => (
     <div className="container centertext topmargin">
       <div className="row ">
         <div className="col-md-12" >
-          <TransactionChart data={props.data} />
+          <TransactionChart />
         </div>
       </div>
     </div>
     <div className="container topmargin">
       <div className="row">
         <div className="col-md-12">
-          <TransactionTable data={props.data} />
+          <TransactionTable />
         </div>
       </div>
     </div>

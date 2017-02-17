@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { connect } from 'react-redux';
 import { populateChart } from '../helpers/transactionHelpers.jsx';
 
 const TransactionChart = props => (
@@ -9,4 +10,7 @@ const TransactionChart = props => (
   </div>
 );
 
-export default TransactionChart;
+export default connect(state => ({
+  data: state.transactions,
+}))(TransactionChart);
+

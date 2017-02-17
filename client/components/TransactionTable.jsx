@@ -1,5 +1,6 @@
 import React from 'react';
 import { mapAndRender } from '../helpers/transactionHelpers.jsx';
+import { connect } from 'react-redux';
 
 const TransactionTable = props => (
   <div className="quicksand">
@@ -21,4 +22,6 @@ const TransactionTable = props => (
   </div>
 );
 
-export default TransactionTable;
+export default connect(state => ({
+  data: state.transactions,
+}))(TransactionTable);
