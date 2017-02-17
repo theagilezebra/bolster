@@ -17,7 +17,7 @@ module.exports = {
         .then((userInstance) => {
           helpers.createSession(req, res, userInstance);
         }).catch((error) => {
-          res.status(400).json(error);
+          res.json(error).status(400);
         });
       });
     });
@@ -41,14 +41,13 @@ module.exports = {
   update: (req, res) => {
     new User(req.params).fetch({ require: true }).then((userInstance) => {
       userInstance.save(req.body, { patch: true }).then((user) => {
-        delete user.attributes.password;
-        res.status(204).json(user);
+        res.json(helpers.formatUser(userInstance)).status(204);
       }).catch((err) => {
-        res.status(404).json(err);
+        res.json(err).status(404);
       });
     })
     .catch((err) => {
-      res.status(404).json(err);
+      res.json(err).status(404);
     });
   },
 };

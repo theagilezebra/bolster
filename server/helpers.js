@@ -20,4 +20,13 @@ module.exports = {
       resolve(category || model.forge(criteria).save(null, { method: 'insert' }));
     });
   }),
+
+  formatUser: (userInstance) => {
+    delete userInstance.attributes.password;
+    delete userInstance.attributes.publicToken;
+    delete userInstance.attributes.privateToken;
+    delete userInstance.attributes.created_at;
+    delete userInstance.attributes.updated_at;
+    return userInstance;
+  },
 };
