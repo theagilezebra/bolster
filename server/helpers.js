@@ -10,7 +10,6 @@ module.exports = {
       // or should this be next(decoded)
     });
   }),
-
   createJWT: (req, res, newUser) => req.session.regenerate(() => {
     delete newUser.attributes.password;
     const userToken = jwt.sign({ email: newUser.attributes.email }, process.env.JWT_SECRET || 'super secret');
