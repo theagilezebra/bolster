@@ -5,11 +5,11 @@ const Address = require('../../database/models/address');
 const helpers = require('../helpers');
 
 module.exports = {
-  create: (req, res) => {
-    const { firstName, lastName, email, password, address, city, state, zip, country } = req.body;
+  signup: (req, res) => {
+    const { firstName, lastName, email, password, address = 'undefined', city = '', state = '', zip = 0, country = '' } = req.body;
     const user = { firstName, lastName, email, password };
     const physicalAddress = { address, city, state, zip, country };
-    return new Address(physicalAddress).save().then((addressInstance) => {
+    return helpers.findOrCreate(Address, physicalAddress).then((addressInstance) => {
       user.address_id = addressInstance.id;
       bcrypt.hash((password), null, null, (err, hash) => {
         user.password = hash;
@@ -23,7 +23,7 @@ module.exports = {
     });
   },
 
-  login: (req, res) => {
+  signin: (req, res) => {
     const { email, password } = req.body;
     new User({ email }).fetch().then((userInstance) => {
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
