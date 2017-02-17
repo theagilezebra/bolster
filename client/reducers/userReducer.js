@@ -11,10 +11,6 @@ export default function reducer(state, action) {
     newState.id = id;
     break;
   }
-  case 'SIGNIN_OR_SIGNUP_FAILED': {
-    console.log('Signin or signup failed.');
-    break;
-  }
   case 'SIGNOUT': {
     newState.sessionActive = false;
     break;
