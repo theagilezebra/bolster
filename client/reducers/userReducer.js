@@ -1,6 +1,7 @@
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
+
   case 'SIGNIN_SUCCESSFUL':
   case 'SIGNUP_SUCCESSFUL': {
     const { firstName, lastName, id, email } = action.payload;
@@ -15,7 +16,8 @@ export default function reducer(state, action) {
     newState.sessionActive = false;
     break;
   }
-  // no default case
+  default:
+    return state;
   }
   return newState;
 }

@@ -10,7 +10,7 @@ export default function reducer(state, action) {
       break;
     }
     case 'FETCH_GOALS_SUCCESSFUL': {
-      newState.goalData = action.payload;
+      newState.goals = action.payload;
       break;
     }
     case 'FETCH_GOALS_FAILED': {
@@ -25,7 +25,8 @@ export default function reducer(state, action) {
       console.log('Update goal failed.');
       break;
     }
-  // no default
+    default:
+      return state;
   }
   return newState;
 }

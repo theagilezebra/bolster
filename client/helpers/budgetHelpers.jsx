@@ -1,6 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
-const mapCategories = function (transactions) {
+const mapCategories = (transactions) => {
   let total = 0;
   const mapped = {};
   for (const key in transactions) {
@@ -16,19 +17,18 @@ const mapCategories = function (transactions) {
   return mapped;
 };
 
-const dateLabels = function (mappedObj) {
-  return Object.keys(mappedObj);
-};
+const dateLabels = mappedObj => Object.keys(mappedObj).map(item => moment(item).format('MMMM Do YYYY'));
 
-const populateChart = function (data) {
+const populateChart = (data) => {
   const chartData = [];
   const chartConfig = {
     labels: [],
     datasets: [
       {
-        label: 'Spending',
-        lineTension: 0.1,
+        label: 'Money Blown',
+        lineTension: 0.3,
         data: [],
+        borderColor: '#2e8b57',
         backgroundColor: '#9CF3C9',
       },
     ],
@@ -42,6 +42,7 @@ const populateChart = function (data) {
   chartConfig.datasets[0].data = chartData.sort();
   return chartConfig;
 };
+
 
 module.exports = {
   mapCategories,
