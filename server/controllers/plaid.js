@@ -25,10 +25,10 @@ module.exports = {
       for (let i = 0; i < data.data.length; i += 1) {
         categories[data.data[i].id] = JSON.stringify(data.data[i].hierarchy);
       }
-      return Promise.all(Object.keys(categories).map(id => helpers.findOrCreate(Category, { id, categories: categories[id] })));
-      // .then(() => {
-      //   Category.forge({ id: '21001000', categories: '["Transfer", "Account Transfer"]' }).save();
-      // });
+      return Promise.all(Object.keys(categories).map(id => helpers.findOrCreate(Category, { id, categories: categories[id] })))
+      .then(() => {
+        Category.forge({ id: '30000000', categories: '["Uncategorized"]' }).save(null, { method: 'insert' });
+      });
     })
     .catch((err) => {
       console.log(err);
