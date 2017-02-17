@@ -15,11 +15,17 @@ module.exports = {
       delete transaction.attributes.business_id;
       return transaction;
     }))))
-    .then(transactions => Promise.all(transactions.map(transaction => Category.forge({ id: transaction.id }).fetch()
+    .then(transactions => Promise.all(transactions.map(transaction => Category.forge({ id: transaction.attributes.category_id }).fetch()
     .then((category) => {
-      transaction.attributes.category = category.attributes.name;
+      transaction.attributes.categories = JSON.parse(category.attributes.categories);
+      delete transaction.attributes.category_id;
       return transaction;
     }))))
+    .then(transactions => Promise.all(transactions.map((transaction) => {
+      delete transaction.attributes.created_at;
+      delete transaction.attributes.updated_at;
+      return transaction;
+    })))
     .then((transactions) => {
       res.json(transactions);
     })
@@ -30,8 +36,8 @@ module.exports = {
   bulkCreate: (transactions, userId) => Promise.all(transactions.map((transaction) => {
     let categoryId;
     let businessId;
-    const name = transaction.category ? transaction.category[transaction.category.length - 1] : 'Uncategorized';
-    return helpers.findOrCreate(Category, { name })
+    const categories = JSON.stringify(transaction.category);
+    return helpers.findOrCreate(Category, { categories })
     .then((record) => {
       categoryId = record;
       if (transaction.meta.location.coordinates) {

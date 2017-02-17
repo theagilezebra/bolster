@@ -5,6 +5,8 @@ const transactionsController = require('./transactions');
 const accountsController = require('./accounts');
 const helpers = require('../helpers');
 
+require('dotenv').config({ path: `${__dirname}/../../.env` });
+
 module.exports = {
   connect: {
     get: (body, userId) => axios.post('https://tartan.plaid.com/connect/get', body).then((data) => {
@@ -18,18 +20,15 @@ module.exports = {
   },
 
   categories: {
-    get: () => axios.get('https://tartan.plaid.com/categories')
-    .then((data) => {
+    get: () => axios.get('https://tartan.plaid.com/categories').then((data) => {
       const categories = {};
       for (let i = 0; i < data.data.length; i += 1) {
-        for (let n = 0; n < data.data[i].hierarchy.length; n += 1) {
-          categories[data.data[i].hierarchy[n]] = null;
-        }
+        categories[data.data[i].id] = JSON.stringify(data.data[i].hierarchy);
       }
-      return Promise.all(Object.keys(categories).map(category => helpers.findOrCreate(Category, { name: category })))
-      .then(() => {
-        Category.forge({ name: 'Account Transfer' }).save();
-      });
+      return Promise.all(Object.keys(categories).map(id => helpers.findOrCreate(Category, { id, categories: categories[id] })));
+      // .then(() => {
+      //   Category.forge({ id: '21001000', categories: '["Transfer", "Account Transfer"]' }).save();
+      // });
     })
     .catch((err) => {
       console.log(err);
