@@ -34,12 +34,12 @@ module.exports = {
     }),
 
   bulkCreate: (transactions, userId) => Promise.all(transactions.map((transaction) => {
-    let categoryId;
+    let category;
     let businessId;
-    const categories = JSON.stringify(transaction.category);
+    const categories = JSON.stringify(transaction.category) || '["Uncategorized"]';
     return helpers.findOrCreate(Category, { categories })
     .then((record) => {
-      categoryId = record;
+      category = record;
       if (transaction.meta.location.coordinates) {
         delete transaction.meta.location.coordinates;
       }
@@ -49,7 +49,7 @@ module.exports = {
       const businessAttributes = {
         name: transaction.name,
         address_id: address.id,
-        category_id: categoryId.id,
+        category_id: category.id,
       };
       if (!address.address) {
         delete businessAttributes.address_id;
@@ -63,13 +63,13 @@ module.exports = {
         user_id: userId,
         account_id: account.id,
         business_id: businessId,
-        category_id: categoryId.id,
+        category_id: category.id,
         amount: transaction.amount,
         date: transaction.date,
       };
-      if (categoryId === 'transfer' || categoryId === 'withdrawal') {
-        delete transactionAttributes.business_id;
-      }
+      // if (category === 'transfer' || category === 'withdrawal') {
+      //   delete transactionAttributes.business_id;
+      // }
       return helpers.findOrCreate(Transaction, transactionAttributes);
     }).catch((err) => {
       console.log(err);
