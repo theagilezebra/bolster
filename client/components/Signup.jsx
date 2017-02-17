@@ -22,16 +22,45 @@ const Signup = ({ dispatch }) => {
     <form action="#" onSubmit={submitHandler} className="quicksand">
       <h3>{'Don\'t have an account? Sign up to get started!'}</h3>
       <div>
-        <input className="inputsize inputmargin" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
+        <input
+          required
+          type="email"
+          maxLength="50"
+          className="inputsize inputmargin"
+          placeholder="Enter email"
+          ref={(ref) => { emailInput = ref; }}
+        />
       </div>
       <div>
-        <input className="inputsize inputmargin" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
+        <input
+          required
+          type="password"
+          minLength="8"
+          maxLength="128"
+          className="inputsize inputmargin"
+          placeholder="Enter super secret password"
+          ref={(ref) => { passwordInput = ref; }}
+        />
       </div>
       <div>
-        <input className="inputsize inputmargin" placeholder="Enter first name" ref={(ref) => { firstNameInput = ref; }} />
+        <input
+          required
+          type="text"
+          maxLength="35"
+          className="inputsize inputmargin"
+          placeholder="Enter first name"
+          ref={(ref) => { firstNameInput = ref; }}
+        />
       </div>
       <div>
-        <input className="inputsize inputmargin" placeholder="Enter lastname" ref={(ref) => { lastNameInput = ref; }} />
+        <input
+          required
+          type="text"
+          maxLength="35"
+          className="inputsize inputmargin"
+          placeholder="Enter lastname"
+          ref={(ref) => { lastNameInput = ref; }}
+        />
       </div>
       <button type="submit" className="btn btn-success submitbutton green">Signup</button>
     </form>

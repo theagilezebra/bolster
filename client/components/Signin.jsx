@@ -18,10 +18,22 @@ const Signin = ({ dispatch }) => {
     <form action="#" onSubmit={submitHandler} className="quicksand">
       <h3>{'Already have an account? Sign in here!'}</h3>
       <div>
-        <input className="inputsize inputmargin" placeholder="Enter email" ref={(ref) => { emailInput = ref; }} />
+        <input
+          required
+          type="email"
+          className="inputsize inputmargin"
+          placeholder="Enter email"
+          ref={(ref) => { emailInput = ref; }}
+        />
       </div>
       <div>
-        <input className="inputsize inputmargin" placeholder="Enter super secret password" ref={(ref) => { passwordInput = ref; }} />
+        <input
+          required
+          type="password"
+          className="inputsize inputmargin"
+          placeholder="Enter super secret password"
+          ref={(ref) => { passwordInput = ref; }}
+        />
       </div>
       <button type="submit" className="btn btn-success submitbutton green">Signin</button>
     </form>
