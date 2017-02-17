@@ -1,18 +1,20 @@
-const Transaction = require('../database/models/transaction');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
-  checkUser: (req, res, next) => {
-    if (req.session ? !!req.session.user : false) {
-      next();
-    } else {
-      res.redirect('/login');
-    }
-  },
+  checkUser: (req, res, next) => new Promise((resolve, reject) => {
+    jwt.verify(req.body.authorization, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(decoded);
+      // or should this be next(decoded)
+    });
+  }),
 
-  createSession: (req, res, newUser) => req.session.regenerate(() => {
+  createJWT: (req, res, newUser) => req.session.regenerate(() => {
     delete newUser.attributes.password;
-    req.session.user = newUser.attributes;
-    res.redirect('/');
+    const userToken = jwt.sign({ email: newUser.attributes.email }, process.env.JWT_SECRET || 'super secret');
+    res.json(userToken).redirect('/dashboard');
   }),
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
@@ -21,3 +23,8 @@ module.exports = {
     });
   }),
 };
+    // if (req.session ? !!req.session.user : false) {
+    //   next();
+    // } else {
+    //   res.redirect('/login');
+    // }
