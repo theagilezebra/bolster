@@ -15,6 +15,7 @@ const defaultState = {
   },
   error: {
     signup: '',
+    signin: '',
   },
   accounts: [
     {
