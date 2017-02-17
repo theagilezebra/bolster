@@ -7,6 +7,7 @@ import budgets from './budgetReducer';
 import goals from './goalReducer';
 import categories from './categoryReducer';
 import render from './renderReducer';
+import error from './errorReducer';
 
 export default combineReducers({
   user,
@@ -17,4 +18,5 @@ export default combineReducers({
   goals,
   categories,
   render,
+  error,
 });
