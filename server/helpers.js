@@ -17,7 +17,7 @@ module.exports = {
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
     model.forge(criteria).fetch().then((category) => {
-      resolve(category || model.forge(criteria).save());
+      resolve(category || model.forge(criteria).save(null, { method: 'insert' }));
     });
   }),
 };
