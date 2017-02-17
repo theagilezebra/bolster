@@ -17,7 +17,7 @@ module.exports = {
         .then((userInstance) => {
           helpers.createSession(req, res, userInstance);
         }).catch((error) => {
-          res.status(500).json(error);
+          res.status(400).json(error);
         });
       });
     });
