@@ -6,7 +6,7 @@ export function signin(credentials) {
       dispatch({ type: 'SIGNIN_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'SIGNIN_FAILED', payload: err });
+      dispatch({ type: 'SIGNIN_FAILED', payload: 'incorrect username or password' });
     });
 }
 
@@ -16,7 +16,7 @@ export function signup(credentials) {
       dispatch({ type: 'SIGNUP_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'SIGNUP_FAILED', payload: err });
+      dispatch({ type: 'SIGNUP_FAILED', payload: 'email already in use' });
     });
 }
 
