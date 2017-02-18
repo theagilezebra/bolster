@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-export function linkAccount(data) {
-  return dispatch => axios.post('/api/accounts/create', data)
+export function linkAccounts(data) {
+  return dispatch => axios.post('/api/plaid/link', data)
     .then((response) => {
-      console.log(JSON.stringify(response.data));
-      dispatch({ type: 'LINK_ACCOUNT_SUCCESSFUL', payload: response.data });
+      dispatch({ type: 'LINK_ACCOUNTS_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'LINK_ACCOUNT_FAILED', payload: err.response });
+      dispatch({ type: 'LINK_ACCOUNTS_FAILED', payload: err.response });
     });
 }
 
-export function fetchAccounts({ userId }) {
-  return dispatch => axios.get(`/api/accounts?user_id=${userId}`)
+export function fetchAccounts(userId) {
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.get(`/api/accounts?user_id=${userId}`, { headers })
     .then((response) => {
       dispatch({ type: 'FETCH_ACCOUNTS_SUCCESSFUL', payload: response.data });
     })
@@ -20,3 +20,4 @@ export function fetchAccounts({ userId }) {
       dispatch({ type: 'FETCH_ACCOUNTS_FAILED', payload: err.response });
     });
 }
+

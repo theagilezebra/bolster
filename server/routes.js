@@ -7,6 +7,7 @@ const budgets = require('./controllers/budgets');
 const transactions = require('./controllers/transactions');
 const businesses = require('./controllers/businesses');
 const goals = require('./controllers/goals');
+const plaid = require('./controllers/plaid');
 
 routes.post('/users/signup', users.signup);
 routes.post('/users/signin', users.signin);
@@ -29,6 +30,8 @@ routes.put('/goals/update/:id', goals.update);
 routes.get('/transactions', transactions.get);
 
 routes.get('/businesses', businesses.get);
+
+routes.post('/plaid/link', plaid.connect.link);
 
 
 module.exports = routes;
