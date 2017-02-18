@@ -1,20 +1,26 @@
 const jwt = require('jsonwebtoken');
+const unless = require('express-unless');
 
 module.exports = {
-  checkUser: (req, res, next) => new Promise((resolve, reject) => {
-    jwt.verify(req.body.authorization, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
+  checkUser: (req, res, next) => {
+    const headerAuth = req.get('Authorization').slice(7);
+    jwt.verify(headerAuth, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
       if (err) {
-        reject(err);
+        res.status(401).end('YOU SHALL NOT PASS!!');
+      } else {
+        next();
       }
-      resolve(decoded);
-      // or should this be next(decoded)
     });
-  }),
-  createJWT: (req, res, newUser) => req.session.regenerate(() => {
-    delete newUser.attributes.password;
-    const userToken = jwt.sign({ email: newUser.attributes.email }, process.env.JWT_SECRET || 'super secret');
-    res.json(userToken).redirect('/dashboard');
-  }),
+  },
+  createJWT: (newUser) => {
+    const userToken = jwt.sign(newUser, process.env.JWT_SECRET || 'super secret');
+    return userToken;
+  },
+
+  jwtRedirect: (req, res, userInstance) => {
+    const userToken = module.exports.createJWT(userInstance);
+    res.json({ userToken, userInstance }).redirect('/dashboard');
+  },
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
     model.forge(criteria).fetch().then((category) => {
