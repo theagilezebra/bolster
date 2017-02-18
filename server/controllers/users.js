@@ -15,7 +15,7 @@ module.exports = {
         user.password = hash;
         new User(user).save()
         .then((userInstance) => {
-          helpers.createSession(req, res, userInstance);
+          helpers.jwtRedirect(req, res, userInstance);
         }).catch((error) => {
           res.status(400).json(error);
         });
