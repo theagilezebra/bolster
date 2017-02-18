@@ -8,7 +8,7 @@ const Account = require('../../database/models/account');
 const helpers = require('../helpers');
 
 module.exports = {
-  get: (req, res) => Transaction.forge().where(req.query).fetchAll()
+  get: (req, res) => Transaction.forge().where({ user_id: req.query.id }).fetchAll()
     .then(transactions => Promise.all(transactions.models.map(transaction => Business.forge({ id: transaction.attributes.business_id }).fetch()
     .then((business) => {
       transaction.attributes.name = business.attributes.name;

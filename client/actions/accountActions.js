@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-export function linkAccount(data) {
-  return dispatch => axios.post('/api/accounts/create', data)
+export function linkAccounts(data) {
+  return dispatch => axios.post('/api/plaid/link', data)
     .then((response) => {
-      console.log(JSON.stringify(response.data));
-      dispatch({ type: 'LINK_ACCOUNT_SUCCESSFUL', payload: response.data });
+      dispatch({ type: 'LINK_ACCOUNTS_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'LINK_ACCOUNT_FAILED', payload: err.response });
+      dispatch({ type: 'LINK_ACCOUNTS_FAILED', payload: err.response });
     });
 }
 
