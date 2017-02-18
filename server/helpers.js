@@ -19,7 +19,7 @@ module.exports = {
 
   jwtRedirect: (req, res, userInstance) => {
     const userToken = module.exports.createJWT(userInstance);
-    res.json({ userToken, userInstance }).redirect('/dashboard');
+    res.json({ userToken, userInstance });
   },
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ module.exports = {
   formatUser: (userInstance) => {
     delete userInstance.attributes.password;
     delete userInstance.attributes.publicToken;
-    delete userInstance.attributes.privateToken;
+    delete userInstance.attributes.accessToken;
     delete userInstance.attributes.created_at;
     delete userInstance.attributes.updated_at;
     return userInstance;
