@@ -1,3 +1,5 @@
+import { hashHistory } from 'react-router';
+
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
@@ -11,6 +13,7 @@ export default function reducer(state, action) {
       newState.lastName = lastName;
       newState.email = email;
       newState.id = id;
+      hashHistory.push('/dashboard');
       break;
     }
     case 'SIGNOUT': {
