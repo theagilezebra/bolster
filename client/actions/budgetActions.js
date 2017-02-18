@@ -11,7 +11,7 @@ export function createBudget(data) {
     });
 }
 
-export function fetchBudgets({ userId }) {
+export function fetchBudgets(userId) {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
   return dispatch => axios.get(`/api/budgets?user_id=${userId}`, { headers })
     .then((response) => {
