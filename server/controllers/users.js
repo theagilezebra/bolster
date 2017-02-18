@@ -28,7 +28,7 @@ module.exports = {
     new User({ email }).fetch().then((userInstance) => {
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
         if (match) {
-          helpers.createSession(req, res, userInstance);
+          helpers.jwtRedirect(req, res, userInstance);
         } else {
           res.status(401).end('wrong username or password');
         }
