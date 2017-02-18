@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function fetchTransactions({ userId }) {
+export default function fetchTransactions(userId) {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
   return dispatch => axios.get(`/api/transactions?user_id=${userId}`, { headers })
     .then((response) => {
