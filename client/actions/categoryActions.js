@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export function createCategory(data) {
-  return dispatch => axios.post('/api/categories/create', data)
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.post('/api/categories/create', data, { headers })
     .then((response) => {
       dispatch({ type: 'CREATE_CATEGORY_SUCCESSFUL', payload: response.data });
     })
