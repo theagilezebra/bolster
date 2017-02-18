@@ -1,3 +1,5 @@
-export default function () {
-  return window.localStorage.get('userToken');
+export default function (nextState, replace) {
+  if (!window.localStorage.getItem('userToken')) {
+    replace('/');
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
+import requireAuth from '../helpers/authHelpers';
 
 // actions and other components
 import Landing from './Landing.jsx';
@@ -14,19 +15,19 @@ class App extends React.Component {
       <Router history={hashHistory}>
         <Route path="/" component={Landing} />
         <Route
-          path="/budgetchart" component={() => (
-            <BudgetGraph />
-        )}
+          path="/budgetchart"
+          component={() => (<BudgetGraph />)}
+          onEnter={requireAuth}
         />
         <Route
-          path="/transactions" component={() => (
-            <Transactions />
-        )}
+          path="/transactions"
+          component={() => (<Transactions />)}
+          onEnter={requireAuth}
         />
         <Route
-          path="/dashboard" component={() => (
-            <Dashboard dispatch={this.props.dispatch} />
-        )}
+          path="/dashboard"
+          component={() => (<Dashboard dispatch={this.props.dispatch} />)}
+          onEnter={requireAuth}
         />
       </Router>
     );
