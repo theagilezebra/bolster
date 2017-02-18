@@ -1,9 +1,9 @@
 import { hashHistory } from 'react-router';
+import { resetState } from '../helpers/stateHelpers';
 
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
-
     case 'SIGNIN_SUCCESSFUL':
     case 'SIGNUP_SUCCESSFUL': {
       window.localStorage.setItem('userToken', action.payload.userToken);
@@ -17,7 +17,9 @@ export default function reducer(state, action) {
       break;
     }
     case 'SIGNOUT': {
-      newState.sessionActive = false;
+      window.localStorage.removeItem('userToken');
+      resetState(newState, 'user');
+      hashHistory.push('/');
       break;
     }
   }

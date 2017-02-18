@@ -1,3 +1,5 @@
+import { resetState } from '../helpers/stateHelpers';
+
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
@@ -15,6 +17,10 @@ export default function reducer(state, action) {
   }
   case 'FETCH_ACCOUNTS_FAILED': {
     console.log('Fetch accounts failed.');
+    break;
+  }
+  case 'SIGNOUT': {
+    resetState(newState, 'accounts');
     break;
   }
   }

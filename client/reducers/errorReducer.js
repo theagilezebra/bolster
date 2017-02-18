@@ -1,3 +1,5 @@
+import { resetState } from '../helpers/stateHelpers';
+
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
@@ -9,7 +11,10 @@ export default function reducer(state, action) {
     newState.signin = action.payload;
     break;
   }
-  // no default case
+  case 'SIGNOUT': {
+    resetState(newState, 'error');
+    break;
+  }
   }
   return newState;
 }
