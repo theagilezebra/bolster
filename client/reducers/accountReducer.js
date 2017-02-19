@@ -2,7 +2,7 @@ export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
   case 'LINK_ACCOUNTS_SUCCESSFUL': {
-    newState.accountData = action.payload;
+    newState.accountStatus = action.payload;
     break;
   }
   case 'LINK_ACCOUNTS_FAILED': {

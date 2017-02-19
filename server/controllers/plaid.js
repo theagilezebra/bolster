@@ -36,7 +36,7 @@ module.exports = {
       .then(({ data }) => {
         const { accounts } = data;
         accounts.forEach((account) => { account.institutionName = institutionName; });
-        accountsController.bulkCreate(accounts, id).then(() => res.end('Accounts stored successfully'));
+        accountsController.bulkCreate(accounts, id).then(() => res.json('Accounts linked successfully.'));
       }))
       .catch((err) => {
         console.log(err);
@@ -52,7 +52,7 @@ module.exports = {
       }))
       .then(({ data }) => {
         const { transactions } = data;
-        return transactionsController.bulkCreate(transactions, id).then(() => res.end('Transactions stored successfully.'));
+        return transactionsController.bulkCreate(transactions, id).then(() => res.json('Transactions stored successfully.'));
       })
       .catch((err) => {
         console.log(err);

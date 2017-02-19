@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { linkAccounts, fetchAccounts } from '../actions/accountActions';
 
 const AddBank = ({ id, accounts, dispatch }) => {
+  const { accountData, accountStatus } = accounts;
   const handleOnSuccess = (public_token, metadata) => {
     dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name })).then(() => {
       dispatch(fetchAccounts(id));
@@ -19,8 +20,10 @@ const AddBank = ({ id, accounts, dispatch }) => {
         clientName="Bolster"
         onSuccess={handleOnSuccess}
       />
+      <br />
+      <span>{accountStatus}</span>
       <div>
-        {accounts.map(account => (
+        {accountData.map(account => (
           <div>
             <span>Account: {account.name} ..... Balance: {account.currentBalance}</span>
           </div>
@@ -32,5 +35,5 @@ const AddBank = ({ id, accounts, dispatch }) => {
 
 export default connect(state => ({
   id: state.user.id,
-  accounts: state.accounts.accountData,
+  accounts: state.accounts,
 }))(AddBank);
