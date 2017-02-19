@@ -34,11 +34,6 @@ module.exports = {
     delete userInstance.attributes.accessToken;
     delete userInstance.attributes.created_at;
     delete userInstance.attributes.updated_at;
-    return userInstance;
+    return userInstance.attributes;
   },
 };
-    // if (req.session ? !!req.session.user : false) {
-    //   next();
-    // } else {
-    //   res.redirect('/login');
-    // }
