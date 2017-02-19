@@ -1,18 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Quicksand');
 
-.logo {
-  font-size: 40px;
-  font-family: 'Pacifico', 'cursive';
-}
-
-.quicksand {
-  font-family: 'Quicksand', 'sans-serif';
-}
-
-.navchoice {
-  font-size: 25px;
-  font-family: 'Quicksand', 'sans-serif';
-}
 .centertext {
   /*margin-right: 200px;*/
   text-align: center;
@@ -22,6 +9,42 @@
   padding: 5%;
   height: 50vh;
   background-color: seagreen;
+}
+
+.dashboardjumbo {
+  padding-top: 5%;
+  height: 33vh;
+}
+
+.dashboardone {
+  margin-top: -3%;
+  background-color: #00B9B9;
+}
+
+.dashboardone:hover {
+  background-color: #37F3A8;
+}
+
+.dashboardtwo {
+  background-color: #00CDB4;
+}
+
+.dashboardtwo:hover {
+  background-color: #37F3A8
+}
+
+.dashboardthree {
+  background-color: #00DFAE;
+}
+
+.dashboardthree:hover {
+  background-color: #01EFAD;
+}
+
+.dashboardtext {
+  text-align: center;
+  font-family: 'Quicksand', 'sans-serif';
+  font-size: 10vmin;
 }
 
 .fullwidth {
@@ -39,6 +62,12 @@
   padding-top: 10px;
   height: 80px;
   background-color: #9CF3C9;
+}
+
+.whitenav {
+  padding-top: 10px;
+  height: 80px;
+  background-color: white;
 }
 
 .inputsize {
@@ -63,11 +92,30 @@
   background-color: #9CF3C9;
 }
 
+.logo {
+  color: white;
+  font-size: 40px;
+  font-family: 'Pacifico', 'cursive'; 
+}
+
 .moneyjumbo {
   height: 100vh;
   background-image: url('../assets/pencil_money.png');
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.navchoice {
+  font-size: 25px;
+  font-family: 'Quicksand', 'sans-serif';
+}
+
+.navBar {
+  margin-bottom: -10px;
+}
+
+.quicksand {
+  font-family: 'Quicksand', 'sans-serif';
 }
 
 .topmargin {
@@ -83,6 +131,10 @@
   margin-left: 10px;
   height: 60px;
   width: 120px;
+}
+
+.relative {
+  position: relative;
 }
 
 .error-message {
