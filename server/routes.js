@@ -12,6 +12,7 @@ const plaid = require('./controllers/plaid');
 routes.post('/users/signup', users.signup);
 routes.post('/users/signin', users.signin);
 routes.put('/users/:id', users.update);
+routes.get('/users/auth', users.checkAuth);
 
 routes.post('/accounts/create', accounts.create);
 routes.get('/accounts', accounts.get);
