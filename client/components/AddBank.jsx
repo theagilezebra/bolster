@@ -9,15 +9,13 @@ const AddBank = ({ id, dispatch }) => {
   };
 
   return (
-    <div>
-      <PlaidLink
+    <PlaidLink
         publicKey="test_key"
         product="connect"
         env="tartan"
         clientName="Bolster"
         onSuccess={handleOnSuccess}
       />
-    </div>
   );
 };
 
