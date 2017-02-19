@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { getUserId } from '../helpers/stateHelpers';
 
-export default function fetchTransactions(userId) {
+export default function fetchTransactions() {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.get(`/api/transactions?user_id=${userId}`, { headers })
+  return (dispatch, getState) => axios.get(`/api/transactions?user_id=${getUserId(getState)}`, { headers })
     .then((response) => {
       dispatch({ type: 'FETCH_TRANSACTIONS_SUCCESSFUL', payload: response.data });
     })

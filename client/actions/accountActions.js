@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getUserId } from '../helpers/stateHelpers';
 
 export function linkAccounts(data) {
   return dispatch => axios.post('/api/plaid/link', data)
@@ -10,9 +11,9 @@ export function linkAccounts(data) {
     });
 }
 
-export function fetchAccounts(userId) {
+export function fetchAccounts() {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.get(`/api/accounts?user_id=${userId}`, { headers })
+  return (dispatch, getState) => axios.get(`/api/accounts?user_id=${getUserId(getState)}`, { headers })
     .then((response) => {
       dispatch({ type: 'FETCH_ACCOUNTS_SUCCESSFUL', payload: response.data });
     })
