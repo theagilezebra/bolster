@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-nodejs');
 
 const User = require('../../database/models/user');
@@ -15,6 +16,7 @@ module.exports = {
         user.password = hash;
         new User(user).save()
         .then((userInstance) => {
+          userInstance = helpers.formatUser(userInstance);
           helpers.jwtRedirect(req, res, userInstance);
         }).catch((error) => {
           res.json(error).status(400);
@@ -28,7 +30,7 @@ module.exports = {
     new User({ email }).fetch().then((userInstance) => {
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
         if (match) {
-          helpers.jwtRedirect(req, res, userInstance);
+          helpers.jwtRedirect(req, res, helpers.formatUser(userInstance));
         } else {
           res.status(401).end('wrong username or password');
         }
@@ -48,6 +50,21 @@ module.exports = {
     })
     .catch((err) => {
       res.json(err).status(404);
+    });
+  },
+
+  checkAuth: (req, res) => {
+    const headerAuth = req.get('Authorization').slice(7);
+    jwt.verify(headerAuth, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
+      if (err) {
+        res.status(401).end('YOU SHALL NOT PASS!!');
+      } else {
+        User.forge({ id: decoded.id }).fetch().then((user) => {
+          res.json(helpers.formatUser(user));
+        }).catch((error) => {
+          res.status(500).json(error);
+        });
+      }
     });
   },
 };
