@@ -558,3 +558,8 @@ export function resetState(state, stateProperty) {
   }
   Object.assign(state, defaultState[stateProperty]);
 }
+
+// modularizes retrieving user id retrieval inside of redux action files, facilitates state restructuring
+export function getUserId(getState) {
+  return getState().user.id;
+}
