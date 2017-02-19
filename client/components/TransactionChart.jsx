@@ -11,6 +11,6 @@ const TransactionChart = props => (
 );
 
 export default connect(state => ({
-  data: state.transactions,
+  data: state.transactions.transactionsData,
 }))(TransactionChart);
 
