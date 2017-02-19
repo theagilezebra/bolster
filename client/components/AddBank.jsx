@@ -1,11 +1,13 @@
 import React from 'react';
 import PlaidLink from 'react-plaid-link';
 import { connect } from 'react-redux';
-import { linkAccounts } from '../actions/accountActions';
+import { linkAccounts, fetchAccounts } from '../actions/accountActions';
 
-const AddBank = ({ id, dispatch }) => {
+const AddBank = ({ id, accounts, dispatch }) => {
   const handleOnSuccess = (public_token, metadata) => {
-    dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name }));
+    dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name })).then(() => {
+      dispatch(fetchAccounts(id));
+    });
   };
 
   return (
@@ -17,10 +19,18 @@ const AddBank = ({ id, dispatch }) => {
         clientName="Bolster"
         onSuccess={handleOnSuccess}
       />
+      <div>
+        {accounts.map(account => (
+          <div>
+            <span>Account: {account.name} ..... Balance: {account.currentBalance}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default connect(state => ({
   id: state.user.id,
+  accounts: state.accounts.accountData,
 }))(AddBank);
