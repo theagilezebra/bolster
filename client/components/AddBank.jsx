@@ -7,9 +7,7 @@ import { fetchTransactions } from '../actions/transActions';
 const AddBank = ({ id, accounts, transactions, dispatch }) => {
   const { accountData, accountStatus } = accounts;
   const handleOnSuccess = (public_token, metadata) => {
-    dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name })).then(() => {
-      dispatch(fetchAccounts(id));
-    });
+    dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name }));
   };
 
   const renderTransactions = () => {
@@ -17,7 +15,8 @@ const AddBank = ({ id, accounts, transactions, dispatch }) => {
   };
 
   return (
-    <PlaidLink
+    <div>
+      <PlaidLink
         publicKey="test_key"
         product="connect"
         env="tartan"
