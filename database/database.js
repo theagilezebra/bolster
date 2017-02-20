@@ -20,8 +20,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', addresses);
   return db.schema.createTableIfNotExists('users', (users) => {
     users.increments('id').primary();
-    users.string('publicToken', 128);
-    users.string('accessToken', 128);
+    users.string('publicToken');
+    users.string('accessToken');
     users.string('firstName', 35).notNullable();
     users.string('lastName', 35).notNullable();
     users.string('email', 50).unique().notNullable();
@@ -44,7 +44,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   return db.schema.createTableIfNotExists('accounts', (accounts) => {
     accounts.increments('id').primary();
     accounts.string('institutionName', 35).notNullable();
-    accounts.string('institutionType', 35).notNullable();
+    accounts.string('accountType', 35).notNullable();
     accounts.string('name', 35);
     accounts.string('plaidAccountId', 50).unique();
     accounts.decimal('availableBalance');
@@ -57,7 +57,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   console.log('Created Table:', accounts);
   return db.schema.createTableIfNotExists('businesses', (businesses) => {
     businesses.increments('id').primary();
-    businesses.string('name', 50).notNullable();
+    businesses.string('name').notNullable();
     businesses.specificType('coordinates', 'POINT');
     businesses.integer('address_id').unsigned();
     businesses.foreign('address_id').references('addresses.id');

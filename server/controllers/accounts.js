@@ -20,13 +20,17 @@ module.exports = {
     }
   },
 
-  get: (req, res) => {
-    Account.forge().where(req.query).fetchAll().then((items) => {
-      res.json(items);
+  get: (req, res) => Account.forge().where({ user_id: req.query.id }).fetchAll()
+    .then(accounts => Promise.all(accounts.map((account) => {
+      delete account.attributes.created_at;
+      delete account.attributes.updated_at;
+      return account;
+    })))
+    .then((accounts) => {
+      res.json(accounts);
     }).catch((err) => {
       res.status(404).json(err);
-    });
-  },
+    }),
 
   getOne: (req, res) => {
     Account.forge().where(req.params).fetchAll().then((items) => {
@@ -46,9 +50,9 @@ module.exports = {
         availableBalance: account.balance.available,
         currentBalance: account.balance.current,
         institutionName: account.institutionName,
-        institutionType: account.type,
+        accountType: account.type,
         plaidAccountId: account._id,
-        name: account.institution_type,
+        name: account.meta.name,
       };
       return helpers.findOrCreate(Account, accountAttributes);
     }))
