@@ -23,5 +23,5 @@ const TransactionTable = props => (
 );
 
 export default connect(state => ({
-  data: state.transactions,
+  data: state.transactions.transactionsData,
 }))(TransactionTable);

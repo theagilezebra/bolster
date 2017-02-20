@@ -25,34 +25,39 @@ module.exports = {
         helpers.findOrCreate(User, { id }).then(({ attributes }) => {
           attributes.accessToken = access_token;
           attributes.publicToken = public_token;
-          new User(attributes).save().then(user => res.json(user));
+          new User(attributes).save();
         });
       })
-      .then(() => {
-        axios.post('https://tartan.plaid.com/connect/get', {
-          client_id: PLAID_CLIENT_ID,
-          secret: PLAID_SECRET,
-          access_token,
-        }).then(({ data }) => {
-          const { accounts } = data;
-          accounts.forEach((account) => {
-            account.institutionName = institutionName;
-          });
-          accountsController.bulkCreate(accounts, id);
-        });
+      .then(() => axios.post('https://tartan.plaid.com/connect/get', {
+        client_id: PLAID_CLIENT_ID,
+        secret: PLAID_SECRET,
+        access_token,
       })
+      .then(({ data }) => {
+        const { accounts } = data;
+        accounts.forEach((account) => { account.institutionName = institutionName; });
+        accountsController.bulkCreate(accounts, id).then(() => res.json('Accounts linked successfully.'));
+      }))
       .catch((err) => {
         console.log(err);
       });
     },
 
-    get: (body, userId) => axios.post('https://tartan.plaid.com/connect/get', body).then(({ data }) => {
-      const { transactions } = data;
-      return transactionsController.bulkCreate(transactions, userId)
+    get: (req, res) => {
+      const { id } = req.body;
+      helpers.findOrCreate(User, { id }).then(({ attributes }) => axios.post('https://tartan.plaid.com/connect/get', {
+        client_id: PLAID_CLIENT_ID,
+        secret: PLAID_SECRET,
+        access_token: attributes.accessToken,
+      }))
+      .then(({ data }) => {
+        const { transactions } = data;
+        return transactionsController.bulkCreate(transactions, id).then(() => res.json('Transactions stored successfully.'));
+      })
       .catch((err) => {
         console.log(err);
       });
-    }),
+    },
   },
 
   categories: {

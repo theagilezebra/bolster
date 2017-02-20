@@ -7,68 +7,66 @@ const budget = {
   Interest: 30,
 };
 
-const renderRows = function (mappedObj) {
+const chartConfig = {
+  labels: [],
+  datasets: [
+    {
+      data: [],
+      backgroundColor: '#9CF3C9',
+    },
+  ],
+};
+
+const renderRows = (mappedObj) => {
   const elements = [];
   for (const key in mappedObj) {
     elements.push(
       <tr key={key}>
         <td>{key}</td>
         <td>{mappedObj[key]}</td>
-        <td>{budget[key]}</td>
-        <td>{budget[key] - mappedObj[key]}</td>
+        <td>{budget[key] ? budget[key] : 'No budget specified'}</td>
+        <td>{budget[key] ? budget[key] - mappedObj[key] : 'No budget specified'}</td>
       </tr>,
     );
   }
   return elements;
 };
 
-// this function does not add transactions that lack a category. it ignores.
-const mapCategories = function (transactions) {
+// this function does not add transactions that have an empty category property. it ignores them.
+const mapCategories = (transactions) => {
   const mapped = {};
-  for (const key in transactions) {
-    const trans = transactions[key];
-    if (trans.category && trans.category[0] !== 'Transfer' && trans.category[0] !== 'Interest') {
-      if (mapped[trans.category[0]] === undefined) {
-        mapped[trans.category[0]] = 0;
+  transactions.forEach((item) => {
+    if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
+      const lastCat = item.categories.length - 1;
+      if (mapped[item.categories[lastCat]] === undefined) {
+        mapped[item.categories[lastCat]] = item.amount;
       } else {
-        mapped[trans.category[0]] = Math.round(mapped[trans.category[0]] + trans.amount);
+        mapped[item.categories[lastCat]] = Math.round(mapped[item.categories[lastCat]] + item.amount);
       }
     }
-  }
+  });
   return mapped;
 };
 
-const mapAndRender = function (data) {
-  return renderRows(mapCategories(data));
-};
+const mapAndRender = data => renderRows(mapCategories(data));
 
-const labelize = function (transactions) {
+const labelize = (transactions) => {
   const labels = [];
-  for (const key in transactions) {
-    const trans = transactions[key];
-    if (trans.category && trans.category[0] !== 'Transfer' && trans.category[0] !== 'Interest') {
-      if (labels.includes(trans.category[0]) === false) {
-        labels.push(trans.category[0]);
+  transactions.forEach((item) => {
+    if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
+      const lastCat = item.categories.length - 1;
+      if (labels.includes(item.categories[lastCat]) === false) {
+        labels.push(item.categories[lastCat]);
       }
     }
-  }
+  });
   return labels;
 };
 
-const populateChart = function (data) {
+const populateChart = (data) => {
   const chartData = [];
-  const chartConfig = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        backgroundColor: [
-          '#2E8B57',
-          '#9CF3C9',
-        ],
-      },
-    ],
-  };
+  console.log(chartConfig);
+  chartConfig.datasets[0].backgroundColor = ['#00DFAE', '#00B9B9', '#00CDB4', '#00A0C3', '#01EFAD', '#263650', '#E74E4E', '#57CBFF', '#2273AA'];
   chartConfig.labels = labelize(data);
   const mapped = mapCategories(data);
   for (const key in mapped) {

@@ -33,6 +33,7 @@ routes.get('/transactions', transactions.get);
 routes.get('/businesses', businesses.get);
 
 routes.post('/plaid/link', plaid.connect.link);
+routes.post('/plaid', plaid.connect.get);
 
 
 module.exports = routes;
