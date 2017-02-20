@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export function fetchTransactions({ userId }) {
-  return dispatch => axios.get(`/api/transactions?user_id=${userId}`)
+export function fetchTransactions(userId) {
+  return dispatch => axios.get(`/api/transactions?id=${userId}`)
     .then((response) => {
       dispatch({ type: 'FETCH_TRANSACTIONS_SUCCESSFUL', payload: response.data });
     })
