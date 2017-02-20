@@ -14,14 +14,14 @@ const NavigationBar = ({ landing, dispatch }) => (
           <a href="#" className="logo">Bolster</a>
         </Navbar.Brand>
       </Navbar.Header>
-      <Nav bsStyle="pills" className="quicksand">
+      <Nav bsStyle="pills" className="navchoice navbar-right">
         {
           landing ?
-            <div>
+            <div className="nav navbar-nav">
               <NavItem onSelect={function () { dispatch(renderForm(this.children)); toBottom(); }}>Signin</NavItem>
               <NavItem onSelect={function () { dispatch(renderForm(this.children)); toBottom(); }}>Signup</NavItem>
             </div>
-          : <NavItem onSelect={function () { dispatch(signout()); }}>Signout</NavItem>
+          : <NavItem className="nav navbar-nav" onSelect={function () { dispatch(signout()); }}>Signout</NavItem>
         }
       </Nav>
     </Navbar>

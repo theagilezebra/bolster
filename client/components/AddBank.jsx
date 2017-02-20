@@ -17,8 +17,7 @@ const AddBank = ({ id, accounts, transactions, dispatch }) => {
   };
 
   return (
-    <div>
-      <PlaidLink
+    <PlaidLink
         publicKey="test_key"
         product="connect"
         env="tartan"
