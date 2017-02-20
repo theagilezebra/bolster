@@ -24,6 +24,13 @@ export function signout() {
   return dispatch => dispatch({ type: 'SIGNOUT' });
 }
 
-// export function checkAuth() {
-
-// }
+export function checkAuth() {
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.get('api/users/auth', { headers })
+    .then((response) => {
+      dispatch({ type: 'AUTH_SUCCESSFUL', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'SIGNOUT', payload: err });
+    });
+}

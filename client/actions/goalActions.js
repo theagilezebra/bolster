@@ -1,8 +1,9 @@
 import axios from 'axios';
-
+import { getUserId } from '../helpers/stateHelpers';
 
 export function createGoal(data) { // create a single goal
-  return dispatch => axios.post('/api/goals/create', data)
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.post('/api/goals/create', data, { headers })
     .then((response) => {
       dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: response.data });
     })
@@ -11,8 +12,9 @@ export function createGoal(data) { // create a single goal
     });
 }
 
-export function fetchGoals({ user_id }) { // provide all goals specific to user
-  return dispatch => axios.get(`/api/goals?user_id=${user_id}`)
+export function fetchGoals() { // provide all goals specific to user
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return (dispatch, getState) => axios.get(`/api/goals?user_id=${getUserId(getState)}`, { headers })
     .then((response) => {
       dispatch({ type: 'FETCH_GOALS_SUCCESSFUL', payload: response.data });
     })
@@ -22,7 +24,8 @@ export function fetchGoals({ user_id }) { // provide all goals specific to user
 }
 
 export function updateGoal(data) { // update a single goal
-  return dispatch => axios.put('/api/goals/update', data)
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.put('/api/goals/update', data, { headers })
     .then((response) => {
       dispatch({ type: 'UPDATE_GOAL_SUCCESSFUL', payload: response.data });
     })

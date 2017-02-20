@@ -19,7 +19,7 @@ module.exports = {
 
   jwtRedirect: (req, res, userInstance) => {
     const userToken = module.exports.createJWT(userInstance);
-    res.json({ userToken, userInstance }).redirect('/dashboard');
+    res.json({ userToken, userInstance });
   },
 
   findOrCreate: (model, criteria) => new Promise((resolve, reject) => {
@@ -27,9 +27,13 @@ module.exports = {
       resolve(category || model.forge(criteria).save(null, { method: 'insert' }));
     });
   }),
+
+  formatUser: (userInstance) => {
+    delete userInstance.attributes.password;
+    delete userInstance.attributes.publicToken;
+    delete userInstance.attributes.accessToken;
+    delete userInstance.attributes.created_at;
+    delete userInstance.attributes.updated_at;
+    return userInstance.attributes;
+  },
 };
-    // if (req.session ? !!req.session.user : false) {
-    //   next();
-    // } else {
-    //   res.redirect('/login');
-    // }

@@ -36,10 +36,10 @@ module.exports = {
       .then(({ data }) => {
         const { accounts } = data;
         accounts.forEach((account) => { account.institutionName = institutionName; });
-        accountsController.bulkCreate(accounts, id).then(() => res.json('Accounts linked successfully.'));
+        accountsController.bulkCreate(accounts, id).then(records => res.json(records));
       }))
       .catch((err) => {
-        console.log(err);
+        res.status(400).json(err);
       });
     },
 
@@ -78,4 +78,4 @@ module.exports = {
 };
 
 // module.exports.connect.get({ access_token: 'test_wells', client_id: PLAID_CLIENT_ID, secret: PLAID_SECRET }, 1);
-module.exports.categories.get();
+// module.exports.categories.get();

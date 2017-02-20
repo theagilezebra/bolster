@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import css from '../styles/main.css';
-import { renderForm } from '../actions/renderActions';
+import renderForm from '../actions/renderActions';
 import { signout } from '../actions/userActions';
 import { toBottom } from '../helpers/scrollHelpers.jsx';
 
