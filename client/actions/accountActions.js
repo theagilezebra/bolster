@@ -2,13 +2,17 @@ import axios from 'axios';
 import { getUserId } from '../helpers/stateHelpers';
 
 export function linkAccounts(data) {
-  return dispatch => axios.post('/api/plaid/link', data)
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return (dispatch, getState) => {
+    data.id = getUserId(getState);
+    return axios.post('/api/plaid/link', data, { headers })
     .then((response) => {
       dispatch({ type: 'LINK_ACCOUNTS_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
       dispatch({ type: 'LINK_ACCOUNTS_FAILED', payload: err.response });
     });
+  };
 }
 
 export function fetchAccounts() {
