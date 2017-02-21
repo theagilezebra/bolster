@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
-
-import { fetchAccounts } from '../actions/accountActions';
-import fetchTransactions from '../actions/transActions';
-import { fetchGoals } from '../actions/goalActions';
-import { fetchBudgets } from '../actions/budgetActions';
-import { checkAuth } from '../actions/userActions';
 import requireAuth from '../helpers/authHelpers';
-// actions and other components
 import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
 import BudgetGraph from './BudgetGraph.jsx';
 import Transactions from './Transactions.jsx';
+
+import { fetchAccounts } from '../actions/accountActions';
+import { fetchTransactions } from '../actions/transActions';
+import { fetchGoals } from '../actions/goalActions';
+import { fetchBudgets } from '../actions/budgetActions';
+import { checkAuth } from '../actions/userActions';
 
 class App extends React.Component {
 
@@ -45,7 +44,7 @@ class App extends React.Component {
         />
         <Route
           path="/dashboard"
-          component={() => (<Dashboard dispatch={this.props.dispatch} />)}
+          component={() => (<Dashboard />)}
           onEnter={requireAuth}
         />
       </Router>
@@ -53,8 +52,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(state => ({
-  transactions: state.transactions,
-  userId: state.user.userId,
-  goalData: state.goalData,
-}))(App);
+export default connect(null)(App);
