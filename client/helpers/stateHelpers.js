@@ -17,6 +17,9 @@ export const defaultState = {
   transactions: {
     transactionsData: [],
   },
+  goals: {
+    goalsData: [],
+  },
 };
 
 export function resetState(state, stateProperty) {

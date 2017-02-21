@@ -18,7 +18,6 @@ export default function reducer(state, action) {
     }
     case 'SIGNOUT': {
       window.localStorage.removeItem('userToken');
-      resetState(newState, 'user');
       hashHistory.push('/');
       break;
     }
