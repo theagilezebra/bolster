@@ -1,4 +1,4 @@
-import convertBalances from '../helpers/accountHelpers';
+import { convertBalances } from '../helpers/accountHelpers.jsx';
 
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);

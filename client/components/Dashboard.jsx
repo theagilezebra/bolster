@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import NavigationBar from './NavBar.jsx';
 import AddBank from './AddBank.jsx';
+import AccountTable from './AccountTable.jsx';
+
 class Dashboard extends React.Component {
 
   budgetHandler(e) {
@@ -33,9 +35,14 @@ class Dashboard extends React.Component {
             <h2>Add a bank account!</h2>
           </div>
         </div>
+        {
+          this.props.accounts.length ? <AccountTable /> : null
+        }
       </div>
     );
   }
 }
 
-export default connect(null)(Dashboard);
+export default connect(state => ({
+  accounts: state.accounts.accountData,
+}))(Dashboard);
