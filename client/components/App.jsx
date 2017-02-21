@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Router, Route, hashHistory } from 'react-router';
 import requireAuth from '../helpers/authHelpers';
 import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
