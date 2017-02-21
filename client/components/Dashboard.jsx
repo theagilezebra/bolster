@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import NavigationBar from './NavBar.jsx';
 import AddBank from './AddBank.jsx';
-import { hashHistory } from 'react-router';
 
 class Dashboard extends React.Component {
 
@@ -33,6 +33,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default connect(state => ({
-  accounts: state.accounts.accountData,
-}))(Dashboard);
+export default connect(null)(Dashboard);
