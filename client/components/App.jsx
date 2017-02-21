@@ -24,7 +24,7 @@ class App extends React.Component {
     .then(() => dispatch(fetchGoals()))
     .then(() => dispatch(fetchBudgets()))
     .catch((err) => {
-      console.error('error fetching data: err');
+      console.error(`error fetching data: ${err}`);
     });
   }
 
