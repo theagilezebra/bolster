@@ -36,7 +36,14 @@ module.exports = {
       .then(({ data }) => {
         const { accounts } = data;
         accounts.forEach((account) => { account.institutionName = institutionName; });
-        accountsController.bulkCreate(accounts, id).then(records => res.json(records));
+        accountsController.bulkCreate(accounts, id).then(records => Promise.all(records.map((account) => {
+          delete account.attributes.plaidAccountId;
+          delete account.attributes.created_at;
+          delete account.attributes.updated_at;
+          return account;
+        }))).then((accountData) => {
+          res.json(accountData);
+        });
       }))
       .catch((err) => {
         res.status(400).json(err);
@@ -50,12 +57,10 @@ module.exports = {
         secret: PLAID_SECRET,
         access_token: attributes.accessToken,
       }))
-      .then(({ data }) => {
-        const { transactions } = data;
-        return transactionsController.bulkCreate(transactions, id).then(() => res.json('Transactions stored successfully.'));
-      })
+      .then(({ data }) => transactionsController.bulkCreate(data.transactions, id))
+      .then(() => res.json('Transactions stored successfully'))
       .catch((err) => {
-        console.log(err);
+        res.status(400).json(err);
       });
     },
   },
@@ -78,4 +83,4 @@ module.exports = {
 };
 
 // module.exports.connect.get({ access_token: 'test_wells', client_id: PLAID_CLIENT_ID, secret: PLAID_SECRET }, 1);
-// module.exports.categories.get();
+module.exports.categories.get();

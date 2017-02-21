@@ -20,8 +20,9 @@ module.exports = {
     }
   },
 
-  get: (req, res) => Account.forge().where({ user_id: req.query.id }).fetchAll()
+  get: (req, res) => Account.forge().where(req.query).fetchAll()
     .then(accounts => Promise.all(accounts.map((account) => {
+      delete account.attributes.plaidAccountId;
       delete account.attributes.created_at;
       delete account.attributes.updated_at;
       return account;
