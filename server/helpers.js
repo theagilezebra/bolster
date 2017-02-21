@@ -36,4 +36,12 @@ module.exports = {
     delete userInstance.attributes.updated_at;
     return userInstance.attributes;
   },
+
+  formatAccount: (accountInstance) => {
+    delete accountInstance.attributes.created_at;
+    delete accountInstance.attributes.updated_at;
+    delete accountInstance.attributes.plaidAccountId;
+    delete accountInstance.attributes.user_id;
+    return accountInstance.attributes;
+  },
 };
