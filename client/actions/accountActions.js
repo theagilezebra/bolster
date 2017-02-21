@@ -6,12 +6,12 @@ export function linkAccounts(data) {
   return (dispatch, getState) => {
     data.id = getUserId(getState);
     return axios.post('/api/plaid/link', data, { headers })
-      .then((response) => {
-        dispatch({ type: 'LINK_ACCOUNTS_SUCCESSFUL', payload: response.data });
-      })
-      .catch((err) => {
-        dispatch({ type: 'LINK_ACCOUNTS_FAILED', payload: err.response });
-      });
+    .then((response) => {
+      dispatch({ type: 'LINK_ACCOUNTS_SUCCESSFUL', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'LINK_ACCOUNTS_FAILED', payload: 'This bank account is already added.' });
+    });
   };
 }
 

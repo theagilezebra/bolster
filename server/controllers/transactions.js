@@ -67,9 +67,6 @@ module.exports = {
         amount: transaction.amount,
         date: transaction.date,
       };
-      // if (category === 'transfer' || category === 'withdrawal') {
-      //   delete transactionAttributes.business_id;
-      // }
       return helpers.findOrCreate(Transaction, transactionAttributes);
     }).catch((err) => {
       console.log(err);

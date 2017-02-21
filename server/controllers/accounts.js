@@ -21,12 +21,7 @@ module.exports = {
   },
 
   get: (req, res) => Account.forge().where(req.query).fetchAll()
-    .then(accounts => Promise.all(accounts.map((account) => {
-      delete account.attributes.plaidAccountId;
-      delete account.attributes.created_at;
-      delete account.attributes.updated_at;
-      return account;
-    })))
+    .then(accounts => Promise.all(accounts.map(account => helpers.formatAccount(account)))) // TODO: check if the promise.all is necessary.
     .then((accounts) => {
       res.json(accounts);
     }).catch((err) => {
@@ -35,7 +30,7 @@ module.exports = {
 
   getOne: (req, res) => {
     Account.forge().where(req.params).fetchAll().then((items) => {
-      res.json(items);
+      res.json(helpers.formatAccount(items));
     }).catch((err) => {
       res.status(404).json(err);
     });
