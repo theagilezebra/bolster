@@ -19,7 +19,7 @@ module.exports = {
           userInstance = helpers.formatUser(userInstance);
           helpers.jwtRedirect(req, res, userInstance);
         }).catch((error) => {
-          res.json(error).status(400);
+          res.status(400).json(error);
         });
       });
     });

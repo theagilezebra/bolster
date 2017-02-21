@@ -8,7 +8,7 @@ const Account = require('../../database/models/account');
 const helpers = require('../helpers');
 
 module.exports = {
-  get: (req, res) => Transaction.forge().where({ user_id: req.query.id }).fetchAll()
+  get: (req, res) => Transaction.forge().where(req.query).fetchAll()
     .then(transactions => Promise.all(transactions.models.map(transaction => Business.forge({ id: transaction.attributes.business_id }).fetch()
     .then((business) => {
       transaction.attributes.name = business.attributes.name;
@@ -67,9 +67,6 @@ module.exports = {
         amount: transaction.amount,
         date: transaction.date,
       };
-      // if (category === 'transfer' || category === 'withdrawal') {
-      //   delete transactionAttributes.business_id;
-      // }
       return helpers.findOrCreate(Transaction, transactionAttributes);
     }).catch((err) => {
       console.log(err);
