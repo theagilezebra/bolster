@@ -7,6 +7,9 @@ export default function reducer(state, action) {
   switch (action.type) {
     case 'AUTH_SUCCESSFUL': {
       decorateState(newState, action.payload.userInstance || action.payload);
+      if (document.location.hash === '#/') {
+        hashHistory.push('/dashboard');
+      }
       break;
     }
     case 'SIGNIN_SUCCESSFUL':
