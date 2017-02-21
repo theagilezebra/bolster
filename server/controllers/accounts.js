@@ -1,10 +1,7 @@
 const Account = require('../../database/models/account');
 const helpers = require('../helpers');
-const plaid = require('plaid');
 
 require('dotenv').config({ path: `${__dirname}/../../.env` });
-
-const plaidClient = new plaid.Client(process.env.PLAID_CLIENT_ID, process.env.PLAID_SECRET, plaid.environments.tartan);
 
 module.exports = {
   create: (req, res) => {
