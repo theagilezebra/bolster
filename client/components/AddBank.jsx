@@ -1,17 +1,16 @@
 import React from 'react';
 import PlaidLink from 'react-plaid-link';
 import { connect } from 'react-redux';
-import { linkAccounts, fetchAccounts } from '../actions/accountActions';
-import { fetchTransactions } from '../actions/transActions';
+import { linkAccounts } from '../actions/accountActions';
+import { requestTransactions, fetchTransactions } from '../actions/transActions';
 
-const AddBank = ({ id, accounts, transactions, dispatch }) => {
-  const { accountData, accountStatus } = accounts;
+const AddBank = ({ accounts, transactions, dispatch }) => {
   const handleOnSuccess = (public_token, metadata) => {
-    dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name }));
+    dispatch(linkAccounts({ public_token, institutionName: metadata.institution.name }));
   };
 
   const renderTransactions = () => {
-    dispatch(fetchTransactions(id));
+    dispatch(requestTransactions()).then(() => dispatch(fetchTransactions()));
   };
 
   return (
@@ -23,10 +22,8 @@ const AddBank = ({ id, accounts, transactions, dispatch }) => {
         clientName="Bolster"
         onSuccess={handleOnSuccess}
       />
-      <br />
-      <span onClick={() => { renderTransactions(); }} >{accountStatus}</span>
       <div>
-        {accountData.map(account => (
+        {accounts.map(account => (
           <div>
             <span>Account: {account.name} ..... Balance: {account.currentBalance}</span>
           </div>
@@ -39,12 +36,12 @@ const AddBank = ({ id, accounts, transactions, dispatch }) => {
           </div>
         ))}
       </div>
+      <button onClick={() => { renderTransactions(); }}>GET TRANSACTIONS</button>
     </div>
   );
 };
 
 export default connect(state => ({
-  id: state.user.id,
-  accounts: state.accounts,
+  accounts: state.accounts.accountData,
   transactions: state.transactions.transactionsData,
 }))(AddBank);
