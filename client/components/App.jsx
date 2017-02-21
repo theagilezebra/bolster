@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, hashHistory } from 'react-router';
+
 import requireAuth from '../helpers/authHelpers';
 import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
@@ -23,8 +23,8 @@ class App extends React.Component {
     .then(() => dispatch(fetchTransactions()))
     .then(() => dispatch(fetchGoals()))
     .then(() => dispatch(fetchBudgets()))
-    .catch(() => {
-      console.err('uninformative error: fetching data');
+    .catch((err) => {
+      console.error('error fetching data: err');
     });
   }
 
