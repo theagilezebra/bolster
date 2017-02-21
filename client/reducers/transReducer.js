@@ -1,10 +1,10 @@
-import { convertTransactions } from '../helpers/transactionHelpers.jsx'; 
+import { convertTransactions } from '../helpers/transactionHelpers.jsx';
 
 export default function (state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
   case 'REQUEST_TRANSACTIONS_SUCCESSFUL': {
-    newState.transactionsData = action.payload;
+    console.log('Request transactions successful.');
     break;
   }
   case 'REQUEST_TRANSACTIONS_FAILED': {
