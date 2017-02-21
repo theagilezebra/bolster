@@ -9,6 +9,7 @@ export const defaultState = {
   error: {
     signup: '',
     signin: '',
+    addBank: '',
   },
   accounts: {
     accountData: [],

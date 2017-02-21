@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { linkAccounts, fetchAccounts } from '../actions/accountActions';
 import { fetchTransactions } from '../actions/transActions';
 
-const AddBank = ({ id, accounts, transactions, dispatch }) => {
+const AddBank = ({ id, accounts, transactions, dispatch, error }) => {
   const { accountData, accountStatus } = accounts;
   const handleOnSuccess = (public_token, metadata) => {
     dispatch(linkAccounts({ id, public_token, institutionName: metadata.institution.name }));
@@ -39,6 +39,7 @@ const AddBank = ({ id, accounts, transactions, dispatch }) => {
           </div>
         ))}
       </div>
+      <p className="error-message">{error}</p>
     </div>
   );
 };
@@ -46,5 +47,6 @@ const AddBank = ({ id, accounts, transactions, dispatch }) => {
 export default connect(state => ({
   id: state.user.id,
   accounts: state.accounts,
+  error: state.error.link,
   transactions: state.transactions.transactionsData,
 }))(AddBank);
