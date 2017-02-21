@@ -29,7 +29,18 @@ const CreateGoal = (props) => {
       </form>
       <div className="quicksand">
         <h3>Current Goals</h3>
-        <ul>{displayGoals(props.goals)}</ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {displayGoals(props.goals)}
+          </tbody>
+        </table>
       </div>
     </div>
   );
