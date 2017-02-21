@@ -74,6 +74,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     budgets.dropForeign('category_id');
     budgets.integer('average');
     budgets.integer('goal');
+    budgets.integer('user_id').unsigned();
+    budgets.foreign('user_id').references('users.id');
     budgets.timestamps();
   });
 }).then((budgets) => {
