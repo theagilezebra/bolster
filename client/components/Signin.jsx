@@ -16,12 +16,14 @@ const Signin = ({ dispatch, error }) => {
       email: emailInput.value,
       password: passwordInput.value,
     }))
-    .then(() => dispatch(fetchAccounts()))
-    .then(() => dispatch(fetchTransactions()))
-    .then(() => dispatch(fetchGoals()))
-    .then(() => dispatch(fetchBudgets()))
-    .catch(() => {
-      console.err('uninformative error: fetching data');
+    .then(() => {
+      dispatch(fetchAccounts());
+      dispatch(fetchTransactions());
+      dispatch(fetchGoals());
+      dispatch(fetchBudgets());
+    })
+    .catch((err) => {
+      console.error(`error fetching data: ${err}`);
     });
   };
 
