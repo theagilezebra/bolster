@@ -9,7 +9,7 @@ import categories from './categoryReducer';
 import render from './renderReducer';
 import error from './errorReducer';
 
-export default combineReducers({
+const appReducer = combineReducers({
   user,
   accounts,
   transactions,
@@ -20,3 +20,13 @@ export default combineReducers({
   render,
   error,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'SIGNOUT') {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
+export default rootReducer;
+
