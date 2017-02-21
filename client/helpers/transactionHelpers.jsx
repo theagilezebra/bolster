@@ -76,8 +76,18 @@ const populateChart = (data) => {
   return chartConfig;
 };
 
+const convertTransactions = (transactions) => {
+  return transactions.filter(transaction => !!transaction)
+  .map((transaction) => {
+    transaction.amount = +transaction.amount;
+    transaction.date = transaction.date.slice(0, 10);
+    return transaction;
+  });
+}
+
 module.exports = {
   budget,
   mapAndRender,
   populateChart,
+  convertTransactions,
 };
