@@ -4,13 +4,11 @@ const displayGoals = (goals) => {
   const elements = [];
   goals.forEach((goal) => {
     elements.push(
-      <li>
-        <ul>
-          <li>{goal.name}</li>
-          <li>{goal.amount}</li>
-          <li>{moment(goal.date).format('MMMM Do YYYY')}</li>
-        </ul>
-      </li>,
+      <tr>
+        <td>{goal.name}</td>
+        <td>{goal.amount}</td>
+        <td>{moment(goal.date).format('MMMM Do YYYY')}</td>
+      </tr>,
     );
   });
   return elements;
