@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signin } from '../actions/userActions';
+import { fetchAccounts } from '../actions/accountActions';
+import { fetchTransactions } from '../actions/transActions';
+import { fetchGoals } from '../actions/goalActions';
+import { fetchBudgets } from '../actions/budgetActions';
 
 const Signin = ({ dispatch, error }) => {
   let emailInput = null;
@@ -11,7 +15,14 @@ const Signin = ({ dispatch, error }) => {
     dispatch(signin({
       email: emailInput.value,
       password: passwordInput.value,
-    }));
+    }))
+    .then(() => dispatch(fetchAccounts()))
+    .then(() => dispatch(fetchTransactions()))
+    .then(() => dispatch(fetchGoals()))
+    .then(() => dispatch(fetchBudgets()))
+    .catch(() => {
+      console.err('uninformative error: fetching data');
+    });
   };
 
   return (

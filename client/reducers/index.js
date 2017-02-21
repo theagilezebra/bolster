@@ -8,6 +8,7 @@ import goals from './goalReducer';
 import categories from './categoryReducer';
 import render from './renderReducer';
 import error from './errorReducer';
+import { defaultState } from '../helpers/stateHelpers';
 
 const appReducer = combineReducers({
   user,
@@ -23,7 +24,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === 'SIGNOUT') {
-    state = undefined;
+    state = defaultState;
   }
   return appReducer(state, action);
 };
