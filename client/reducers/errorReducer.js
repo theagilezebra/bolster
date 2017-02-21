@@ -15,6 +15,10 @@ export default function reducer(state, action) {
     resetState(newState, 'error');
     break;
   }
+  case 'LINK_ACCOUNTS_FAILED': {
+    newState.addBank = action.payload;
+    break;
+  }
   }
   return newState;
 }
