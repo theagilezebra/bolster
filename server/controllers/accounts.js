@@ -1,7 +1,7 @@
 const Account = require('../../database/models/account');
 const helpers = require('../helpers');
 
-require('dotenv').config({ path: `${__dirname}/../../.env` });
+// require('dotenv').config({ path: `${__dirname}/../../.env` });
 
 module.exports = {
   create: (req, res) => {
