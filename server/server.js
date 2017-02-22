@@ -4,7 +4,7 @@ const routes = require('./routes');
 const middleware = require('./middleware');
 
 const app = express();
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port);
 
 middleware(app, express);
