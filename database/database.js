@@ -112,11 +112,33 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.foreign('business_id').references('businesses.id');
     transactions.dropForeign('business_id');
     transactions.string('category_id');
-    // transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
   });
 }).then((transactions) => {
   console.log('Created Table:', transactions);
+  return db.schema.createTableIfNotExists('achievementTypes', (achievementTypes) => {
+    achievementTypes.increments('id').primary();
+    achievementTypes.string('name').notNullable().unique();
+    achievementTypes.string('structure');
+    achievementTypes.string('description').notNullable();
+    achievementTypes.timestamps();
+  });
+}).then((achievementTypes) => {
+  console.log('Created Table:', achievementTypes);
+  return db.schema.createTableIfNotExists('achievements', (achievements) => {
+    achievements.increments('id').primary();
+    achievements.integer('user_id').unsigned();
+    achievements.foreign('user_id').references('users.id');
+    achievements.integer('achievementTypes_id').unsigned();
+    achievements.foreign('achievementTypes_id').references('achievementTypes.id');
+    achievements.date('date');
+    achievements.integer('period'); // in days
+    achievements.boolean('status'); // signifies either 'complete' or 'in progress'.
+    achievements.integer('amount'); // could be an amount of money, or any unit to be reached for the achievement to complete.
+    achievements.integer('bar'); // limit or minimum needed to validate the achievement.
+    achievements.integer('percentage'); // percentage completion.
+    achievements.timestamps();
+  });
 }).catch((err) => {
   console.log(err);
 });
