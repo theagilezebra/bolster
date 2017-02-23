@@ -91,15 +91,6 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((goals) => {
   console.log('Created Table:', goals);
-  return db.schema.createTableIfNotExists('achievements', (achievements) => {
-    achievements.increments('id').primary();
-    achievements.string('name', 63).notNullable();
-    achievements.integer('user_id').unsigned();
-    achievements.foreign('user_id').references('users.id');
-    achievements.timestamps();
-  });
-}).then((achievements) => {
-  console.log('Created Table:', achievements);
   return db.schema.createTableIfNotExists('transactions', (transactions) => {
     transactions.increments('id').primary();
     transactions.decimal('amount').notNullable();
