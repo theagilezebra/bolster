@@ -8,6 +8,9 @@ const transactions = require('./controllers/transactions');
 const businesses = require('./controllers/businesses');
 const goals = require('./controllers/goals');
 const plaid = require('./controllers/plaid');
+const achievements = require('./controllers/achievements');
+
+routes.get('/test', achievements.test);
 
 routes.post('/users/signup', users.signup);
 routes.post('/users/signin', users.signin);
