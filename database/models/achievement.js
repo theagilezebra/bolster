@@ -1,5 +1,5 @@
 const db = require('../database');
-const AchievementTypes = require('./achievement');
+const AchievementTypes = require('./achievementType');
 const User = require('./user');
 
 module.exports = db.Model.extend({
