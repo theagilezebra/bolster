@@ -32,16 +32,14 @@ const renderRows = (mappedObj) => {
   return elements;
 };
 
-// this function does not add transactions that have an empty category property. it ignores them.
 const mapCategories = (transactions) => {
   const mapped = {};
   transactions.forEach((item) => {
     if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
-      // const lastCat = item.categories.length - 1;
-      if (mapped[item.categories[1]] === undefined) {
-        mapped[item.categories[1]] = item.amount;
+      if (mapped[item.categories[0]] === undefined) {
+        mapped[item.categories[0]] = item.amount;
       } else {
-        mapped[item.categories[1]] = Math.round(mapped[item.categories[1]] + item.amount);
+        mapped[item.categories[0]] = Math.round(mapped[item.categories[0]] + item.amount);
       }
     }
   });
@@ -54,7 +52,6 @@ const labelize = (transactions) => {
   const labels = [];
   transactions.forEach((item) => {
     if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
-      // const lastCat = item.categories.length - 1;
       if (!labels.includes(item.categories[0])) {
         labels.push(item.categories[0]);
       }
@@ -72,8 +69,8 @@ const renderCategoryDropdown = (categories, transactionCategories, tier, width, 
   </select>
 )
 
-const renderTransactions = (transactions, categoryList, callback) => {
-  return transactions.map(({ name, amount, date, categories, id }, key) => (
+const renderTransactions = (transactions, categoryList, callback) => transactions
+  .map(({ name, amount, date, categories, id }, key) => (
     <tr key={key}>
       <td>{name}</td>
       <td>{amount}</td>
@@ -82,7 +79,6 @@ const renderTransactions = (transactions, categoryList, callback) => {
       <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, {width: "303px"}, id, callback)}</td>
     </tr>
   ));
-}
 
 const populateChart = (data) => {
   const chartData = [];
@@ -96,8 +92,8 @@ const populateChart = (data) => {
   return chartConfig;
 };
 
-const convertTransactions = (transactions) => {
-  return transactions.filter(transaction => !!transaction && transaction.amount > 0)
+const convertTransactions = (transactions) => transactions
+  .filter(transaction => !!transaction && transaction.amount)
   .map((transaction) => {
     if (transaction.categories.length < 2) {
       transaction.categories[1] = 'Uncategorized'
@@ -106,16 +102,14 @@ const convertTransactions = (transactions) => {
     transaction.date = transaction.date.slice(0, 10);
     return transaction;
   });
-}
 
-const overwriteTransactionCategories = (transactions, { id, categories }) => {
-  return transactions.map((transaction) => {
+const overwriteTransactionCategories = (transactions, { id, categories }) => transactions
+  .map((transaction) => {
     if (transaction.id === (+id)) {
       transaction.categories = categories;
     }
     return transaction;
   });
-}
 
 module.exports = {
   budget,
