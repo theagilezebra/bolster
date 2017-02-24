@@ -21,7 +21,7 @@ export default function (state, action) {
     break;
   }
   case 'UPDATE_TRANSACTION_SUCCESSFUL': {
-    newState.transactionsData = action.payload;
+    console.log('Update transaction successful.');
     break;
   }
   case 'UPDATE_TRANSACTION_FAILED': {

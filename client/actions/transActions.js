@@ -29,7 +29,7 @@ export function updateTransaction(data) {
     data.user_id = getUserId(getState);
     return axios.put('/api/transactions/update', data, { headers })
       .then((response) => {
-        dispatch({ type: 'UPDATE_TRANSACTION_SUCCESSFUL', payload: response.data });
+        dispatch({ type: 'UPDATE_TRANSACTION_SUCCESSFUL' });
       })
       .catch((err) => {
         dispatch({ type: 'UPDATE_TRANSACTION_FAILED', payload: err.response });

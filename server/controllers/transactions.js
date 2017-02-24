@@ -87,7 +87,7 @@ module.exports = {
       .then((transactionInstance) => {
         transactionInstance.save({ category_id }, { patch: true });
       }).then(() => {
-        res.status(204);
+        res.status(204).end();
       }).catch((err) => {
         res.status(404).json(err);
       })
