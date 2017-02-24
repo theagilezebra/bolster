@@ -1,3 +1,4 @@
+const achievementList = require('./achievementTypes'); // import achievements used to seed our database.
 require('dotenv').config({ path: `${__dirname}/../.env` });
 
 const db = require('knex')({
@@ -91,15 +92,6 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   });
 }).then((goals) => {
   console.log('Created Table:', goals);
-  return db.schema.createTableIfNotExists('achievements', (achievements) => {
-    achievements.increments('id').primary();
-    achievements.string('name', 63).notNullable();
-    achievements.integer('user_id').unsigned();
-    achievements.foreign('user_id').references('users.id');
-    achievements.timestamps();
-  });
-}).then((achievements) => {
-  console.log('Created Table:', achievements);
   return db.schema.createTableIfNotExists('transactions', (transactions) => {
     transactions.increments('id').primary();
     transactions.decimal('amount').notNullable();
@@ -112,11 +104,35 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.foreign('business_id').references('businesses.id');
     transactions.dropForeign('business_id');
     transactions.string('category_id');
-    // transactions.foreign('category_id').references('categories.id');
     transactions.timestamps();
   });
 }).then((transactions) => {
   console.log('Created Table:', transactions);
+  return db.schema.createTableIfNotExists('achievementtypes', (achievementtypes) => {
+    achievementtypes.increments('id').primary();
+    achievementtypes.string('name').notNullable().unique();
+    achievementtypes.string('structure');
+    achievementtypes.string('description').notNullable();
+    achievementtypes.timestamps();
+  });
+}).then((achievementtypes) => {
+  console.log('Created Table:', achievementtypes);
+  return db('achievementtypes').insert(achievementList);
+}).then(achievementRecords => db.schema.createTableIfNotExists('achievements', (achievements) => {
+  achievements.increments('id').primary();
+  achievements.integer('user_id').unsigned();
+  achievements.foreign('user_id').references('users.id');
+  achievements.integer('achievementtypes_id').unsigned();
+  achievements.foreign('achievementtypes_id').references('achievementtypes.id');
+  achievements.date('date');
+  achievements.integer('period'); // in days
+  achievements.boolean('status'); // signifies either 'complete' or 'in progress'.
+  achievements.integer('amount'); // could be an amount of money, or any unit to be reached for the achievement to complete.
+  achievements.integer('bar'); // limit or minimum needed to validate the achievement.
+  achievements.integer('percentage'); // percentage completion.
+  achievements.timestamps();
+})).then((achievements) => {
+  console.log('Created Table:', achievements);
 }).catch((err) => {
   console.log(err);
 });
