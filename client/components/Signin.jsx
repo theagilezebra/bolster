@@ -6,6 +6,7 @@ import { fetchTransactions, requestTransactions } from '../actions/transActions'
 import { fetchGoals } from '../actions/goalActions';
 import { fetchBudgets } from '../actions/budgetActions';
 import { fetchCategories } from '../actions/categoryActions';
+import { fetchAchievements } from '../actions/achievementActions';
 
 const Signin = ({ dispatch, error }) => {
   let emailInput = null;
@@ -24,6 +25,7 @@ const Signin = ({ dispatch, error }) => {
       dispatch(fetchGoals());
       dispatch(fetchBudgets());
       dispatch(fetchCategories());
+      dispatch(fetchAchievements());
     })
     .catch((err) => {
       console.error(`error fetching data: ${err}`);

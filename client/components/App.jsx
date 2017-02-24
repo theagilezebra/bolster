@@ -13,6 +13,7 @@ import { fetchTransactions } from '../actions/transActions';
 import { fetchGoals } from '../actions/goalActions';
 import { fetchBudgets } from '../actions/budgetActions';
 import { fetchCategories } from '../actions/categoryActions';
+import { fetchAchievements } from '../actions/achievementActions';
 import { checkAuth } from '../actions/userActions';
 
 class App extends React.Component {
@@ -27,6 +28,7 @@ class App extends React.Component {
       dispatch(fetchGoals());
       dispatch(fetchBudgets());
       dispatch(fetchCategories());
+      dispatch(fetchAchievements());
     })
     .catch((err) => {
       console.error(`error fetching data: ${err}`);
