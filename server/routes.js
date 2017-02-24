@@ -30,6 +30,7 @@ routes.get('/goals', goals.get);
 routes.put('/goals/update/:id', goals.update);
 
 routes.get('/transactions', transactions.get);
+routes.put('/transactions/update', transactions.update);
 
 routes.get('/businesses', businesses.get);
 
