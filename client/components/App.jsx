@@ -19,12 +19,14 @@ class App extends React.Component {
     const dispatch = this.props.dispatch;
 
     dispatch(checkAuth())
-    .then(() => dispatch(fetchAccounts()))
-    .then(() => dispatch(fetchTransactions()))
-    .then(() => dispatch(fetchGoals()))
-    .then(() => dispatch(fetchBudgets()))
-    .catch(() => {
-      console.err('uninformative error: fetching data');
+    .then(() => {
+      dispatch(fetchAccounts());
+      dispatch(fetchTransactions());
+      dispatch(fetchGoals());
+      dispatch(fetchBudgets());
+    })
+    .catch((err) => {
+      console.error(`error fetching data: ${err}`);
     });
   }
 

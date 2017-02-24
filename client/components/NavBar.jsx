@@ -11,7 +11,7 @@ const NavigationBar = ({ landing, dispatch }) => (
     <Navbar className="greennav">
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#" className="logo">Bolster</a>
+          <a href={landing ? '#' : '#/dashboard'} className="logo">Bolster</a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav bsStyle="pills" className="navchoice navbar-right">

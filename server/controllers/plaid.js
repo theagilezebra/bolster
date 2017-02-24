@@ -43,6 +43,8 @@ module.exports = {
           return account;
         }))).then((accountData) => {
           res.json(accountData);
+        }).catch((err) => {
+          res.status(400).json(err);
         });
       }))
       .catch((err) => {

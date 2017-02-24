@@ -46,6 +46,6 @@ const AddBank = ({ id, accounts, transactions, dispatch, error }) => {
 export default connect(state => ({
   accounts: state.accounts.accountData,
   id: state.user.id,
-  error: state.error.link,
+  error: state.error.addBank,
   transactions: state.transactions.transactionsData,
 }))(AddBank);
