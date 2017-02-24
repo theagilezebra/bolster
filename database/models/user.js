@@ -22,5 +22,24 @@ module.exports = db.Model.extend({
         achievementtypes_id: achievementType.id,
       }).save())));
     });
+
+    this.on('updated', (user) => {
+      if (user.attributes.phone) {
+        AchievementType.forge({ name: 'You used to call me...' }).fetch()
+        .then(achievementType => Achievement.forge().where({
+          achievementtypes_id: achievementType.id,
+          user_id: user.id,
+        }).fetch())
+        .then((achievement) => {
+          if (!achievement.attributes.status) {
+            achievement.attributes.status = true;
+            achievement.save();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+    });
   },
 });
