@@ -21,7 +21,7 @@ export const defaultState = {
     goalsData: [],
   },
   categories: {
-    categoryData: [],
+    categoryData: {},
   },
 };
 
