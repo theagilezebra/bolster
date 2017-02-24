@@ -3,29 +3,13 @@ const AchievementType = require('../../database/models/achievementType');
 const User = require('../../database/models/user');
 
 module.exports = {
-  fetch: (options) => {
-    Achievement.forge().where(options).fetchAll().then((achievements) => {
-      console.log(achievements);
-    });
-  },
-
-  test: (req, res, options) => {
-    // AchievementType.forge({ name: 'cool achievement', description: 'best achievement in the world' }).save()
-    // .then((achievementType) => {
-    //   res.json('cool this is the end');
-    // })
-    // .catch((err) => {
-    //   res.json(err);
-    // });
-
-    AchievementType.forge().where({ name: 'cool achievement' }).fetchAll()
-    .then(achivementTypes => Promise.all(achivementTypes.map(achievementType => achievementType.delete()))
-      .then((destroyeditems) => {
-        res.json(destroyeditems.length);
-      }))
+  get: (req, res) => {
+    Achievement.forge().where(req.query).fetchAll()
+    .then((achievements) => {
+      res.json(achievements);
+    })
     .catch((err) => {
-      console.log(err);
-      res.json(err);
+      res.status(400).json(err);
     });
   },
 };

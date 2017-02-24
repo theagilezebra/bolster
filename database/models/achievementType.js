@@ -21,7 +21,6 @@ module.exports = db.Model.extend({
 
   delete() {
     return new Promise((resolve, reject) => {
-      console.log('THIS INSIDE ARROW FUNCTION, YAY FOR ARROW FUNCTIONS!?!?', this);
       require('./achievement.js').forge().where({ achievementtypes_id: this.id }).fetchAll()
       .then(achievements => Promise.all(achievements.models.map(achievement => achievement.destroy())))
       .then(() => this.destroy())
