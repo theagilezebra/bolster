@@ -6,6 +6,7 @@ import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
 import BudgetGraph from './BudgetGraph.jsx';
 import Transactions from './Transactions.jsx';
+import Achievements from './Achievements.jsx';
 
 import { fetchAccounts } from '../actions/accountActions';
 import { fetchTransactions } from '../actions/transActions';
@@ -47,6 +48,11 @@ class App extends React.Component {
         <Route
           path="/dashboard"
           component={() => (<Dashboard />)}
+          onEnter={requireAuth}
+        />
+        <Route
+          path="/achievements"
+          component={() => (<Achievements />)}
           onEnter={requireAuth}
         />
       </Router>

@@ -24,12 +24,12 @@ const AddBank = ({ id, accounts, transactions, dispatch, error }) => {
         onSuccess={handleOnSuccess}
       />
       <div>
-        {accounts.map(account => (
+         {accounts.map(account => (
           <div>
             <span>Account: {account.name} ..... Balance: {account.currentBalance}</span>
           </div>
         ))}
-      </div>
+       </div>
       <div>
         {transactions.map(transaction => (
           <div>

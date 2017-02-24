@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import NavigationBar from './NavBar.jsx';
 import AddBank from './AddBank.jsx';
-
 class Dashboard extends React.Component {
 
   budgetHandler(e) {
@@ -16,6 +15,11 @@ class Dashboard extends React.Component {
     hashHistory.push('/transactions');
   }
 
+  gameHandler(e) {
+    e.preventDefault();
+    hashHistory.push('/achievements');
+  }
+
   render() {
     return (
       <div>
@@ -23,6 +27,7 @@ class Dashboard extends React.Component {
         <div className="dashboardtext">
           <div className="dashboardjumbo dashboardone" onClick={this.budgetHandler}>Budget</div>
           <div className="dashboardjumbo dashboardtwo" onClick={this.transactionHandler}>Transactions</div>
+          <div className="dashboardjumbo dashboardtwo green" onClick={this.gameHandler}>Achievements</div>
           <div className="dashboardjumbo dashboardthree">
             <AddBank />
             <h2>Add a bank account!</h2>
