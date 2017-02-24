@@ -23,6 +23,9 @@ export const defaultState = {
   categories: {
     categoryData: {},
   },
+  achievements: {
+    achievementsData: [],
+  },
 };
 
 export function resetState(state, stateProperty) {
