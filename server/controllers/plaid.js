@@ -67,6 +67,16 @@ module.exports = {
     },
   },
 
+  transactions: {
+    get(id) { // TODO: user this to refactor connect.get, above
+      return helpers.findOrCreate(User, { id }).then(({ attributes }) => axios.post('https://tartan.plaid.com/connect/get', {
+        client_id: PLAID_CLIENT_ID,
+        secret: PLAID_SECRET,
+        access_token: attributes.accessToken,
+      }));
+    },
+  },
+
   categories: {
     get: () => axios.get('https://tartan.plaid.com/categories').then((data) => {
       const categories = {};
