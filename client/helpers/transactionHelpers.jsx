@@ -32,16 +32,14 @@ const renderRows = (mappedObj) => {
   return elements;
 };
 
-// this function does not add transactions that have an empty category property. it ignores them.
 const mapCategories = (transactions) => {
   const mapped = {};
   transactions.forEach((item) => {
     if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
-      const lastCat = item.categories.length - 1;
-      if (mapped[item.categories[lastCat]] === undefined) {
-        mapped[item.categories[lastCat]] = item.amount;
+      if (mapped[item.categories[0]] === undefined) {
+        mapped[item.categories[0]] = item.amount;
       } else {
-        mapped[item.categories[lastCat]] = Math.round(mapped[item.categories[lastCat]] + item.amount);
+        mapped[item.categories[0]] = Math.round(mapped[item.categories[0]] + item.amount);
       }
     }
   });
@@ -54,18 +52,36 @@ const labelize = (transactions) => {
   const labels = [];
   transactions.forEach((item) => {
     if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
-      const lastCat = item.categories.length - 1;
-      if (labels.includes(item.categories[lastCat]) === false) {
-        labels.push(item.categories[lastCat]);
+      if (!labels.includes(item.categories[0])) {
+        labels.push(item.categories[0]);
       }
     }
   });
   return labels;
 };
 
+const renderCategoryDropdown = (categories, transactionCategories, tier, width, transactionId, callback) => (
+  <select onChange={callback} data-id={transactionId} data-tier={tier} style={width}>
+    <option>{transactionCategories[tier] || 'Uncategorized'}</option>
+    {
+      categories.map((category, key) => <option key={key}>{category}</option>)
+    }
+  </select>
+)
+
+const renderTransactions = (transactions, categoryList, callback) => transactions
+  .map(({ name, amount, date, categories, id }, key) => (
+    <tr key={key}>
+      <td>{name}</td>
+      <td>{amount}</td>
+      <td>{date}</td>
+      <td>{renderCategoryDropdown(Object.keys(categoryList), categories, 0, {}, id, callback)}</td>
+      <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, {width: "303px"}, id, callback)}</td>
+    </tr>
+  ));
+
 const populateChart = (data) => {
   const chartData = [];
-  console.log(chartConfig);
   chartConfig.datasets[0].backgroundColor = ['#00DFAE', '#00B9B9', '#00CDB4', '#00A0C3', '#01EFAD', '#263650', '#E74E4E', '#57CBFF', '#2273AA'];
   chartConfig.labels = labelize(data);
   const mapped = mapCategories(data);
@@ -76,18 +92,30 @@ const populateChart = (data) => {
   return chartConfig;
 };
 
-const convertTransactions = (transactions) => {
-  return transactions.filter(transaction => !!transaction)
+const convertTransactions = (transactions) => transactions
+  .filter(transaction => !!transaction && transaction.amount)
   .map((transaction) => {
+    if (transaction.categories.length < 2) {
+      transaction.categories[1] = 'Uncategorized'
+    }
     transaction.amount = +transaction.amount;
     transaction.date = transaction.date.slice(0, 10);
     return transaction;
   });
-}
+
+const overwriteTransactionCategories = (transactions, { id, categories }) => transactions
+  .map((transaction) => {
+    if (transaction.id === (+id)) {
+      transaction.categories = categories;
+    }
+    return transaction;
+  });
 
 module.exports = {
   budget,
   mapAndRender,
   populateChart,
   convertTransactions,
+  renderTransactions,
+  overwriteTransactionCategories,
 };

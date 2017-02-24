@@ -33,10 +33,12 @@ module.exports = {
       res.status(404).json(err);
     }),
 
-  bulkCreate: (transactions, userId) => Promise.all(transactions.map((transaction) => {
+  bulkCreate: (transactions, userId) => Promise.all(transactions
+  .filter(transaction => transaction.amount > 0)
+  .map((transaction) => {
     let category;
     let businessId;
-    const categories = JSON.stringify(transaction.category) || '["Uncategorized"]';
+    const categories = JSON.stringify(transaction.category) || '["Uncategorized", "Uncategorized"]';
     return helpers.findOrCreate(Category, { categories })
     .then((record) => {
       category = record;
@@ -72,4 +74,25 @@ module.exports = {
       console.log(err);
     });
   })),
+
+  update: (req, res) => {
+    let category_id;
+    const { id, categories, user_id } = req.body;
+    return Category.forge().where({ categories }).fetch()
+      .then(({ attributes }) => attributes.id)
+      .then((categoryId) => {
+        category_id = categoryId;
+        return new Transaction({ id, user_id }).fetch({ require: true });
+      })
+      .then((transactionInstance) => {
+        transactionInstance.save({ category_id }, { patch: true });
+      }).then(() => {
+        res.status(204).end();
+      }).catch((err) => {
+        res.status(404).json(err);
+      })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+  },
 };

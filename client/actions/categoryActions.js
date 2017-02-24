@@ -12,7 +12,8 @@ export function createCategory(data) {
 }
 
 export function fetchCategories() {
-  return dispatch => axios.get('/api/categories')
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.get('/api/categories', { headers })
     .then((response) => {
       dispatch({ type: 'FETCH_CATEGORIES_SUCCESSFUL', payload: response.data });
     })

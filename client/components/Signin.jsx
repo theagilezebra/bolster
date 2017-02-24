@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signin } from '../actions/userActions';
 import { fetchAccounts } from '../actions/accountActions';
-import { fetchTransactions } from '../actions/transActions';
+import { fetchTransactions, requestTransactions } from '../actions/transActions';
 import { fetchGoals } from '../actions/goalActions';
 import { fetchBudgets } from '../actions/budgetActions';
+import { fetchCategories } from '../actions/categoryActions';
 
 const Signin = ({ dispatch, error }) => {
   let emailInput = null;
@@ -18,9 +19,11 @@ const Signin = ({ dispatch, error }) => {
     }))
     .then(() => {
       dispatch(fetchAccounts());
-      dispatch(fetchTransactions());
+      dispatch(requestTransactions())
+      .then(() => dispatch(fetchTransactions()));
       dispatch(fetchGoals());
       dispatch(fetchBudgets());
+      dispatch(fetchCategories());
     })
     .catch((err) => {
       console.error(`error fetching data: ${err}`);

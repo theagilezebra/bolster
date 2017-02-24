@@ -18,7 +18,7 @@ module.exports = {
   },
 
   get: (req, res) => Account.forge().where(req.query).fetchAll()
-    .then(accounts => Promise.all(accounts.map(account => helpers.formatAccount(account)))) // TODO: check if the promise.all is necessary.
+    .then(accounts => accounts.map(account => helpers.formatAccount(account)))
     .then((accounts) => {
       res.json(accounts);
     }).catch((err) => {

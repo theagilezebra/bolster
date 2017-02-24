@@ -20,6 +20,9 @@ export const defaultState = {
   goals: {
     goalsData: [],
   },
+  categories: {
+    categoryData: {},
+  },
 };
 
 export function resetState(state, stateProperty) {
