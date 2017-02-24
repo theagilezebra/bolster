@@ -44,4 +44,16 @@ module.exports = {
     delete accountInstance.attributes.user_id;
     return accountInstance.attributes;
   },
+
+  formatAchievement: (achievementInstance, achievementTypeInstance) => {
+    delete achievementInstance.attributes.achievementtypes_id;
+    delete achievementInstance.attributes.user_id;
+    delete achievementInstance.attributes.updated_at;
+    delete achievementInstance.attributes.created_at;
+    delete achievementInstance.attributes.id;
+    achievementInstance.attributes.name = achievementTypeInstance.attributes.name;
+    achievementInstance.attributes.structure = achievementTypeInstance.attributes.structure;
+    achievementInstance.attributes.description = achievementTypeInstance.attributes.description;
+    return achievementInstance.attributes;
+  },
 };
