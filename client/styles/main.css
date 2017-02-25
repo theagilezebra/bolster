@@ -112,8 +112,11 @@
 .moneyjumbo {
   height: 100vh;
   background-image: url('../assets/pencil_money.png');
-  background-repeat: no-repeat;
-  background-position: center center;
+  /*background-repeat: no-repeat;
+  background-position: center center;*/
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
 }
 
 .littlemoney {
