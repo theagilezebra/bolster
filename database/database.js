@@ -29,6 +29,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     users.string('password', 128).notNullable();
     users.integer('address_id').unsigned();
     users.foreign('address_id').references('addresses.id');
+    // TODO: do not give users a default address, make this foreign key optional
     users.string('phone', 128);
     users.integer('bolsterIndex');
     users.timestamps();
