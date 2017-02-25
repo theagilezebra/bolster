@@ -103,9 +103,9 @@ const convertTransactions = (transactions) => transactions
     return transaction;
   });
 
-const overwriteTransactionCategories = (transactions, { id, categories }) => transactions
+const overwriteTransactionCategories = (transactions, { id, categories, name }) => transactions
   .map((transaction) => {
-    if (transaction.id === (+id)) {
+    if (transaction.id === (+id) || transaction.name === name) {
       transaction.categories = categories;
     }
     return transaction;
