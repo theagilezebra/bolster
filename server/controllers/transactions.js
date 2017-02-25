@@ -24,6 +24,7 @@ module.exports = {
     .then(transactions => Promise.all(transactions.map((transaction) => {
       delete transaction.attributes.created_at;
       delete transaction.attributes.updated_at;
+      delete transaction.attributes.plaidTransactionId;
       return transaction;
     })))
     .then((transactions) => {
@@ -66,6 +67,7 @@ module.exports = {
         account_id: account.id,
         business_id: businessId,
         category_id: category.id,
+        plaidTransactionId: transaction._id,
         amount: transaction.amount,
         date: transaction.date,
       };

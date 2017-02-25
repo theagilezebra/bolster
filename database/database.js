@@ -104,6 +104,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     transactions.foreign('business_id').references('businesses.id');
     transactions.dropForeign('business_id');
     transactions.string('category_id');
+    transactions.string('plaidTransactionId').unique();
     transactions.timestamps();
   });
 }).then((transactions) => {
