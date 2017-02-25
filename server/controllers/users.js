@@ -30,8 +30,13 @@ module.exports = {
     new User({ email }).fetch().then((userInstance) => {
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
         if (match) {
-          // TODO: decorate user instance with address information (see checkAuth bellow)
-          helpers.jwtRedirect(req, res, helpers.formatUser(userInstance));
+          Address.forge({ id: userInstance.attributes.address_id }).fetch()
+          .then((address) => {
+            helpers.jwtRedirect(req, res, helpers.formatUser(userInstance, address));
+          })
+          .catch(() => {
+            helpers.jwtRedirect(req, res, helpers.formatUser(userInstance));
+          });
         } else {
           res.status(401).end('wrong username or password');
         }
