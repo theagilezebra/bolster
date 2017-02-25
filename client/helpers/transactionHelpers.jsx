@@ -96,7 +96,7 @@ const convertTransactions = (transactions) => transactions
   .filter(transaction => !!transaction && transaction.amount)
   .map((transaction) => {
     if (transaction.categories.length < 2) {
-      transaction.categories[1] = 'Uncategorized'
+      transaction.categories[1] = 'Uncategorized';
     }
     transaction.amount = +transaction.amount;
     transaction.date = transaction.date.slice(0, 10);
@@ -106,6 +106,9 @@ const convertTransactions = (transactions) => transactions
 const overwriteTransactionCategories = (transactions, { id, categories, name }) => transactions
   .map((transaction) => {
     if (transaction.id === (+id) || transaction.name === name) {
+      if (categories.length < 2) {
+        categories[1] = 'Uncategorized';
+      }
       transaction.categories = categories;
     }
     return transaction;

@@ -12,7 +12,6 @@ export default function (state, action) {
     break;
   }
   case 'FETCH_TRANSACTIONS_SUCCESSFUL': {
-    console.log(convertTransactions(action.payload));
     newState.transactionsData = convertTransactions(action.payload);
     break;
   }
