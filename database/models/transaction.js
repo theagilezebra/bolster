@@ -11,4 +11,15 @@ module.exports = db.Model.extend({
   account: () => this.belongsTo(Account),
   business: () => this.belongsTo(Business),
   categories: () => this.belongsTo(Category),
+  initialize() {
+    this.on('created', ({ attributes }) => {
+      const Transaction = require('./transaction');
+      const { business_id, id } = attributes;
+      Business.where({ id: business_id }).fetch()
+      .then(business => business.attributes.category_id)
+      .then(category_id => Transaction.forge({ id }).save({ category_id }));
+    }).catch((err) => {
+      console.log(err);
+    });
+  },
 });
