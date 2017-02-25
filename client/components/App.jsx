@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
 import requireAuth from '../helpers/authHelpers';
+import Profile from './Profile.jsx';
 import Landing from './Landing.jsx';
 import Dashboard from './Dashboard.jsx';
 import BudgetGraph from './BudgetGraph.jsx';
@@ -57,6 +58,11 @@ class App extends React.Component {
         <Route
           path="/achievements"
           component={() => (<Achievements />)}
+          onEnter={requireAuth}
+        />
+        <Route
+          path="/profile"
+          component={() => (<Profile />)}
           onEnter={requireAuth}
         />
       </Router>
