@@ -28,12 +28,20 @@ module.exports = {
     });
   }),
 
-  formatUser: (userInstance) => {
+  formatUser: (userInstance, address) => {
     delete userInstance.attributes.password;
     delete userInstance.attributes.publicToken;
     delete userInstance.attributes.accessToken;
     delete userInstance.attributes.created_at;
     delete userInstance.attributes.updated_at;
+    if (address) {
+      console.log('HEY I AM FORMATTING AN ADDRESS');
+      userInstance.attributes.address = address.attributes.address;
+      userInstance.attributes.city = address.attributes.city;
+      userInstance.attributes.zip = address.attributes.zip;
+      userInstance.attributes.state = address.attributes.state;
+      userInstance.attributes.country = address.attributes.country;
+    }
     return userInstance.attributes;
   },
 

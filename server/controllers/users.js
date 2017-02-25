@@ -30,6 +30,7 @@ module.exports = {
     new User({ email }).fetch().then((userInstance) => {
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
         if (match) {
+          // TODO: decorate user instance with address information (see checkAuth bellow)
           helpers.jwtRedirect(req, res, helpers.formatUser(userInstance));
         } else {
           res.status(401).end('wrong username or password');
@@ -59,9 +60,14 @@ module.exports = {
       if (err) {
         res.status(401).end('YOU SHALL NOT PASS!!');
       } else {
-        User.forge({ id: decoded.id }).fetch().then((user) => {
-          res.json(helpers.formatUser(user));
-        }).catch((error) => {
+        let user;
+        User.forge({ id: decoded.id }).fetch().then((userInstance) => {
+          user = userInstance;
+          return Address.forge({ id: user.attributes.address_id }).fetch();
+        }).then((address) => {
+          res.json(helpers.formatUser(user, address));
+        })
+        .catch((error) => {
           res.status(500).json(error);
         });
       }
