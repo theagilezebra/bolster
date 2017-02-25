@@ -4,8 +4,6 @@ const getTotal = purchases => purchases.reduce((prev, curr) => prev += curr.amou
 
 const getAverage = (days, transactions) => {
   const total = getTotal(transactions);
-  console.log('total', total);
-  console.log('days', days);
   return Math.round(total / days);
 };
 
@@ -21,16 +19,14 @@ const timeFrame = (start, days) => {
     const date = moment(previous).add(1, 'day').format('MM/DD/YYYY');
     results.push(date);
     previous = moment(date);
-    curr++;
+    curr += 1;
   }
-  console.log('timeframe', results);
   return results;
 };
 // this is a rolling average
 const previousMonth = (start, period, transactions) => {
   const startDate = moment(start).subtract(1, 'month');
   const purchases = filterPurchases(startDate, 30, transactions);
-  console.log('purchases from previous month', purchases);
   const prevMonthTotal = Math.round(getTotal(purchases));
   if (period === 'daily') {
     const prevMonthDailyAverage = getAverage(30, purchases);
@@ -61,11 +57,27 @@ const progressBar = (start, days, period, transactions) => {
   console.log('progress bar percentage', Math.round((average / comparison) * 100));
   return Math.round((average / comparison) * 100);
 };
+// /////ACHIEVEMENT FUNCTIONS///////////////////
+const trappistMonk = (start, days, transactions) => getTotal(filterPurchases(start, days, transactions));
 
+const hero = (start, days, period, transactions) => {
+  const total = getTotal(filterPurchases(start, days, transactions));
+  // this produces either a daily or weekly average from the last month based on which period is passed as an argument
+  const prevMonthAverage = previousMonth(start, period, transactions);
+  const percentage = progressBar(start, days, period, transactions);
+  return {
+    total,
+    prevMonthAverage,
+    percentage,
+  };
+};
+// /////////////////////////////////////////////
 module.exports = {
   getAverage,
   timeFrame,
   filterPurchases,
   progressBar,
   previousMonth,
+  trappistMonk,
+  hero,
 };
