@@ -16,7 +16,35 @@ const renderAccounts = accounts => accounts.map((account, key) => (
   </tr>
 ));
 
+const groupAccounts = bankAccounts => bankAccounts.reduce((prev, curr) => {
+  if (Object.prototype.hasOwnProperty.call(prev, curr.institutionName)) {
+    prev[curr.institutionName].push(curr);
+  } else {
+    prev[curr.institutionName] = [curr];
+  }
+  return prev;
+}, {});
+
+const renderAccountGroups = (bankAccounts) => {
+  const institutionWithAccounts = [];
+  for (const key in bankAccounts) {
+    institutionWithAccounts.push((
+      <div key="key">
+        <h3>{key}</h3>
+        <ul>
+          {bankAccounts[key].map(item => (
+            <li key={item.id}>{item.name}: {item.currentBalance}</li>
+          ))}
+        </ul>
+      </div>
+    ));
+  }
+  return institutionWithAccounts;
+};
+
 module.exports = {
+  renderAccountGroups,
   convertBalances,
   renderAccounts,
+  groupAccounts,
 };
