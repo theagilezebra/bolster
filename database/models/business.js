@@ -15,9 +15,10 @@ module.exports = db.Model.extend({
       const { name, id } = attributes;
       Business.where({ name }).fetch()
       .then(existingBusiness => existingBusiness.attributes.category_id)
-      .then(category_id => Business.forge({ id }).save({ category_id }));
-    }).catch((err) => {
-      console.log(err);
+      .then(category_id => Business.forge({ id }).save({ category_id }))
+      .catch((err) => {
+        console.log(err);
+      });
     });
   },
 });
