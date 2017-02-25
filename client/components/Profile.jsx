@@ -5,29 +5,15 @@ import Institutions from './Institutions.jsx';
 import ProfileInfo from './ProfileInfo.jsx';
 import css from '../styles/profile.css';
 
-const Profile = ({ accounts, userInfo }) => (
+const Profile = ({ accounts, userInfo, dispatch }) => (
   <div className="quicksand">
     <NavigationBar landing={false} />
     <div className="accounts-container">
       <Institutions accounts={accounts} />
     </div>
     <div className="main-profile-container">
-      <ProfileInfo userinfo={userInfo} />
+      <ProfileInfo userinfo={userInfo} dispatch={dispatch} />
     </div>
-    {
-      // email
-      // ==> Change email
-      // ==> Change password
-      // first name
-      // last name
-      // =======
-      // address
-      // =======
-      // phone number
-      // =======
-      // Financial institutions and bank accounts
-      // #fff
-    }
   </div>
 );
 
