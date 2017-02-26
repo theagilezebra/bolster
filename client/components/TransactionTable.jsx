@@ -12,14 +12,15 @@ class TransactionTable extends React.Component {
   handleSelect({ target, nativeEvent }) {
     const { value } = target;
     const id = target.attributes['data-id'].value;
+    const name = nativeEvent.path[2].children[0].innerText;
 
     if (!(+target.attributes['data-tier'].value)) {
       this.dispatch(updateTransaction({ id, categories: `["${value}"]` }));
-      this.dispatch(rerenderTransactions({ id, categories: [value] }));
+      this.dispatch(rerenderTransactions({ id, categories: [value], name }));
     } else {
       const main = nativeEvent.path[2].children[3].children[0].value;
       this.dispatch(updateTransaction({ id, categories: `["${main}","${value}"]` }));
-      this.dispatch(rerenderTransactions({ id, categories: [main, value] }));
+      this.dispatch(rerenderTransactions({ id, categories: [main, value], name }));
     }
   }
 

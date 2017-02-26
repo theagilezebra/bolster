@@ -24,6 +24,7 @@ module.exports = {
     .then(transactions => Promise.all(transactions.map((transaction) => {
       delete transaction.attributes.created_at;
       delete transaction.attributes.updated_at;
+      delete transaction.attributes.plaidTransactionId;
       return transaction;
     })))
     .then((transactions) => {
@@ -66,6 +67,7 @@ module.exports = {
         account_id: account.id,
         business_id: businessId,
         category_id: category.id,
+        plaidTransactionId: transaction._id,
         amount: transaction.amount,
         date: transaction.date,
       };
@@ -75,22 +77,32 @@ module.exports = {
     });
   })),
 
+
   update: (req, res) => {
     let category_id;
     const { id, categories, user_id } = req.body;
     return Category.forge().where({ categories }).fetch()
-      .then(({ attributes }) => attributes.id)
-      .then((categoryId) => {
-        category_id = categoryId;
-        return new Transaction({ id, user_id }).fetch({ require: true });
-      })
-      .then((transactionInstance) => {
-        transactionInstance.save({ category_id }, { patch: true });
-      }).then(() => {
-        res.status(204).end();
-      }).catch((err) => {
-        res.status(404).json(err);
-      })
+    .then(({ attributes }) => attributes.id)
+    .then((categoryId) => {
+      category_id = categoryId;
+      return Transaction.forge({ id, user_id }).fetch({ require: true });
+    })
+    .then(transaction => helpers.findOrCreate(Business, { id: transaction.attributes.business_id })
+    .then(business => Business.forge().where({ name: business.attributes.name }).fetchAll()
+    .then((businesses) => {
+      businesses.models.forEach((businessInstance) => {
+        businessInstance.save({ category_id }, { patch: true });
+        Transaction.forge().where({ user_id, business_id: businessInstance.attributes.id }).fetchAll()
+        .then((transactions) => {
+          transactions.models.forEach((transactionInstance) => {
+            transactionInstance.save({ category_id }, { patch: true });
+          });
+        });
+      });
+    })))
+    .then(() => {
+      res.status(204).end();
+    })
     .catch((err) => {
       res.status(404).json(err);
     });
