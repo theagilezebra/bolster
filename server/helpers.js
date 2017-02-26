@@ -35,7 +35,6 @@ module.exports = {
     delete userInstance.attributes.created_at;
     delete userInstance.attributes.updated_at;
     if (address) {
-      console.log('HEY I AM FORMATTING AN ADDRESS');
       userInstance.attributes.address = address.attributes.address;
       userInstance.attributes.city = address.attributes.city;
       userInstance.attributes.zip = address.attributes.zip;
