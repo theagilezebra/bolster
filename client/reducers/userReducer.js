@@ -1,9 +1,18 @@
 import { hashHistory } from 'react-router';
-import decorateState from '../helpers/userHelpers';
+import { decorateState } from '../helpers/userHelpers';
 
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
+  case 'UPDATE_ADDRESS_SUCCESSFUL':
+  case 'UPDATE_USER_SUCCESSFUL': {
+    decorateState(newState, action.payload.userInstance || action.payload, state);
+    break;
+  }
+  case 'UPDATE_USER_FAILED': {
+    console.error(action.payload);
+    break;
+  }
   case 'AUTH_SUCCESSFUL': {
     decorateState(newState, action.payload.userInstance || action.payload);
     if (document.location.hash === '#/') {
