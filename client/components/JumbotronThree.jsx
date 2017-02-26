@@ -3,7 +3,7 @@ import Signin from './Signin.jsx';
 import Signup from './Signup.jsx';
 
 const JumbotronThree = ({ formType }) => (
-  <div className="lightgreenjumbo">
+  <div className=" container-flud lightgreenjumbo">
     {
       formType === 'Signin' ? <Signin /> : <Signup />
     }

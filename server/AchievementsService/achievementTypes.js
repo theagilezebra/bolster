@@ -14,4 +14,19 @@ module.exports = [
     structure: '',
     description: 'Add an address to your profile.',
   },
+  {
+    name: 'Trappist Monk',
+    structure: '',
+    description: 'Spent $0 for one day',
+  },
+  {
+    name: 'Daily Hero',
+    structure: '',
+    description: 'Spent less than last month\'s daily average for one day.',
+  },
+  {
+    name: 'Weekly Hero',
+    structure: '',
+    description: 'Spent less than last month\'s weekly average for one week.',
+  },
 ];
