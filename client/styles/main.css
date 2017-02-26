@@ -112,10 +112,8 @@
 .moneyjumbo {
   height: 100vh;
   background-image: url('../assets/pencil_money.png');
-  /*background-repeat: no-repeat;
-  background-position: center center;*/
   background-repeat:no-repeat;
-  background-size:contain;
+  background-size: contain;
   background-position:center;
 }
 
@@ -129,6 +127,22 @@
 .navchoice {
   font-size: 25px;
   font-family: 'Quicksand', 'sans-serif';
+}
+.navbar-nav > li{
+  font-size: 25px;
+  font-family: 'Quicksand', 'sans-serif';
+  padding-left:30px;
+  padding-right:30px;
+}
+.navbar {
+  border: 0;
+}
+
+.hamburger {
+  padding-right: 30px; 
+  font-size: 30px; 
+  color: white; 
+  background-color: #9CF3C9;
 }
 
 .navBar {
