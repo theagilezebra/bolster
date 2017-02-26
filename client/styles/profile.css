@@ -1,0 +1,17 @@
+.accounts-container {
+  display: inline-block;
+  width: 35%;
+  margin: 0;
+  vertical-align:top; 
+}
+
+.main-profile-container {
+  display: inline-block;
+  width: 65%;
+  margin: 0;
+  vertical-align:top;
+}
+
+#state {
+  background-color: #fff;
+}

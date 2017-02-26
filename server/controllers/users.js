@@ -30,7 +30,13 @@ module.exports = {
     new User({ email }).fetch().then((userInstance) => {
       bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
         if (match) {
-          helpers.jwtRedirect(req, res, helpers.formatUser(userInstance));
+          Address.forge({ id: userInstance.attributes.address_id }).fetch()
+          .then((address) => {
+            helpers.jwtRedirect(req, res, helpers.formatUser(userInstance, address));
+          })
+          .catch(() => {
+            helpers.jwtRedirect(req, res, helpers.formatUser(userInstance));
+          });
         } else {
           res.status(401).end('wrong username or password');
         }
@@ -41,14 +47,15 @@ module.exports = {
   },
 
   update: (req, res) => {
-    new User(req.params).fetch({ require: true }).then((userInstance) => {
-      userInstance.save(req.body, { patch: true }).then((user) => {
-        res.json(helpers.formatUser(userInstance)).status(204);
-      }).catch((err) => {
-        res.json(err).status(404);
-      });
-    })
-    .catch((err) => {
+    let user;
+    new User(req.params).save(req.body, { patch: false })
+    .then(userInstance => User.forge({ id: userInstance.id }).fetch())
+    .then((userInstance) => {
+      user = userInstance;
+      return Address.forge({ id: user.attributes.address_id }).fetch();
+    }).then((address) => {
+      res.json(helpers.formatUser(user, address)).status(204);
+    }).catch((err) => {
       res.json(err).status(404);
     });
   },
@@ -59,9 +66,14 @@ module.exports = {
       if (err) {
         res.status(401).end('YOU SHALL NOT PASS!!');
       } else {
-        User.forge({ id: decoded.id }).fetch().then((user) => {
-          res.json(helpers.formatUser(user));
-        }).catch((error) => {
+        let user;
+        User.forge({ id: decoded.id }).fetch().then((userInstance) => {
+          user = userInstance;
+          return Address.forge({ id: user.attributes.address_id }).fetch();
+        }).then((address) => {
+          res.json(helpers.formatUser(user, address));
+        })
+        .catch((error) => {
           res.status(500).json(error);
         });
       }

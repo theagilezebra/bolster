@@ -9,6 +9,7 @@ const businesses = require('./controllers/businesses');
 const goals = require('./controllers/goals');
 const plaid = require('./controllers/plaid');
 const achievements = require('./controllers/achievements');
+const addresses = require('./controllers/addresses');
 
 routes.post('/users/signup', users.signup);
 routes.post('/users/signin', users.signin);
@@ -38,6 +39,8 @@ routes.post('/plaid/link', plaid.connect.link);
 routes.post('/plaid', plaid.connect.get);
 
 routes.get('/achievements', achievements.get);
+
+routes.post('/addresses', addresses.post);
 
 
 module.exports = routes;

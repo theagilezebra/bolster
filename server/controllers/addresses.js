@@ -1,10 +1,22 @@
+const User = require('../../database/models/user');
 const Address = require('../../database/models/address');
+const helpers = require('../helpers');
 
 module.exports = {
-  createAddress: (req, res) => {
-    const newUser = new Address(req.body);
-    newUser.save();
-    console.log(req.body);
-    res.end('kthxbai');
+  post: (req, res) => {
+    let address;
+    const userId = req.body.id;
+    delete req.body.id;
+    helpers.findOrCreate(Address, req.body)
+    .then((addressInstance) => {
+      address = addressInstance;
+      return User.forge({ id: userId }).save({ address_id: address.id });
+    })
+    .then((user) => {
+      res.status(201).json(helpers.formatUser(user, address));
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
   },
 };

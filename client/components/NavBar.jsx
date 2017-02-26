@@ -23,8 +23,11 @@ const NavigationBar = ({ landing, dispatch }) => (
                     <li id="Signin" onClick={function () { dispatch(renderForm(document.getElementById('Signin').innerText)); toBottom(); }}>Signin</li>
                     <li id="Signup" onClick={function () { dispatch(renderForm(document.getElementById('Signup').innerTextx)); toBottom(); }}>Signup</li>
                   </div>
-                : <li onClick={function () { dispatch(signout()); }}>Signout</li>
-                }
+                : <div>
+                  <li><a href="#/profile">Profile</a></li>
+                  <li onClick={function () { dispatch(signout()); }}>Signout</li>
+                </div>
+              }
             </ul>
           </div>
         </div>
