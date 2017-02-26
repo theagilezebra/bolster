@@ -32,7 +32,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
       state: state.value === '' ? userinfo.state : state.value,
       zip: zip.value === '' ? userinfo.zip : zip.value,
       country: country.value === '' ? userinfo.country : country.value,
-      id: userinfo.id,
+      user_id: userinfo.id,
     };
     dispatch(update(user))
     .then(() => dispatch(updateAddress(addressInfo)));

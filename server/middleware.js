@@ -4,7 +4,13 @@ const expressJWT = require('express-jwt');
 const unless = require('express-unless');
 
 const helpers = require('./helpers');
-const unprotectedPaths = ['/index.html', '/', '/api/users/signup', '/api/users/signin'];
+const unprotectedPaths = [
+  '/',
+  '/index.html',
+  { url: '/api/categories', methods: ['GET'] },
+  '/api/users/signup',
+  '/api/users/signin',
+];
 helpers.checkUser.unless = require('express-unless');
 
 module.exports = (app, express) => {

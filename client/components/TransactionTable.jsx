@@ -15,11 +15,11 @@ class TransactionTable extends React.Component {
     const name = nativeEvent.path[2].children[0].innerText;
 
     if (!(+target.attributes['data-tier'].value)) {
-      this.dispatch(updateTransaction({ id, categories: `["${value}"]` }));
+      this.dispatch(updateTransaction({ id, categories: `["${value}"]`, user_id: this.props.userId }));
       this.dispatch(rerenderTransactions({ id, categories: [value], name }));
     } else {
       const main = nativeEvent.path[2].children[3].children[0].value;
-      this.dispatch(updateTransaction({ id, categories: `["${main}","${value}"]` }));
+      this.dispatch(updateTransaction({ id, categories: `["${main}","${value}"]`, user_id: this.props.userId }));
       this.dispatch(rerenderTransactions({ id, categories: [main, value], name }));
     }
   }
@@ -51,4 +51,5 @@ class TransactionTable extends React.Component {
 export default connect(state => ({
   transactions: state.transactions.transactionsData,
   categories: state.categories.categoryData,
+  userId: state.user.id,
 }))(TransactionTable);

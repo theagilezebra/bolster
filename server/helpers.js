@@ -5,11 +5,12 @@ module.exports = {
   checkUser: (req, res, next) => {
     const headerAuth = req.get('Authorization').slice(7);
     jwt.verify(headerAuth, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
-      if (err) {
-        res.status(401).end('YOU SHALL NOT PASS!!');
-      } else {
-        next();
-      }
+      const id = req.query.user_id || req.params.id || req.body.user_id || req.body.id;
+      const jwtMatch = id ? +id === decoded.id : id;
+      const bolsterKeyMatch = req.get('BolsterKey') === process.env.BOLSTER_API_KEY;
+      const isAuth = decoded && req.url === '/users/auth';
+      const exceptions = jwtMatch || bolsterKeyMatch || isAuth;
+      exceptions ? next() : res.status(401).end('YOU SHALL NOT PASS!!');
     });
   },
   createJWT: (newUser) => {
