@@ -47,14 +47,15 @@ module.exports = {
   },
 
   update: (req, res) => {
-    new User(req.params).fetch({ require: true }).then((userInstance) => {
-      userInstance.save(req.body, { patch: true }).then((user) => {
-        res.json(helpers.formatUser(userInstance)).status(204);
-      }).catch((err) => {
-        res.json(err).status(404);
-      });
-    })
-    .catch((err) => {
+    let user;
+    new User(req.params).save(req.body, { patch: false })
+    .then(userInstance => User.forge({ id: userInstance.id }).fetch())
+    .then((userInstance) => {
+      user = userInstance;
+      return Address.forge({ id: user.attributes.address_id }).fetch();
+    }).then((address) => {
+      res.json(helpers.formatUser(user, address)).status(204);
+    }).catch((err) => {
       res.json(err).status(404);
     });
   },
