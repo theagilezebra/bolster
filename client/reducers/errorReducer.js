@@ -1,3 +1,5 @@
+import { resetState } from '../helpers/stateHelpers';
+
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
@@ -11,6 +13,14 @@ export default function reducer(state, action) {
   }
   case 'LINK_ACCOUNTS_FAILED': {
     newState.addBank = action.payload;
+    break;
+  }
+  case 'ADDRESS_REQUIRED': {
+    newState.address = action.payload;
+    break;
+  }
+  case 'RESET_ERRORS': {
+    resetState(newState, state.error);
     break;
   }
   }
