@@ -25,6 +25,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
       lastName: lastName.value === '' ? userinfo.lastName : lastName.value,
       email: email.value === '' ? userinfo.email : email.value,
       phone: phone.value === '' ? userinfo.phone : phone.value,
+      id: userinfo.id,
     };
     const addressInfo = {
       address: address.value === '' ? userinfo.address : address.value,
@@ -69,6 +70,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
           placeholder={userinfo.email}
           ref={(ref) => { email = ref; }}
         />
+        <span>{error.email}</span>
         <hr />
         <h3>Phone</h3>
         <input
@@ -85,10 +87,10 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
           type="text"
           maxLength="50"
           id="address"
-          placeholder={userinfo.address || '7 maple street'}
+          placeholder={userinfo.address === 'undefined' ? '7 maple street' : userinfo.address}
           ref={(ref) => { address = ref; }}
         />
-        <span>{error}</span>
+        <span>{error.address}</span>
         <br />
         <label htmlFor="city">City:</label>
         <input

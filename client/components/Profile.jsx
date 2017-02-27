@@ -20,5 +20,5 @@ const Profile = ({ accounts, userInfo, dispatch, error }) => (
 export default connect(state => ({
   accounts: state.accounts.accountData,
   userInfo: state.user,
-  error: state.error.address,
+  error: state.error,
 }))(Profile);

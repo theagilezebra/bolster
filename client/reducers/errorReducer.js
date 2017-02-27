@@ -19,6 +19,10 @@ export default function reducer(state, action) {
     newState.address = action.payload;
     break;
   }
+  case 'UPDATE_USER_FAILED': {
+    newState.email = action.payload;
+    break;
+  }
   case 'RESET_ERRORS': {
     resetState(newState, state.error);
     break;

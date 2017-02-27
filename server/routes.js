@@ -16,22 +16,22 @@ routes.post('/users/signin', users.signin);
 routes.put('/users/:id', users.update);
 routes.get('/users/auth', users.checkAuth);
 
-routes.post('/accounts/create', accounts.create);
+routes.post('/accounts/create', accounts.create); // TODO: make this into '/accounts'. 'create' is implicit thanks to POST method
 routes.get('/accounts', accounts.get);
-routes.get('/accounts/:id', accounts.getOne);
+routes.get('/accounts/:id', accounts.getOne); // TODO: refactor this functionality into /accounts with query parameters
 
-routes.post('/budgets/create', budgets.create);
+routes.post('/budgets/create', budgets.create); // TODO: make this into '/budgets'. 'create' is implicit thanks to POST method
 routes.get('/budgets', budgets.get);
 
-routes.post('/categories/create', categories.create);
+routes.post('/categories/create', categories.create); // TODO: make this into '/categories'. 'create' is implicit thanks to POST method
 routes.get('/categories', categories.get);
 
-routes.post('/goals/create', goals.create);
+routes.post('/goals/create', goals.create); // TODO: make this into '/goals'. 'create' is implicit thanks to POST method
 routes.get('/goals', goals.get);
-routes.put('/goals/update/:id', goals.update);
+routes.put('/goals/update/:id', goals.update); // TODO: make this into '/goals/:id'. 'update' is implicit thanks to PUT method
 
 routes.get('/transactions', transactions.get);
-routes.put('/transactions/update', transactions.update);
+routes.put('/transactions/update', transactions.update); // TODO: make this into '/transactions'. 'update' is implicit thanks to PUT method
 
 routes.get('/businesses', businesses.get);
 

@@ -7,8 +7,8 @@ const helpers = require('../helpers');
 
 module.exports = {
   signup: (req, res) => {
-    const { firstName, lastName, email, password, address = 'undefined', city = '', state = '', zip = 0, country = '' } = req.body;
-    const user = { firstName, lastName, email, password };
+    const { firstName, lastName, email, password, address = 'undefined', city = '', state = '', zip = 0, country = '', phone = '' } = req.body;
+    const user = { firstName, lastName, email, password, phone };
     const physicalAddress = { address, city, state, zip, country };
     return helpers.findOrCreate(Address, physicalAddress).then((addressInstance) => {
       user.address_id = addressInstance.id;
@@ -16,7 +16,7 @@ module.exports = {
         user.password = hash;
         new User(user).save()
         .then((userInstance) => {
-          userInstance = helpers.formatUser(userInstance);
+          userInstance = helpers.formatUser(userInstance, addressInstance);
           helpers.jwtRedirect(req, res, userInstance);
         }).catch((error) => {
           res.status(400).json(error);
@@ -54,9 +54,9 @@ module.exports = {
       user = userInstance;
       return Address.forge({ id: user.attributes.address_id }).fetch();
     }).then((address) => {
-      res.json(helpers.formatUser(user, address)).status(204);
+      res.status(204).json(helpers.formatUser(user, address));
     }).catch((err) => {
-      res.json(err).status(404);
+      res.status(400).json(err);
     });
   },
 

@@ -43,7 +43,7 @@ export function update(userInfo) {
       dispatch({ type: 'UPDATE_USER_SUCCESSFUL', payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'UPDATE_USER_FAILED', payload: err });
+      dispatch({ type: 'UPDATE_USER_FAILED', payload: 'the email address provided is already in use' });
     });
 }
 
