@@ -35,9 +35,6 @@ class Dashboard extends React.Component {
             <h2>Add a bank account!</h2>
           </div>
         </div>
-        {
-          this.props.accounts.length ? <AccountTable /> : null
-        }
       </div>
     );
   }
