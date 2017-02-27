@@ -10,6 +10,7 @@ export const defaultState = {
     signup: '',
     signin: '',
     addBank: '',
+    email: '',
   },
   accounts: {
     accountData: [],
