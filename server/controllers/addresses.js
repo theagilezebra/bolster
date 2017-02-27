@@ -5,8 +5,8 @@ const helpers = require('../helpers');
 module.exports = {
   post: (req, res) => {
     let address;
-    const userId = req.body.user_id;
-    delete req.body.user_id;
+    const userId = req.body.id;
+    delete req.body.id;
     helpers.findOrCreate(Address, req.body)
     .then((addressInstance) => {
       address = addressInstance;
