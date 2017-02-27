@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, hashHistory } from 'react-redux';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import css from '../styles/main.css';
 import renderForm from '../actions/renderActions';
@@ -23,8 +23,7 @@ const NavigationBar = ({ landing, dispatch }) => (
                     <li id="Signin" onClick={function () { dispatch(renderForm(document.getElementById('Signin').innerText)); toBottom(); }}>Signin</li>
                     <li id="Signup" onClick={function () { dispatch(renderForm(document.getElementById('Signup').innerTextx)); toBottom(); }}>Signup</li>
                   </div>
-                : <div>
-                  <li><a href="#/profile">Profile</a></li>
+                : <div className="nav navbar-nav">
                   <li onClick={function () { dispatch(signout()); }}>Signout</li>
                 </div>
               }
