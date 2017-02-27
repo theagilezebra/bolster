@@ -21,7 +21,7 @@ module.exports = db.Model.extend({
       // test this out once you have implemented adding an address for a user.
       setTimeout(() => {
         let user;
-        User.forge({ address_id: address.id }).fetch()
+        require('./user').forge({ address_id: address.id }).fetch()
         .then((userInstance) => {
           user = userInstance;
           return AchievementType.forge({ name: 'Home sweet home' }).fetch();
