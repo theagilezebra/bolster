@@ -44,85 +44,98 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
       <form action="" onSubmit={submitHandler}>
         <h2>Profile information</h2>
         <h3>Name</h3>
-        <label htmlFor="firstName">First:</label>
-        <input
-          type="text"
-          maxLength="35"
-          id="firstName"
-          placeholder={userinfo.firstName}
-          ref={(ref) => { firstName = ref; }}
-        />
-        <br />
-        <label htmlFor="lastName">Last:</label>
-        <input
-          type="text"
-          maxLength="35"
-          id="lastName"
-          placeholder={userinfo.lastName}
-          ref={(ref) => { lastName = ref; }}
-        />
-        <hr />
+        <div className="form-group" >
+          <label htmlFor="firstName">First:</label>
+          <input
+            className="form-control profileinput"
+            type="text"
+            maxLength="35"
+            id="firstName"
+            placeholder={userinfo.firstName}
+            ref={(ref) => { firstName = ref; }}
+          />
+        </div>
+        <div className="form-group" >
+          <label htmlFor="lastName">Last:</label>
+          <input
+            className="form-control profileinput"
+            type="text"
+            maxLength="35"
+            id="lastName"
+            placeholder={userinfo.lastName}
+            ref={(ref) => { lastName = ref; }}
+          />
+        </div>
         <h3>Email</h3>
-        <input
-          type="email"
-          maxLength="50"
-          id="email"
-          placeholder={userinfo.email}
-          ref={(ref) => { email = ref; }}
-        />
-        <span>{error.email}</span>
-        <hr />
+        <div className="form-group" >
+          <input
+            className="form-control profileinput"
+            type="email"
+            maxLength="50"
+            id="email"
+            placeholder={userinfo.email}
+            ref={(ref) => { email = ref; }}
+          />
+          <span>{error.email}</span>
+        </div>
         <h3>Phone</h3>
-        <input
-          type="tel"
-          maxLength="50"
-          id="phone"
-          placeholder={userinfo.phone || '(012) 345-6789'}
-          ref={(ref) => { phone = ref; }}
-        />
-        <hr />
+        <div className="form-group" >
+          <input
+            className="form-control profileinput"
+            type="tel"
+            maxLength="50"
+            id="phone"
+            placeholder={userinfo.phone || '(012) 345-6789'}
+            ref={(ref) => { phone = ref; }}
+          />
+        </div>
         <h3>Address</h3>
-        <label htmlFor="address">Address:</label>
-        <input
-          type="text"
-          maxLength="50"
-          id="address"
-          placeholder={userinfo.address === 'undefined' ? '7 maple street' : userinfo.address}
-          ref={(ref) => { address = ref; }}
-        />
-        <span>{error.address}</span>
-        <br />
-        <label htmlFor="city">City:</label>
-        <input
-          type="text"
-          maxLength="35"
-          id="city"
-          placeholder={userinfo.city || 'Lodi'}
-          ref={(ref) => { city = ref; }}
-        />
-        <label htmlFor="state">State:</label>
-        <select name="" id="state" ref={(ref) => { state = ref; }}>
-          <option value="" selected="selected">{'' || userinfo.state}</option>
-          {renderOptions()}
-        </select>
-        <br />
-        <label htmlFor="zip">ZIP:</label>
-        <input
-          type="text"
-          maxLength="10"
-          id="zip"
-          placeholder={userinfo.zip || '00000'}
-          ref={(ref) => { zip = ref; }}
-        />
-        <label htmlFor="country">Country:</label>
-        <input
-          type="text"
-          maxLength="35"
-          id="country"
-          placeholder={userinfo.country || 'USA'}
-          ref={(ref) => { country = ref; }}
-        />
-        <br />
+        <div className="form-group" >
+          <label htmlFor="address">Address:</label>
+          <input
+            className="form-control profileinput"
+            type="text"
+            maxLength="50"
+            id="address"
+            placeholder={userinfo.address === 'undefined' ? '7 maple street' : userinfo.address}
+            ref={(ref) => { address = ref; }}
+          />
+          <span>{error.address}</span>
+          <br />
+          <label htmlFor="city">City:</label>
+          <input
+            className="form-control profileinput"
+            type="text"
+            maxLength="35"
+            id="city"
+            placeholder={userinfo.city || 'Lodi'}
+            ref={(ref) => { city = ref; }}
+          />
+          <label htmlFor="state">State:</label>
+          <select className="form-control profileinput" name="" id="state" ref={(ref) => { state = ref; }}>
+            <option value="" selected="selected">{'' || userinfo.state}</option>
+            {renderOptions()}
+          </select>
+          <br />
+          <label htmlFor="zip">ZIP:</label>
+          <input
+            className="form-control profileinput"
+            type="text"
+            maxLength="10"
+            id="zip"
+            placeholder={userinfo.zip || '00000'}
+            ref={(ref) => { zip = ref; }}
+          />
+          <label htmlFor="country">Country:</label>
+          <input
+            className="form-control profileinput"
+            type="text"
+            maxLength="35"
+            id="country"
+            placeholder={userinfo.country || 'USA'}
+            ref={(ref) => { country = ref; }}
+          />
+        </div>
         <input type="submit" />
       </form>
     </div>

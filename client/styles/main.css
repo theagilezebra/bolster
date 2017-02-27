@@ -4,6 +4,17 @@
   /*margin-right: 200px;*/
   text-align: center;
 }
+.bankbalances {
+  font-size: 18px;
+}
+
+.banklist {
+  list-style-type: none;
+}
+
+.profilepadding {
+  padding-bottom: 100px;
+}
 
 .darkgreenjumbo {
   padding: 5%;
@@ -13,7 +24,6 @@
 
 .darkgreenback {
   background-color: seagreen;
-    padding-top: 7%;
 }
 
 .dashboardjumbo {
@@ -23,7 +33,7 @@
 
 .dashboardone {
   margin-top: -3%;
-  background-color: #00B9B9;
+  background-color: #00CDB4; 
 }
 
 .dashboardone:hover {
@@ -31,7 +41,7 @@
 }
 
 .dashboardtwo {
-  background-color: #00CDB4;
+  background-color: #00B9B9;
 }
 
 .dashboardtwo:hover {
@@ -39,13 +49,20 @@
 }
 
 .dashboardthree {
-  background-color: #00DFAE;
+  background-color: #00A0C3;  
 }
 
 .dashboardthree:hover {
   background-color: #01EFAD;
 }
 
+.dashboardfour {
+  background-color: #2273AA; 
+}
+
+.dashboardfour:hover {
+  background-color: #01EFAD;
+}
 .dashboardtext {
   text-align: center;
   font-family: 'Quicksand', 'sans-serif';
@@ -84,9 +101,9 @@
   margin: auto;
   border-radius: 5px;
   margin-top: 5px;
-  width: 500px;
+  width: 40%;
   height: 60px;
-  font-size: 25px;
+  font-size: 130%;
 }
 
 
@@ -101,6 +118,7 @@
   text-align: center;
   height: 100vh;
   background-color: #9CF3C9;
+  overflow: scroll;
 }
 
 .logo {
@@ -136,6 +154,11 @@
 }
 .navbar {
   border: 0;
+}
+
+.profileinput {
+  width: 75%;
+  height: 10%;
 }
 
 .hamburger {

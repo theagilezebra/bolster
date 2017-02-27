@@ -31,9 +31,9 @@ const renderAccountGroups = (bankAccounts) => {
     institutionWithAccounts.push((
       <div key="key">
         <h3>{key}</h3>
-        <ul>
+        <ul className="banklist">
           {bankAccounts[key].map(item => (
-            <li key={item.id}>{item.name}: {item.currentBalance}</li>
+            <li key={item.id}><span className="bankbalances">{item.name} </span>: {item.currentBalance}</li>
           ))}
         </ul>
       </div>

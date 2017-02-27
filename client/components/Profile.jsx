@@ -7,12 +7,16 @@ import css from '../styles/profile.css';
 
 const Profile = ({ accounts, userInfo, dispatch, error }) => (
   <div className="quicksand">
-    <NavigationBar landing={false} />
-    <div className="accounts-container">
-      <Institutions accounts={accounts} />
-    </div>
-    <div className="main-profile-container">
-      <ProfileInfo userinfo={userInfo} dispatch={dispatch} error={error} />
+    <NavigationBar />
+    <div className="container profilepadding">
+      <div className="row">
+        <div className="col-md-6">
+          <ProfileInfo userinfo={userInfo} dispatch={dispatch} error={error} />
+        </div>
+        <div className="col-md-4">
+          <Institutions accounts={accounts} />
+        </div>
+      </div>
     </div>
   </div>
 );

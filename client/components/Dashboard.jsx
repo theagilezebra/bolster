@@ -16,6 +16,10 @@ class Dashboard extends React.Component {
     e.preventDefault();
     hashHistory.push('/transactions');
   }
+  profileHandler(e) {
+    e.preventDefault();
+    hashHistory.push('/profile');
+  }
 
   gameHandler(e) {
     e.preventDefault();
@@ -29,15 +33,9 @@ class Dashboard extends React.Component {
         <div className="dashboardtext">
           <div className="dashboardjumbo dashboardone" onClick={this.budgetHandler}>Budget</div>
           <div className="dashboardjumbo dashboardtwo" onClick={this.transactionHandler}>Transactions</div>
-          <div className="dashboardjumbo dashboardtwo green" onClick={this.gameHandler}>Achievements</div>
-          <div className="dashboardjumbo dashboardthree">
-            <AddBank />
-            <h2>Add a bank account!</h2>
-          </div>
+          <div className="dashboardjumbo dashboardthree" onClick={this.gameHandler}>Achievements</div>
+          <div className="dashboardjumbo dashboardfour" onClick={this.profileHandler}>Profile</div>
         </div>
-        {
-          this.props.accounts.length ? <AccountTable /> : null
-        }
       </div>
     );
   }
