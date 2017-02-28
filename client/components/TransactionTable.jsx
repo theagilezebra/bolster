@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { renderTransactions } from '../helpers/transactionHelpers.jsx';
-import { rerenderTransactions, updateTransaction } from '../actions/transActions';
+import { updateTransaction } from '../actions/transActions';
 
 class TransactionTable extends React.Component {
   constructor(props) {
@@ -12,16 +12,10 @@ class TransactionTable extends React.Component {
   handleSelect({ target, nativeEvent }) {
     const { value } = target;
     const id = target.attributes['data-id'].value;
-    const name = nativeEvent.path[2].children[0].innerText;
 
-    if (!(+target.attributes['data-tier'].value)) {
-      this.dispatch(updateTransaction({ id, categories: `["${value}"]`, user_id: this.props.userId }));
-      this.dispatch(rerenderTransactions({ id, categories: [value], name }));
-    } else {
-      const main = nativeEvent.path[2].children[3].children[0].value;
-      this.dispatch(updateTransaction({ id, categories: `["${main}","${value}"]`, user_id: this.props.userId }));
-      this.dispatch(rerenderTransactions({ id, categories: [main, value], name }));
-    }
+    !(+target.attributes['data-tier'].value)
+      ? this.dispatch(updateTransaction({ id, categories: `["${value}"]` }))
+      : this.dispatch(updateTransaction({ id, categories: `["${nativeEvent.path[2].children[3].children[0].value}","${value}"]` }));
   }
 
   render() {
@@ -51,5 +45,4 @@ class TransactionTable extends React.Component {
 export default connect(state => ({
   transactions: state.transactions.transactionsData,
   categories: state.categories.categoryData,
-  userId: state.user.id,
 }))(TransactionTable);
