@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const budget = {
   Transfer: 200,
@@ -74,7 +75,7 @@ const renderTransactions = (transactions, categoryList, callback) => transaction
     <tr key={key}>
       <td>{name}</td>
       <td>{amount}</td>
-      <td>{date}</td>
+      <td>{moment(date).format('MMMM Do YYYY')}</td>
       <td>{renderCategoryDropdown(Object.keys(categoryList), categories, 0, {}, id, callback)}</td>
       <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, {width: "303px"}, id, callback)}</td>
     </tr>
