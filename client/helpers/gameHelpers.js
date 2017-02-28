@@ -1,10 +1,10 @@
 const moment = require('moment');
 
-const getTotal = purchases => purchases.reduce((prev, curr) => prev += curr.amount, 0);
+const getTotal = purchases => purchases.reduce((prev, curr) => prev += +curr.attributes.amount, 0);
 
 const getAverage = (days, transactions) => {
   const total = getTotal(transactions);
-  return Math.round(total / days);
+  return (total / days).toFixed(2);
 };
 
 function slicePurchasesByDate(transactions, startDate, endDate) {
@@ -109,16 +109,30 @@ const hero = (start, days, period, transactions) => {
     percentage,
   };
 };
+
+// Generates achievements of the following type: Reduce spending in category x by y% over period z
+const periodicAchievementGenerator = ({ category, percentage = 0.3, period = 30, purchases, creationDate }) => {
+  let historicalAverage = slicePurchasesByDate(purchases, 0, creationDate);
+  if (category) historicalAverage = filterPurchasesByCategory(historicalAverage, category);
+  historicalAverage = getAverage(period, historicalAverage);
+  const periodAgo = moment().subtract(period, 'days').toString();
+  const purchasesOfPeriod = slicePurchasesByDate(purchases, periodAgo);
+  const spendingOfPeriod = getTotal(purchasesOfPeriod);
+  if (!spendingOfPeriod) return 0;
+  const spendingReduction = 1 - (historicalAverage / spendingOfPeriod);
+  return spendingReduction >= percentage ? true : spendingReduction / percentage;
+};
 // /////////////////////////////////////////////
 module.exports = {
   getAverage,
   timeFrame,
   filterPurchases,
+  filterPurchasesByCategory,
+  categoryHighRange,
+  slicePurchasesByDate,
   progressBar,
   previousMonth,
   trappistMonk,
   hero,
-  filterPurchasesByCategory,
-  categoryHighRange,
-  slicePurchasesByDate,
+  periodicAchievementGenerator,
 };
