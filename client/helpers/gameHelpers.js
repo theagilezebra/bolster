@@ -28,9 +28,12 @@ const filterPurchasesByCategory = (transactions, category) => {
   }
   const highRange = categoryHighRange(category);
   return transactions.filter((transaction) => {
-    const filter = category !== highRange && +transaction.attributes.category >= +category && +transaction.attributes.category <= +category;
-    return filter ? transaction : transaction.attributes.category === category;
-  }).length;
+    if (transaction === undefined) return false;
+    const filter = category !== highRange &&
+      +transaction.attributes.category_id >= +category &&
+      +transaction.attributes.category_id <= +highRange;
+    return filter ? transaction : transaction.attributes.category_id === category;
+  });
 };
 
 const timeFrame = (start, days) => {
