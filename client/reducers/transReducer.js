@@ -20,15 +20,11 @@ export default function (state, action) {
     break;
   }
   case 'UPDATE_TRANSACTION_SUCCESSFUL': {
-    console.log('Update transaction successful.');
+    newState.transactionsData = overwriteTransactionCategories(newState.transactionsData, action.payload);
     break;
   }
   case 'UPDATE_TRANSACTION_FAILED': {
     console.log('Update transaction failed.');
-    break;
-  }
-  case 'RERENDER_TRANSACTIONS_SUCCESSFUL': {
-    newState.transactionsData = overwriteTransactionCategories(newState.transactionsData, action.payload);
     break;
   }
   }
