@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Game from './Game.jsx';
 import NavigationBar from './NavBar.jsx';
 import Stats from './Stats.jsx';
-import { getPurchases, progressBar, average, previousMonth } from '../helpers/gameHelpers.jsx';
+import { getPurchases, progressBar, average, previousMonth } from '../helpers/gameHelpers';
+
 const Achievements = props => (
   <div>
     <NavigationBar />

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-progressbar.js';
-import { progressBar } from '../helpers/gameHelpers.jsx';
+import { progressBar } from '../helpers/gameHelpers';
+
 const options = {
   color: '#FFEA82',
   trailColor: '#eee',
