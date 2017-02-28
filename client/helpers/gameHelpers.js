@@ -22,7 +22,7 @@ const categoryHighRange = (category) => {
   return category;
 };
 
-const filterTransactions = (transactions, category) => {
+const filterPurchasesByCategory = (transactions, category) => {
   if (category === 'undefined' || category.length !== 8 || typeof category !== 'string') {
     throw new Error('please provide valid category');
   }
@@ -49,6 +49,12 @@ const timeFrame = (start, days) => {
   }
   return results;
 };
+
+const filterPurchases = (start, days, transactions) => {
+  const time = timeFrame(start, days);
+  return transactions.filter(purchase => time.includes(moment(purchase.date).format('MM/DD/YYYY')));
+};
+
 // this is a rolling average
 const previousMonth = (start, period, transactions) => {
   const startDate = moment(start).subtract(1, 'month');
@@ -62,11 +68,6 @@ const previousMonth = (start, period, transactions) => {
   return prevMonthWeeklyAverage;
 };
 
-
-const filterPurchases = (start, days, transactions) => {
-  const time = timeFrame(start, days);
-  return transactions.filter(purchase => time.includes(moment(purchase.date).format('MM/DD/YYYY')));
-};
 
 const progressBar = (start, days, period, transactions) => {
   const comparison = previousMonth(start, period, transactions);
@@ -106,6 +107,6 @@ module.exports = {
   previousMonth,
   trappistMonk,
   hero,
-  filterTransactions,
+  filterPurchasesByCategory,
   categoryHighRange,
 };
