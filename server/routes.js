@@ -20,7 +20,7 @@ routes.post('/accounts/create', accounts.create); // TODO: make this into '/acco
 routes.get('/accounts', accounts.get);
 routes.get('/accounts/:id', accounts.getOne); // TODO: refactor this functionality into /accounts with query parameters
 
-routes.post('/budgets/create', budgets.create); // TODO: make this into '/budgets'. 'create' is implicit thanks to POST method
+routes.post('/budgets', budgets.create); // --DONE--- TODO: make this into '/budgets'. 'create' is implicit thanks to POST method
 routes.get('/budgets', budgets.get);
 
 routes.post('/categories/create', categories.create); // TODO: make this into '/categories'. 'create' is implicit thanks to POST method
