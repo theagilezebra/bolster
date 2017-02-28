@@ -27,7 +27,7 @@ export function updateTransaction(data) {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
   return (dispatch, getState) => {
     data.user_id = getUserId(getState);
-    return axios.put('/api/transactions/update', data, { headers })
+    return axios.put('/api/transactions', data, { headers })
       .then((response) => {
         dispatch({ type: 'UPDATE_TRANSACTION_SUCCESSFUL', payload: response.data });
       })

@@ -31,7 +31,7 @@ routes.get('/goals', goals.get);
 routes.put('/goals/:id', goals.update); // ----DONE----TODO: make this into '/goals/:id'. 'update' is implicit thanks to PUT method
 
 routes.get('/transactions', transactions.get);
-routes.put('/transactions/update', transactions.update); // TODO: make this into '/transactions'. 'update' is implicit thanks to PUT method
+routes.put('/transactions', transactions.update); // ----DONE---- TODO: make this into '/transactions'. 'update' is implicit thanks to PUT method
 
 routes.get('/businesses', businesses.get);
 
