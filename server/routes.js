@@ -26,7 +26,7 @@ routes.get('/budgets', budgets.get);
 routes.post('/categories/create', categories.create); // TODO: make this into '/categories'. 'create' is implicit thanks to POST method
 routes.get('/categories', categories.get);
 
-routes.post('/goals/create', goals.create); // TODO: make this into '/goals'. 'create' is implicit thanks to POST method
+routes.post('/goals', goals.create); // TODO: make this into '/goals'. 'create' is implicit thanks to POST method
 routes.get('/goals', goals.get);
 routes.put('/goals/update/:id', goals.update); // TODO: make this into '/goals/:id'. 'update' is implicit thanks to PUT method
 

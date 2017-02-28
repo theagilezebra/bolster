@@ -3,7 +3,7 @@ import { getUserId } from '../helpers/stateHelpers';
 
 export function createGoal(data) { // create a single goal
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.post('/api/goals/create', data, { headers })
+  return dispatch => axios.post('/api/goals', data, { headers })
     .then((response) => {
       dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: response.data });
     })
