@@ -3,8 +3,8 @@ const User = require('../database/models/user');
 const AchievementType = require('../database/models/achievementType');
 const transactions = require('../server/controllers/transactions');
 const plaid = require('../server/controllers/plaid');
-const gameHelpers = require('../client/helpers/gameHelpers');
-// const achievementCalculator = require('some file that colby makes');
+const gameHelpers = require('../server/AchievementsService/gameHelpers');
+const achievementCalculator = require('../server/AchievementsService/achievementCalculators');
 
 function updateTransactions() {
   let achievements;
@@ -21,7 +21,10 @@ function updateTransactions() {
       // const config = { creationDate: user.attributes.created_at, category: '13005000', purchases };
       // console.log(gameHelpers.periodicAchievementGenerator(config));
       for (let i = 0; i < achievements.length; i += 1) {
-        // achievementCalculator[achievements[i].attributes.name](purchases);
+        console.log('----------', achievements);
+        if (achievements[i].attributes.structure !== 'profile') {
+          achievementCalculator[achievements[i].attributes.name](purchases);
+        }
         // update transaction
       }
     }))))
