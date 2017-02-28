@@ -3,6 +3,7 @@ const User = require('../database/models/user');
 const AchievementType = require('../database/models/achievementType');
 const transactions = require('../server/controllers/transactions');
 const plaid = require('../server/controllers/plaid');
+const gameHelpers = require('../client/helpers/gameHelpers');
 // const achievementCalculator = require('some file that colby makes');
 
 function updateTransactions() {
@@ -16,8 +17,9 @@ function updateTransactions() {
     .then(results => results.data.transactions)
     .then(purchases => transactions.bulkCreate(purchases, user.id))
     .then((purchases) => {
-      console.log(achievements);
-      console.log(purchases);
+      // TODO: there is an issue with the transactions: some purchases come back undefined, and we get too many (12) compared to what is in the DB (9)
+      // const config = { creationDate: user.attributes.created_at, category: '13005000', purchases };
+      // console.log(gameHelpers.periodicAchievementGenerator(config));
       for (let i = 0; i < achievements.length; i += 1) {
         // achievementCalculator[achievements[i].attributes.name](purchases);
         // update transaction
