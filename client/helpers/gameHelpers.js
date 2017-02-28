@@ -1,4 +1,3 @@
-// import moment from 'moment';
 const moment = require('moment');
 
 const getTotal = purchases => purchases.reduce((prev, curr) => prev += curr.amount, 0);
@@ -8,9 +7,21 @@ const getAverage = (days, transactions) => {
   return Math.round(total / days);
 };
 
+function slicePurchasesByDate(transactions, startDate, endDate) {
+  if (arguments.length === 2 && !Date.parse(startDate)) throw new Error('Please provide a valid date');
+  if (arguments.length === 3 && (!Date.parse(startDate) || !Date.parse(endDate))) throw new Error('Please provide a valid date');
+  startDate = Date.parse(startDate);
+  endDate = Date.parse(endDate);
+  return transactions.filter((transaction) => {
+    if (transaction === undefined) return false;
+    const date = Date.parse(transaction.attributes.date);
+    return arguments.length === 2 ? date >= startDate : date >= startDate && date <= endDate;
+  });
+}
+
 const categoryHighRange = (category) => {
   if (category === 'undefined' || category.length !== 8 || typeof category !== 'string') {
-    throw new Error('please provide valid category');
+    throw new Error('please provide a valid category');
   }
   let nines = '';
   for (let i = category.length - 1; i >= 0; i -= 1) {
@@ -23,9 +34,6 @@ const categoryHighRange = (category) => {
 };
 
 const filterPurchasesByCategory = (transactions, category) => {
-  if (category === 'undefined' || category.length !== 8 || typeof category !== 'string') {
-    throw new Error('please provide valid category');
-  }
   const highRange = categoryHighRange(category);
   return transactions.filter((transaction) => {
     if (transaction === undefined) return false;
@@ -112,4 +120,5 @@ module.exports = {
   hero,
   filterPurchasesByCategory,
   categoryHighRange,
+  slicePurchasesByDate,
 };
