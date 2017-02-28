@@ -1,10 +1,36 @@
-import moment from 'moment';
+// import moment from 'moment';
+const moment = require('moment');
 
 const getTotal = purchases => purchases.reduce((prev, curr) => prev += curr.amount, 0);
 
 const getAverage = (days, transactions) => {
   const total = getTotal(transactions);
   return Math.round(total / days);
+};
+
+const categoryHighRange = (category) => {
+  if (category === 'undefined' || category.length !== 8 || typeof category !== 'string') {
+    throw new Error('please provide valid category');
+  }
+  let nines = '';
+  for (let i = category.length - 1; i >= 0; i -= 1) {
+    if (category[i] !== '0') {
+      return category.slice(0, i + 1) + nines;
+    }
+    nines += '9';
+  }
+  return category;
+};
+
+const filterTransactions = (transactions, category) => {
+  if (category === 'undefined' || category.length !== 8 || typeof category !== 'string') {
+    throw new Error('please provide valid category');
+  }
+  const highRange = categoryHighRange(category);
+  return transactions.filter((transaction) => {
+    const filter = category !== highRange && +transaction.attributes.category >= +category && +transaction.attributes.category <= +category;
+    return filter ? transaction : transaction.attributes.category === category;
+  }).length;
 };
 
 const timeFrame = (start, days) => {
@@ -80,4 +106,6 @@ module.exports = {
   previousMonth,
   trappistMonk,
   hero,
+  filterTransactions,
+  categoryHighRange,
 };
