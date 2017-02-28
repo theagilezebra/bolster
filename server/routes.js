@@ -16,9 +16,9 @@ routes.post('/users/signin', users.signin);
 routes.put('/users/:id', users.update);
 routes.get('/users/auth', users.checkAuth);
 
-routes.post('/accounts/create', accounts.create); // TODO: make this into '/accounts'. 'create' is implicit thanks to POST method
+// routes.post('/accounts/create', accounts.create); // --WE DO NOT USE THIS ENDPOINT---TODO: make this into '/accounts'. 'create' is implicit thanks to POST method
 routes.get('/accounts', accounts.get);
-routes.get('/accounts/:id', accounts.getOne); // TODO: refactor this functionality into /accounts with query parameters
+routes.get('/accounts/:id', accounts.getOne); // ----NO NEED--- TODO: refactor this functionality into /accounts with query parameters
 
 routes.post('/budgets', budgets.create); // --DONE--- TODO: make this into '/budgets'. 'create' is implicit thanks to POST method
 routes.get('/budgets', budgets.get);
