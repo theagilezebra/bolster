@@ -75,4 +75,4 @@ const Signup = ({ dispatch, error }) => {
 
 export default connect((state => ({
   error: state.error.signup,
-})), null)(Signup); // TODO: remove the null, and do not pass in dispatch to this component via parent component.
+})))(Signup); // ---DONE----TODO: remove the null, and do not pass in dispatch to this component via parent component.
