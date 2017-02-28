@@ -3,7 +3,7 @@ import { getUserId } from '../helpers/stateHelpers';
 
 export function createGoal(data) { // create a single goal
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.post('/api/goals/create', data, { headers })
+  return dispatch => axios.post('/api/goals', data, { headers })
     .then((response) => {
       dispatch({ type: 'CREATE_GOAL_SUCCESSFUL', payload: response.data });
     })
@@ -25,7 +25,7 @@ export function fetchGoals() { // provide all goals specific to user
 
 export function updateGoal(data) { // update a single goal
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.put('/api/goals/update', data, { headers })
+  return dispatch => axios.put('/api/goals', data, { headers })
     .then((response) => {
       dispatch({ type: 'UPDATE_GOAL_SUCCESSFUL', payload: response.data });
     })
