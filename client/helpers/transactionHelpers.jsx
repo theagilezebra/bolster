@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const budget = {
   Transfer: 200,
@@ -61,8 +62,7 @@ const labelize = (transactions) => {
 };
 
 const renderCategoryDropdown = (categories, transactionCategories, tier, width, transactionId, callback) => (
-  <select onChange={callback} data-id={transactionId} data-tier={tier} style={width}>
-    <option>{transactionCategories[tier] || 'Uncategorized'}</option>
+  <select value={transactionCategories[tier]} onChange={callback} data-id={transactionId} data-tier={tier} style={width}>
     {
       categories.map((category, key) => <option key={key}>{category}</option>)
     }
@@ -70,11 +70,12 @@ const renderCategoryDropdown = (categories, transactionCategories, tier, width, 
 )
 
 const renderTransactions = (transactions, categoryList, callback) => transactions
+  .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
   .map(({ name, amount, date, categories, id }, key) => (
     <tr key={key}>
       <td>{name}</td>
       <td>{amount}</td>
-      <td>{date}</td>
+      <td>{moment(date).format('MMMM Do YYYY')}</td>
       <td>{renderCategoryDropdown(Object.keys(categoryList), categories, 0, {}, id, callback)}</td>
       <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, {width: "303px"}, id, callback)}</td>
     </tr>
@@ -103,16 +104,18 @@ const convertTransactions = (transactions) => transactions
     return transaction;
   });
 
-const overwriteTransactionCategories = (transactions, { id, categories, name }) => transactions
-  .map((transaction) => {
-    if (transaction.id === (+id) || transaction.name === name) {
-      if (categories.length < 2) {
-        categories[1] = 'Uncategorized';
+const overwriteTransactionCategories = (prev, updated) => {
+  const updatedTransactions = convertTransactions(updated);
+  return prev.map((transaction) => {
+    let temp = transaction;
+    for (let i = 0; i < updatedTransactions.length; i++) {
+      if (updatedTransactions[i].id === transaction.id) {
+        temp = updatedTransactions[i];
       }
-      transaction.categories = categories;
     }
-    return transaction;
+    return temp;
   });
+}
 
 module.exports = {
   budget,

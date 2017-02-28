@@ -89,19 +89,32 @@ module.exports = {
     })
     .then(transaction => helpers.findOrCreate(Business, { id: transaction.attributes.business_id })
     .then(business => Business.forge().where({ name: business.attributes.name }).fetchAll()
-    .then((businesses) => {
-      businesses.models.forEach((businessInstance) => {
-        businessInstance.save({ category_id }, { patch: true });
-        Transaction.forge().where({ user_id, business_id: businessInstance.attributes.id }).fetchAll()
-        .then((transactions) => {
-          transactions.models.forEach((transactionInstance) => {
-            transactionInstance.save({ category_id }, { patch: true });
-          });
-        });
-      });
+    .then(businesses => Promise.all(businesses.models.map((businessInstance) => {
+      businessInstance.save({ category_id }, { patch: true }); // maybe toggle this on or off #HailMary
+      return Transaction.forge().where({ user_id, business_id: businessInstance.attributes.id }).fetchAll()
+        .then(transactions => Promise.all(transactions.models.map(transactionInstance => transactionInstance.save({ category_id }, { patch: true }))));
+    })))))
+    .then(transactions => transactions.filter(placeholder => placeholder.length).map(container => container[0]))
+    .then(transactions => Promise.all(transactions.map(transaction => Business.forge({ id: transaction.attributes.business_id }).fetch()
+    .then((business) => {
+      transaction.attributes.name = business.attributes.name;
+      delete transaction.attributes.business_id;
+      return transaction;
+    }))))
+    .then(transactions => Promise.all(transactions.map(transaction => Category.forge({ id: transaction.attributes.category_id }).fetch()
+    .then((category) => {
+      transaction.attributes.categories = JSON.parse(category.attributes.categories);
+      delete transaction.attributes.category_id;
+      return transaction;
+    }))))
+    .then(transactions => Promise.all(transactions.map((transaction) => {
+      delete transaction.attributes.created_at;
+      delete transaction.attributes.updated_at;
+      delete transaction.attributes.plaidTransactionId;
+      return transaction;
     })))
-    .then(() => {
-      res.status(204).end();
+    .then((transactions) => {
+      res.json(transactions);
     })
     .catch((err) => {
       res.status(404).json(err);

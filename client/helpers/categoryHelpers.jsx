@@ -11,7 +11,7 @@ export default function (categoryList) {
 
   for (const category in categoryObj) {
     categoryObj[category] = categoryObj[category].sort();
+    categoryObj[category].unshift('Uncategorized');
   }
-
   return categoryObj;
 }
