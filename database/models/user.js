@@ -40,6 +40,22 @@ module.exports = db.Model.extend({
           console.log(err);
         });
       }
+      if (user.attributes.accessToken) {
+        AchievementType.forge({ name: 'Making bank' }).fetch()
+        .then(achievementType => Achievement.forge().where({
+          achievementtypes_id: achievementType.id,
+          user_id: user.id,
+        }).fetch())
+        .then((achievement) => {
+          if (!achievement.attributes.status) {
+            achievement.attributes.status = true;
+            achievement.save();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
     });
   },
 });
