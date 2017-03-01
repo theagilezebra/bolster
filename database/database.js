@@ -132,6 +132,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   achievements.integer('amount'); // could be an amount of money, or any unit to be reached for the achievement to complete.
   achievements.integer('bar'); // limit or minimum needed to validate the achievement.
   achievements.integer('percentage'); // percentage completion.
+  achievements.decimal('total');
+  achievements.decimal('average');
   achievements.timestamps();
 })).then((achievements) => {
   console.log('Created Table:', achievements);
