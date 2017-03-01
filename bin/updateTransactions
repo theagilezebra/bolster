@@ -1,4 +1,4 @@
-// #! <node path inside of the heroku instance, find by using heroku run bash and which node>
+#! /app/.heroku/node/bin/node
 const User = require('../database/models/user');
 const Achievement = require('../database/models/achievement');
 const AchievementType = require('../database/models/achievementType');
