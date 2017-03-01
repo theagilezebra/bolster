@@ -112,7 +112,7 @@ const hero = (start, days, period, transactions) => {
   const percentage = progressBar(start, days, period, transactions);
   return {
     total,
-    prevMonthAverage,
+    average: prevMonthAverage,
     percentage,
   };
 };
