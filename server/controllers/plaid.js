@@ -6,7 +6,6 @@ const transactionsController = require('./transactions');
 const accountsController = require('./accounts');
 const helpers = require('../helpers');
 
-require('dotenv').config({ path: `${__dirname}/../../.env` });
 
 const { PLAID_CLIENT_ID, PLAID_SECRET } = process.env;
 

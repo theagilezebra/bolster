@@ -1,5 +1,4 @@
 const achievementList = require('../server/AchievementsService/achievementTypes'); // import achievements used to seed our database.
-require('dotenv').config({ path: `${__dirname}/../.env` });
 
 const db = require('knex')({
   client: 'pg',
