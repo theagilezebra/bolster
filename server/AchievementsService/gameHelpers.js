@@ -46,14 +46,14 @@ const filterPurchasesByCategory = (transactions, category) => {
 
 const timeFrame = (start, days) => {
   const results = [];
-  results.push(moment(start).format('MM/DD/YYYY'));
+  results.push(moment(start, 'MM-DD-YYYY'));
   if (!days) {
     return results;
   }
   let previous = results[0];
   let curr = 1;
   while (curr < days) {
-    const date = moment(previous).add(1, 'day').format('MM/DD/YYYY');
+    const date = moment(previous, 'MM-DD-YYYY').add(1, 'day');
     results.push(date);
     previous = moment(date);
     curr += 1;
@@ -65,7 +65,7 @@ const filterPurchases = (start, days, transactions) => {
   const time = timeFrame(start, days);
   return transactions.filter((purchase) => {
     if (purchase === undefined) return false;
-    return time.includes(moment(purchase.date).format('MM/DD/YYYY'));
+    return time.includes(moment(purchase.date, 'MM-DD-YYYY'));
   });
 };
 
