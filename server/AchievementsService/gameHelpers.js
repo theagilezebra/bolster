@@ -46,14 +46,14 @@ const filterPurchasesByCategory = (transactions, category) => {
 
 const timeFrame = (start, days) => {
   const results = [];
-  results.push(moment(start).format('MM/DD/YYYY'));
+  results.push(moment(start, 'MM-DD-YYYY'));
   if (!days) {
     return results;
   }
   let previous = results[0];
   let curr = 1;
   while (curr < days) {
-    const date = moment(previous).add(1, 'day').format('MM/DD/YYYY');
+    const date = moment(previous, 'MM-DD-YYYY').add(1, 'day');
     results.push(date);
     previous = moment(date);
     curr += 1;
@@ -63,7 +63,10 @@ const timeFrame = (start, days) => {
 
 const filterPurchases = (start, days, transactions) => {
   const time = timeFrame(start, days);
-  return transactions.filter(purchase => time.includes(moment(purchase.date).format('MM/DD/YYYY')));
+  return transactions.filter((purchase) => {
+    if (purchase === undefined) return false;
+    return time.includes(moment(purchase.date, 'MM-DD-YYYY'));
+  });
 };
 
 // this is a rolling average
@@ -88,24 +91,28 @@ const progressBar = (start, days, period, transactions) => {
   const total = getTotal(purchases);
   // averages periods from that time period
   const average = getAverage(purchases.length, purchases);
-  console.log('average from previous month', comparison);
-  console.log('average from that period', average);
-  console.log('purchases from that period', purchases);
-  console.log('total from that period', total);
-  console.log('progress bar percentage', Math.round((average / comparison) * 100));
-  return Math.round((average / comparison) * 100);
+  // console.log('average from that period', average);
+  // // console.log('purchases from that period', purchases);
+  // console.log('total from that period', total.toFixed(2));
+  // console.log('progress bar percentage', (average / comparison).toFixed(2));
+  // console.log('average from previous month', comparison);
+  if (comparison == 0) return 1;
+  return (average / comparison).toFixed(2);
 };
-// /////ACHIEVEMENT FUNCTIONS///////////////////
-const trappistMonk = (start, days, transactions) => getTotal(filterPurchases(start, days, transactions));
+// /////ACHIEVEMENT FUNCTIONS/////////////////// moment().subtract(period, 'days').toString();
+const trappistMonk = (start, days, transactions) => {
+  const totes = getTotal(slicePurchasesByDate(transactions, moment().subtract(days, 'days').toString()));
+  return { status: !(totes > 0) };
+};
 
 const hero = (start, days, period, transactions) => {
-  const total = getTotal(filterPurchases(start, days, transactions));
+  const total = getTotal(filterPurchases(start, days, transactions)).toFixed(2);
   // this produces either a daily or weekly average from the last month based on which period is passed as an argument
   const prevMonthAverage = previousMonth(start, period, transactions);
   const percentage = progressBar(start, days, period, transactions);
   return {
     total,
-    prevMonthAverage,
+    average: prevMonthAverage,
     percentage,
   };
 };
@@ -119,7 +126,7 @@ const periodicAchievementGenerator = ({ category, percentage = 0.3, period = 30,
   const purchasesOfPeriod = slicePurchasesByDate(purchases, periodAgo);
   const spendingOfPeriod = getTotal(purchasesOfPeriod);
   if (!spendingOfPeriod) return 0;
-  const spendingReduction = 1 - (historicalAverage / spendingOfPeriod);
+  const spendingReduction = 1 - (spendingOfPeriod / historicalAverage);
   return spendingReduction >= percentage ? true : spendingReduction / percentage;
 };
 // /////////////////////////////////////////////

@@ -1,17 +1,17 @@
 module.exports = [
   {
     name: 'Making bank',
-    structure: '',
+    structure: 'profile',
     description: 'Add a bank account to your profile.',
   },
   {
     name: 'You used to call me...',
-    structure: '',
+    structure: 'profile',
     description: 'Add your phone number to your profile.',
   },
   {
     name: 'Home sweet home',
-    structure: '',
+    structure: 'profile',
     description: 'Add an address to your profile.',
   },
   {

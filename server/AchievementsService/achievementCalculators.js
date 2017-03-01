@@ -1,17 +1,23 @@
-import { hero, getOneDayTotal } from '../client/helpers/gameHelpers.jsx';
+const { trappistMonk, hero } = require('./gameHelpers');
 
-const achievementFunctions = {
+module.exports = {
 
   'Trappist Monk': function (purchases) {
-    return getOneDayTotal(new Date(), 1, purchases);
+    const date = new Date();
+    date.setDate(date.getDate() - 2);
+    return trappistMonk(date, 1, purchases);
   },
 
   'Daily Hero': function (purchases) {
-    return hero(new Date(), 1, 'daily', purchases);
+    const date = new Date();
+    date.setDate(date.getDate() - 2);
+    return hero(date, 1, 'daily', purchases);
   },
 
   'Weekly Hero': function (purchases) {
-    return hero(new Date(), 7, 'weekly', purchases);
+    const date = new Date();
+    date.setDate(date.getDate() - 8);
+    return hero(date, 7, 'weekly', purchases);
   },
 };
 
