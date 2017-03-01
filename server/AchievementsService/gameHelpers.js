@@ -125,9 +125,9 @@ const periodicAchievementGenerator = ({ category, percentage = 0.3, period = 30,
   const periodAgo = moment().subtract(period, 'days').toString();
   const purchasesOfPeriod = slicePurchasesByDate(purchases, periodAgo);
   const spendingOfPeriod = getTotal(purchasesOfPeriod);
-  if (!spendingOfPeriod) return 0;
+  if (!spendingOfPeriod) return { percentage: 0 };
   const spendingReduction = 1 - (spendingOfPeriod / historicalAverage);
-  return spendingReduction >= percentage ? true : spendingReduction / percentage;
+  return spendingReduction >= percentage ? { status: true } : { percentage: spendingReduction / percentage };
 };
 // /////////////////////////////////////////////
 module.exports = {
