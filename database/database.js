@@ -2,10 +2,7 @@ const achievementList = require('../server/AchievementsService/achievementTypes'
 
 const db = require('knex')({
   client: 'pg',
-  connection: {
-    user: process.env.PG_USER,
-    database: 'bolster',
-  },
+  connection: process.env.DATABASE_URL,
 });
 
 db.schema.createTableIfNotExists('addresses', (addresses) => {
