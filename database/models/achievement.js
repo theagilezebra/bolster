@@ -3,7 +3,6 @@ const db = require('../database');
 const AchievementType = require('./achievementType');
 const User = require('./user');
 
-require('dotenv').config({ path: `${__dirname}/../../.env` });
 
 module.exports = db.Model.extend({
   tableName: 'achievements',
