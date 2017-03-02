@@ -2,12 +2,12 @@ import React from 'react';
 import moment from 'moment';
 
 const displayGoals = (goals, callback, handler) => goals.map((goal, key) => (
-  <tr onClick={callback} key={key}>
-    <td>{goal.name}</td>
-    <td>{goal.amount}</td>
-    <td>{moment(goal.startDate).format('MMMM Do YYYY')}</td>
-    <td>{moment(goal.endDate).format('MMMM Do YYYY')}</td>
-    <td><button data-goal={goal.id} onClick={handler}> Delete Goal</button></td>
+  <tr key={key}>
+    <td onClick={callback}>{goal.name}</td>
+    <td onClick={callback}>{goal.amount}</td>
+    <td onClick={callback}>{moment(goal.startDate).format('MMMM Do YYYY')}</td>
+    <td onClick={callback}>{moment(goal.endDate).format('MMMM Do YYYY')}</td>
+    <td><button data-goal={goal.id} onClick={handler}>Delete Goal</button></td>
   </tr>
 ));
 
