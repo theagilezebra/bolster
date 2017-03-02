@@ -79,4 +79,25 @@ module.exports = {
       }
     });
   },
+
+  delete: (req, res) => {
+    console.log('hey I want to delete');
+    const { email, password } = req.body;
+    new User({ email }).fetch().then((userInstance) => {
+      bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
+        if (match) {
+          userInstance.destroy().then(() => {
+            res.status(202).end('User deleted');
+          })
+          .catch((error) => {
+            res.status(404).json(error);
+          });
+        } else {
+          res.status(401).end('wrong password');
+        }
+      });
+    }).catch((err) => {
+      res.status(401).end('wrong email or password');
+    });
+  },
 };
