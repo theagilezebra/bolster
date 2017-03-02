@@ -23,6 +23,10 @@ export default function reducer(state, action) {
     newState.email = action.payload;
     break;
   }
+  case 'DELETE_USER_FAILED': {
+    newState.deleteUser = action.payload;
+    break;
+  }
   case 'RESET_ERRORS': {
     resetState(newState, state.error);
     break;
