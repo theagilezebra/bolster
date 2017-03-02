@@ -27,6 +27,12 @@ export default function reducer(state, action) {
     resetState(newState, state.error);
     break;
   }
+  case 'UPDATE_ADDRESS_SUCCESSFUL':
+  case 'UPDATE_USER_SUCCESSFUL': {
+    debugger;
+    newState.profileUpdated = 'Profile updated';
+    break;
+  }
   }
   return newState;
 }
