@@ -11,10 +11,8 @@ module.exports = db.Model.extend({
   achievementType: () => this.belongsTo(AchievementType),
   user: () => this.belongsTo(User),
   initialize() {
-    this.on('updated', ({ attributes }) => {
-      console.log('attributes', attributes);
-      if (attributes.status) return;
-      this.save({ status: true });
+    this.on('updating', ({ attributes }) => {
+      if (this._previousAttributes.status) return;
       let name;
       let email;
       let achievementName;
