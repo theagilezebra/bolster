@@ -9,26 +9,26 @@ const chartConfig = {
       label: 'Money Blown',
       lineTension: 0.3,
       data: [],
-      borderColor: '#2e8b57',
-      backgroundColor: '#9CF3C9',
+      borderColor: '#37f3a8',
+      backgroundColor: 'rgba(0, 0, 0, 0)',
     },
   ],
   limbo: [
     {
-      label: 'Spending Limit',
+      label: 'Average Spending',
       lineTension: 0,
       data: [],
-      borderColor: '#222222',
+      borderColor: '#ff0000',
       backgroundColor: 'rgba(0, 0, 0, 0)',
       radius: 0,
       hitRadius: 10,
       hoverRadius: 10,
     },
     {
-      label: 'Average Spending',
+      label: 'Spending Limit',
       lineTension: 0,
       data: [],
-      borderColor: '#ff0000',
+      borderColor: '#ffff00',
       backgroundColor: 'rgba(0, 0, 0, 0)',
       radius: 0,
       hitRadius: 10,
@@ -63,35 +63,40 @@ const populateChart = ({ transactionsData }) => {
   return chartConfig;
 };
 
-const populateGoalChart = ({ transactionsData, dailyAverage }, goal) => {
+const populateGoalChart = ({ transactionsData, dailyAverage }, { amount, startDate, endDate }) => {
   let { labels, datasets, limbo } = chartConfig;
+  let total = 0;
   const chartData = [];
   const goalData = [];
   const averageData = [];
   const goalTimespan = [];
-  const days = Math.floor((moment(goal.endDate).valueOf() - moment(goal.startDate).valueOf()) / 86400000);
+  const days = Math.floor((moment(endDate).valueOf() - moment(startDate).valueOf()) / 86400000);
   const mapped = mapCategories(transactionsData);
   if (!datasets[1]) {
-    datasets = datasets.concat(limbo);
+    datasets.unshift(limbo[0], limbo[1]);
   }
   for (const key in mapped) {
-    moment(key).valueOf() < moment(goal.startDate).valueOf() ? delete mapped[key] : chartData.push(mapped[key]);
+    const nextDay = moment(key).add(1, 'd').format('YYYY-MM-DD');
+    if (!mapped[nextDay]) mapped[nextDay] = 0;
   }
-  if (!Object.keys(mapped).length) {
-    chartData.push(0);
+  for (const key in mapped) {
+    if (moment(key).valueOf() < moment(startDate).valueOf()) delete mapped[key];
   }
+  Object.keys(mapped)
+    .map(key => [key, mapped[key]])
+    .sort((a, b) => moment(a[0]).valueOf() > moment(b[0]).valueOf())
+    .forEach((tuple) => { chartData.push(tuple[1]); });
   for (let i = 0; i < days; i += 1) {
-    goalTimespan.push(moment(goal.startDate).add(i, 'd').format('MMMM Do YYYY'));
+    goalTimespan.push(moment(startDate).add(i, 'd').format('MMMM Do YYYY'));
     averageData.push(dailyAverage * days);
-    goalData.push((dailyAverage * days) - goal.amount);
+    goalData.push((dailyAverage * days) - amount);
   }
   labels = goalTimespan;
-  datasets[0].data = chartData;
+  datasets[0].data = averageData;
   datasets[1].data = goalData;
-  datasets[2].data = averageData;
-  return { labels, datasets, limbo };
+  datasets[2].data = chartData.map(num => total += num).slice(0, -1);
+  return { labels, datasets };
 };
-
 
 module.exports = {
   mapCategories,
