@@ -1,4 +1,4 @@
-import { convertTransactions, overwriteTransactionCategories } from '../helpers/transactionHelpers.jsx';
+import { convertTransactions, overwriteTransactionCategories, getDailySpendingAverage } from '../helpers/transactionHelpers.jsx';
 
 export default function (state, action) {
   const newState = Object.assign({}, state);
@@ -13,6 +13,7 @@ export default function (state, action) {
   }
   case 'FETCH_TRANSACTIONS_SUCCESSFUL': {
     newState.transactionsData = convertTransactions(action.payload);
+    newState.dailyAverage = getDailySpendingAverage(action.payload);
     break;
   }
   case 'FETCH_TRANSACTIONS_FAILED': {
