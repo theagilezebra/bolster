@@ -9,11 +9,21 @@ const AchievementType = require('./achievementType');
 module.exports = db.Model.extend({
   tableName: 'users',
   hasTimestamps: true,
-  accounts: () => this.hasMany(Account),
-  address: () => this.belongsTo(Address),
-  transactions: () => this.hasMany(Transaction),
-  goals: () => this.hasMany(Goal),
-  achievements: () => this.hasMany(Achievement),
+  address() {
+    return this.belongsTo(Address);
+  },
+  accounts() {
+    return this.hasMany(Account);
+  },
+  achievements() {
+    return this.hasMany(Achievement);
+  },
+  transactions() {
+    return this.hasMany(Transaction);
+  },
+  goals() {
+    return this.hasMany(Goal);
+  },
   initialize() {
     this.on('created', (user) => {
       AchievementType.forge().fetchAll()
@@ -57,5 +67,13 @@ module.exports = db.Model.extend({
         });
       }
     });
+
+    // this.on('deleting', user => new Promise((resolve, reject) => {
+    //   console.log('LOL!!!');
+    //   setTimeout(() => {
+    //     console.log('lol!!!');
+    //     resolve('lol');
+    //   }, 4000);
+    // }));
   },
 });
