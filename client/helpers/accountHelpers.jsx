@@ -36,7 +36,10 @@ const renderAccountGroups = (bankAccounts, dispatch) => {
       <div key="key">
         <div>
           <h3 style={{ display: 'inline-block' }}>{key}</h3>
-          <button style={{ float: 'right', 'margin-top': '20px', 'margin-bottom': '10px' }} onClick={() => { deleteInsitutionHandler(dispatch); }} >Delete</button>
+          <button
+            style={{ float: 'right', 'margin-top': '20px', 'margin-bottom': '10px' }}
+            onClick={() => { deleteInsitutionHandler(dispatch); }}
+          >Delete</button>
         </div>
         <ul className="banklist">
           {bankAccounts[key].map(item => (

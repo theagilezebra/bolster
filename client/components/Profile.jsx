@@ -16,7 +16,7 @@ const Profile = ({ accounts, userInfo, dispatch, error }) => (
           <DeleteAccount userinfo={userInfo} dispatch={dispatch} error={error} />
         </div>
         <div className="col-md-4">
-          <Institutions accounts={accounts} />
+          <Institutions accounts={accounts} dispatch={dispatch} />
         </div>
       </div>
     </div>
