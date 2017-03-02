@@ -3,7 +3,6 @@ const db = require('../database');
 const AchievementType = require('./achievementType');
 const User = require('./user');
 
-
 module.exports = db.Model.extend({
   tableName: 'achievements',
   hasTimestamps: true,

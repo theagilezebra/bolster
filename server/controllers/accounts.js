@@ -1,10 +1,6 @@
 const Account = require('../../database/models/account');
 const helpers = require('../helpers');
 
-<<<<<<< 852bee30b30fc036b77d7348474acbc66a497332
-
-=======
->>>>>>> Remove dotenv as dependency
 module.exports = {
   create: (req, res) => {
     if (req.body.user_id) {
