@@ -79,4 +79,28 @@ module.exports = {
       }
     });
   },
+
+  delete: (req, res) => {
+    const { email, password } = req.body;
+    new User({ email }).fetch({ withRelated: ['accounts', 'achievements', 'transactions', 'goals'] }).then((userInstance) => {
+      bcrypt.compare(password, userInstance.attributes.password, (err, match) => {
+        if (match) {
+          Promise.all(userInstance.relations.transactions.models.map(model => model.destroy()))
+          .then(() => Promise.all(userInstance.relations.accounts.models.map(model => model.destroy())))
+          .then(() => Promise.all(userInstance.relations.goals.models.map(model => model.destroy())))
+          .then(() => Promise.all(userInstance.relations.achievements.models.map(model => model.destroy())))
+          .then(() => userInstance.destroy())
+          .then(() => res.status(202).end('User deleted'));
+          userInstance.destroy().then(() => {
+            res.status(202).end('User deleted');
+          });
+        } else {
+          res.status(401).end('wrong password');
+        }
+      });
+    }).catch((err) => {
+      console.log(err);
+      res.status(401).end('wrong email or password');
+    });
+  },
 };

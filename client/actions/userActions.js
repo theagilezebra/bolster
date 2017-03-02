@@ -57,3 +57,16 @@ export function updateAddress(address) {
       dispatch({ type: 'UPDATE_ADDRESS_FAILED', payload: err });
     });
 }
+
+export function deleteAccount(data) {
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  const config = { headers, data };
+  return dispatch => axios.delete('api/users', config)
+    .then((response) => {
+      dispatch({ type: 'DELETE_USER_SUCCESSFUL', payload: response.data });
+    })
+    .catch(() => {
+      const errorMessage = 'There was a issue deleting your account. Please try again and contact support if the issue persists.';
+      dispatch({ type: 'DELETE_USER_FAILED', payload: errorMessage });
+    });
+}

@@ -11,6 +11,7 @@ export const defaultState = {
     signin: '',
     addBank: '',
     email: '',
+    deleteUser: '',
   },
   accounts: {
     accountData: [],
