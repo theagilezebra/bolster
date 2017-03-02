@@ -29,7 +29,6 @@ export default function reducer(state, action) {
   }
   case 'UPDATE_ADDRESS_SUCCESSFUL':
   case 'UPDATE_USER_SUCCESSFUL': {
-    debugger;
     newState.profileUpdated = 'Profile updated';
     break;
   }
