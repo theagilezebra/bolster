@@ -7,7 +7,7 @@ const helpers = require('../helpers');
 
 module.exports = {
   signup: (req, res) => {
-    const { firstName, lastName, email, password, address = 'undefined', city = '', state = '', zip = 0, country = '', phone = '' } = req.body;
+    const { firstName, lastName, email, password, address = 'undefined', city = '', state = '', zip = '', country = '', phone = '' } = req.body;
     const user = { firstName, lastName, email, password, phone };
     const physicalAddress = { address, city, state, zip, country };
     return helpers.findOrCreate(Address, physicalAddress).then((addressInstance) => {

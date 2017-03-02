@@ -15,6 +15,15 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if ((!firstName.value || firstName.value === userinfo.firstName) &&
+      (!lastName.value || lastName.value === userinfo.lastName) &&
+      (!email.value || email.value === userinfo.email) &&
+      (!phone.value || phone.value === userinfo.phone) &&
+      (!address.value || address.value === userinfo.address) &&
+      (!city.value || city.value === userinfo.city) &&
+      (!state.value || state.value === userinfo.state) &&
+      (!zip.value || zip.value === userinfo.zip) &&
+      (!country.value || country.value === country.lastName)) return;
     if ((!!city.value || !!state.value || !!zip.value || !!country.value) && !address.value) {
       dispatch({ type: 'ADDRESS_REQUIRED', payload: 'address field is required' });
       return;
@@ -85,7 +94,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="tel"
             maxLength="50"
             id="phone"
-            placeholder={userinfo.phone || '(012) 345-6789'}
+            placeholder={userinfo.phone || ''}
             ref={(ref) => { phone = ref; }}
           />
         </div>
@@ -97,7 +106,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="50"
             id="address"
-            placeholder={userinfo.address === 'undefined' ? '7 maple street' : userinfo.address}
+            placeholder={userinfo.address === 'undefined' ? '' : userinfo.address}
             ref={(ref) => { address = ref; }}
           />
           <span>{error.address}</span>
@@ -108,7 +117,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="35"
             id="city"
-            placeholder={userinfo.city || 'Lodi'}
+            placeholder={userinfo.city || ''}
             ref={(ref) => { city = ref; }}
           />
           <label htmlFor="state">State:</label>
@@ -123,7 +132,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="10"
             id="zip"
-            placeholder={userinfo.zip || '00000'}
+            placeholder={userinfo.zip || ''}
             ref={(ref) => { zip = ref; }}
           />
           <label htmlFor="country">Country:</label>
@@ -132,11 +141,12 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="35"
             id="country"
-            placeholder={userinfo.country || 'USA'}
+            placeholder={userinfo.country || ''}
             ref={(ref) => { country = ref; }}
           />
         </div>
         <input type="submit" />
+        <span>{error.profileUpdated}</span>
       </form>
     </div>
   );
