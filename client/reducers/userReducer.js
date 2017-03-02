@@ -1,5 +1,5 @@
 import { hashHistory } from 'react-router';
-import { decorateState } from '../helpers/userHelpers';
+import { decorateState, bootUser } from '../helpers/userHelpers';
 
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
@@ -28,8 +28,11 @@ export default function reducer(state, action) {
     break;
   }
   case 'SIGNOUT': {
-    window.localStorage.removeItem('userToken');
-    hashHistory.push('/');
+    bootUser();
+    break;
+  }
+  case 'DELETE_USER_SUCCESSFUL': {
+    bootUser();
     break;
   }
   }
