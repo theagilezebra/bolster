@@ -22,7 +22,12 @@ class BudgetGraph extends React.Component {
         {
           !this.props.goal.currentGoal
             ? <Line data={populateChart(this.props.transactions)} height={350} width={800} />
-            : <Line data={populateGoalChart(this.props.transactions, this.props.goal.currentGoal)} height={350} width={800} />
+            : <Line
+              data={populateGoalChart(this.props.transactions, this.props.goal.currentGoal)}
+              options={{ scales: { yAxes: [{ ticks: { beginAtZero: true } }] } }}
+              height={350}
+              width={800}
+            />
         }
         <div >
           <Goals />
