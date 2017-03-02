@@ -15,6 +15,7 @@ routes.post('/users/signup', users.signup);
 routes.post('/users/signin', users.signin);
 routes.put('/users/:id', users.update);
 routes.get('/users/auth', users.checkAuth);
+routes.delete('/users', users.delete);
 
 // routes.post('/accounts/create', accounts.create); // --WE DO NOT USE THIS ENDPOINT---TODO: make this into '/accounts'. 'create' is implicit thanks to POST method
 routes.get('/accounts', accounts.get);
@@ -29,7 +30,7 @@ routes.get('/categories', categories.get);
 routes.post('/goals', goals.create); // ----DONE---TODO: make this into '/goals'. 'create' is implicit thanks to POST method
 routes.get('/goals', goals.get);
 routes.put('/goals/:id', goals.update); // ----DONE----TODO: make this into '/goals/:id'. 'update' is implicit thanks to PUT method
-routes.delete('/goals/:goal_id', goals.delete); 
+routes.delete('/goals/:goal_id', goals.delete);
 
 routes.get('/transactions', transactions.get);
 routes.put('/transactions', transactions.update); // ----DONE---- TODO: make this into '/transactions'. 'update' is implicit thanks to PUT method
