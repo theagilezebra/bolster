@@ -15,7 +15,15 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!!firstName && !!lastName && !!email && !!phone && !!address && !!city && !!state && !!zip && !!country) return;
+    if ((!firstName.value || firstName.value === userinfo.firstName) &&
+      (!lastName.value || lastName.value === userinfo.lastName) &&
+      (!email.value || email.value === userinfo.email) &&
+      (!phone.value || phone.value === userinfo.phone) &&
+      (!address.value || address.value === userinfo.address) &&
+      (!city.value || city.value === userinfo.city) &&
+      (!state.value || state.value === userinfo.state) &&
+      (!zip.value || zip.value === userinfo.zip) &&
+      (!country.value || country.value === country.lastName)) return;
     if ((!!city.value || !!state.value || !!zip.value || !!country.value) && !address.value) {
       dispatch({ type: 'ADDRESS_REQUIRED', payload: 'address field is required' });
       return;
