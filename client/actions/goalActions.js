@@ -33,3 +33,14 @@ export function updateGoal(data) { // update a single goal
       dispatch({ type: 'UPDATE_GOAL_FAILED', payload: err });
     });
 }
+
+export function deleteGoal(data) {
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return dispatch => axios.delete(`/api/goals/${data.goal_id}`, { headers })
+  .then((response) => {
+    dispatch({ type: 'GOAL_DELETION_SUCCESSFUL', payload: response.data });
+  })
+  .catch((err) => {
+    dispatch({ type: 'GOAL_DELETION_FAILED', payload: err });
+  });
+}
