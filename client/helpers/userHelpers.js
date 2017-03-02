@@ -1,4 +1,5 @@
 import React from 'react';
+import { hashHistory } from 'react-router';
 
 export function decorateState(newState, payload, oldState) {
   // TODO: refactor with an array containing the properties and a for loop
@@ -270,3 +271,8 @@ export const states = [
 export const renderOptions = () => states.map(item => (
   <option value={item.abbreviation} key={item.abbreviation}>{item.name}</option>
 ));
+
+export const bootUser = () => {
+  window.localStorage.removeItem('userToken');
+  hashHistory.push('/');
+};
