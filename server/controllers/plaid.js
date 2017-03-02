@@ -6,7 +6,6 @@ const transactionsController = require('./transactions');
 const accountsController = require('./accounts');
 const helpers = require('../helpers');
 
-
 const { PLAID_CLIENT_ID, PLAID_SECRET } = process.env;
 
 module.exports = {
@@ -93,5 +92,4 @@ module.exports = {
   },
 };
 
-// module.exports.connect.get({ access_token: 'test_wells', client_id: PLAID_CLIENT_ID, secret: PLAID_SECRET }, 1);
 module.exports.categories.get();
