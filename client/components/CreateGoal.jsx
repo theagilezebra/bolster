@@ -49,7 +49,13 @@ const CreateGoal = (props) => {
         <h3>Create A Goal</h3>
         <input type="text" className="goal-inputsize inputmargin" placeholder="Name your budget" ref={(ref) => { goalName = ref; }} />
         <input type="number" className="goal-inputsize inputmargin" placeholder="Enter amount" ref={(ref) => { goalAmount = ref; }} />
-        <input type="date" className="goal-inputsize inputmargin" min={moment().format('YYYY-MM-DD')} max={moment().add(6, 'M').format('YYYY-MM-DD')} ref={(ref) => { goalTimeframe = ref; }} />
+        <input
+          type="date"
+          className="goal-inputsize inputmargin"
+          min={moment().format('YYYY-MM-DD')}
+          max={moment().add(6, 'M').format('YYYY-MM-DD')}
+          ref={(ref) => { goalTimeframe = ref; }}
+        />
         <button type="submit" className="btn btn-success submitbutton green">Submit</button>
       </form>
       <div className="quicksand">

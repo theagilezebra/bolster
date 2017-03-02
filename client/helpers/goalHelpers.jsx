@@ -1,21 +1,15 @@
 import React from 'react';
 import moment from 'moment';
 
-const displayGoals = (goals, callback, handler) => {
-  const elements = [];
-  goals.forEach((goal) => {
-    elements.push(
-      <tr onClick={callback}>
-        <td>{goal.name}</td>
-        <td>{goal.amount}</td>
-        <td>{moment(goal.startDate).format('MMMM Do YYYY')}</td>
-        <td>{moment(goal.endDate).format('MMMM Do YYYY')}</td>
-        <td><button data-goal={goal.id} onClick={handler}> Delete Goal</button></td>
-      </tr>,
-    );
-  });
-  return elements;
-};
+const displayGoals = (goals, callback, handler) => goals.map((goal, key) => (
+  <tr onClick={callback} key={key}>
+    <td>{goal.name}</td>
+    <td>{goal.amount}</td>
+    <td>{moment(goal.startDate).format('MMMM Do YYYY')}</td>
+    <td>{moment(goal.endDate).format('MMMM Do YYYY')}</td>
+    <td><button data-goal={goal.id} onClick={handler}> Delete Goal</button></td>
+  </tr>
+));
 
 const parseDate = (date) => {
   date = date.split(' ');
@@ -35,7 +29,7 @@ const parseDate = (date) => {
   };
   const day = date[1].replace(/[dhnrst]/g, '');
   return `${date[2]}-${months[date[0]]}-${day.length !== 1 ? day : 0 + day}`;
-}
+};
 
 module.exports = {
   displayGoals,
