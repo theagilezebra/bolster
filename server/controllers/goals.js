@@ -19,14 +19,9 @@ module.exports = {
     const { user_id, goal_id } = req.query;
   },
 
-  delete: (req, res) => Goal.forge().where({ id: req.params.goal_id }).destroy().then((destroyed) => {
-    res.json(req.params);
+  delete: (req, res) => Goal.forge().where({ id: req.body.goal_id }).destroy().then((destroyed) => {
+    res.json({ goal_id: req.body.goal_id });
   }).catch((err) => {
     res.status(404).json(err);
   }),
-    // delele goal
-    // does bookshelf return other goals when this one is delelete
-    // res.status(delete status code).json(goals);
-    // catch error
-
 };

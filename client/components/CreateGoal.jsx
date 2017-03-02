@@ -79,6 +79,7 @@ const CreateGoal = (props) => {
 };
 
 export default connect(state => ({
+  user_id: state.user.id,
   goals: state.goals.goalsData,
   transactions: state.transactions.transactionsData,
 }))(CreateGoal);

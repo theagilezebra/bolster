@@ -39,7 +39,7 @@ export function updateGoal(data) { // update a single goal
 
 export function deleteGoal(data) {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.delete(`/api/goals/${data.goal_id}`, { headers })
+  return dispatch => axios.delete('/api/goals', { data, headers })
     .then((response) => {
       dispatch({ type: 'GOAL_DELETION_SUCCESSFUL', payload: response.data });
     })
