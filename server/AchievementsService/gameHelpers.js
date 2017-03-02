@@ -3,6 +3,7 @@ const moment = require('moment');
 const getTotal = purchases => purchases.reduce((prev, curr) => prev += +curr.attributes.amount, 0);
 
 const getAverage = (days, transactions) => {
+  if (transactions.length === 0) return 0;
   const total = getTotal(transactions);
   return (total / days).toFixed(2);
 };
@@ -91,15 +92,12 @@ const progressBar = (start, days, period, transactions) => {
   const total = getTotal(purchases);
   // averages periods from that time period
   const average = getAverage(purchases.length, purchases);
-  // console.log('average from that period', average);
-  // // console.log('purchases from that period', purchases);
-  // console.log('total from that period', total.toFixed(2));
-  // console.log('progress bar percentage', (average / comparison).toFixed(2));
-  // console.log('average from previous month', comparison);
-  if (comparison == 0) return 1;
+  if (comparison === 0) return 1;
   return (average / comparison).toFixed(2);
 };
-// /////ACHIEVEMENT FUNCTIONS/////////////////// moment().subtract(period, 'days').toString();
+
+/* ////////////////////////  ACHIEVEMENT FUNCTIONS  //////////////////////// */
+
 const trappistMonk = (start, days, transactions) => {
   const totes = getTotal(slicePurchasesByDate(transactions, moment().subtract(days, 'days').toString()));
   return { status: !(totes > 0) };
@@ -109,7 +107,7 @@ const hero = (start, days, period, transactions) => {
   const total = getTotal(filterPurchases(start, days, transactions)).toFixed(2);
   // this produces either a daily or weekly average from the last month based on which period is passed as an argument
   const prevMonthAverage = previousMonth(start, period, transactions);
-  const percentage = progressBar(start, days, period, transactions);
+  const percentage = progressBar(start, days, period, transactions.filter(transaction => transaction));
   return {
     total,
     average: prevMonthAverage,
@@ -129,7 +127,8 @@ const periodicAchievementGenerator = ({ category, percentage = 0.3, period = 30,
   const spendingReduction = 1 - (spendingOfPeriod / historicalAverage);
   return spendingReduction >= percentage ? { status: true } : { percentage: spendingReduction / percentage };
 };
-// /////////////////////////////////////////////
+
+
 module.exports = {
   getAverage,
   timeFrame,
