@@ -18,7 +18,7 @@ function updateTransactions() {
     .then(purchases => transactions.bulkCreate(purchases, user.id))
     .then(purchases => Promise.all(achievements.map((achievement) => {
       if (achievement.attributes.structure !== 'profile') {
-        const calculation = achievementCalculator[achievement.attributes.name](purchases);
+        const calculation = achievementCalculator[achievement.attributes.name](purchases, user.attributes.created_at);
         return Achievement.forge({ user_id: user.id, achievementtypes_id: achievement.id }).fetch()
         .then((achievementInstance) => {
           if (!achievementInstance.attributes.status) {
