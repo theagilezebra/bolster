@@ -12,6 +12,9 @@ module.exports = db.Model.extend({
   user: () => this.belongsTo(User),
   initialize() {
     this.on('updated', ({ attributes }) => {
+      console.log('attributes', attributes);
+      if (attributes.status) return;
+      this.save({ status: true });
       let name;
       let email;
       let achievementName;
