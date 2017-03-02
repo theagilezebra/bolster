@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Goals from './Goals.jsx';
 import NavigationBar from './NavBar.jsx';
 import { requestTransactions, fetchTransactions } from '../actions/transActions';
-import { populateChart } from '../helpers/budgetHelpers.jsx';
+import { populateChart, populateGoalChart } from '../helpers/budgetHelpers.jsx';
 
 class BudgetGraph extends React.Component {
 
@@ -19,7 +19,11 @@ class BudgetGraph extends React.Component {
       <div>
         <NavigationBar landing={false} />
         <h3 className="quicksand centertext">Your Current Spending</h3>
-        <Line data={populateChart(this.props.data)} height={350} width={800} />
+        {
+          !this.props.goal.currentGoal
+            ? <Line data={populateChart(this.props.transactions)} height={350} width={800} />
+            : <Line data={populateGoalChart(this.props.transactions, this.props.goal.currentGoal)} height={350} width={800} />
+        }
         <div >
           <Goals />
         </div>
@@ -29,5 +33,6 @@ class BudgetGraph extends React.Component {
 }
 
 export default connect(state => ({
-  data: state.transactions.transactionsData,
+  transactions: state.transactions,
+  goal: state.goals,
 }))(BudgetGraph);
