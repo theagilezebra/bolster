@@ -27,6 +27,16 @@ export default function reducer(state, action) {
       console.log('Update goal failed.');
       break;
     }
+    case 'GOAL_DELETION_FAILED': {
+      console.log('Delete goal failed.');
+    }
+    case 'GOAL_DELETION_SUCCESSFUL': {
+      const updatedGoals = newState.goalsData.slice();
+      const deletedID = Number(action.payload.goal_id);
+      const deleteAtIndex = updatedGoals.map(goal => goal.id).indexOf(deletedID);
+      updatedGoals.splice(deleteAtIndex, 1);
+      newState.goalsData = updatedGoals;
+    }
   }
   return newState;
 }
