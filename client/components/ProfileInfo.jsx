@@ -15,6 +15,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!!firstName && !!lastName && !!email && !!phone && !!address && !!city && !!state && !!zip && !!country) return;
     if ((!!city.value || !!state.value || !!zip.value || !!country.value) && !address.value) {
       dispatch({ type: 'ADDRESS_REQUIRED', payload: 'address field is required' });
       return;
@@ -137,6 +138,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
           />
         </div>
         <input type="submit" />
+        <span>{error.profileUpdated}</span>
       </form>
     </div>
   );
