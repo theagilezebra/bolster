@@ -16,17 +16,39 @@ module.exports = [
   },
   {
     name: 'Trappist Monk',
-    structure: '',
+    structure: 'repeatable',
     description: 'Spent $0 for one day',
   },
   {
     name: 'Daily Hero',
-    structure: '',
+    structure: 'repeatable',
     description: 'Spent less than last month\'s daily average for one day.',
   },
   {
     name: 'Weekly Hero',
-    structure: '',
+    structure: 'repeatable',
     description: 'Spent less than last month\'s weekly average for one week.',
   },
+  {
+    name: 'Stay hungry',
+    structure: 'single',
+    description: 'Reduce your monthly food budget by 20%',
+  },
+  {
+    name: 'Peanut butter jelly time!',
+    structure: 'single',
+    description: 'Reduce your monthly restaurant budget by 30%',
+  },
+  {
+    name: 'Stone-cold sober',
+    structure: 'single',
+    description: 'Reduce your monthly bar budget by 50%',
+  },
+  {
+    name: 'Do you even thrift?',
+    structure: 'single',
+    description: 'Reduce your monthly clothes budget by 50%',
+  },
 ];
+
+// Peanut butter jelly time!
