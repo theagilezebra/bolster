@@ -85,7 +85,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="tel"
             maxLength="50"
             id="phone"
-            placeholder={userinfo.phone || '(012) 345-6789'}
+            placeholder={userinfo.phone || ''}
             ref={(ref) => { phone = ref; }}
           />
         </div>
@@ -97,7 +97,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="50"
             id="address"
-            placeholder={userinfo.address === 'undefined' ? '7 maple street' : userinfo.address}
+            placeholder={userinfo.address === 'undefined' ? '' : userinfo.address}
             ref={(ref) => { address = ref; }}
           />
           <span>{error.address}</span>
@@ -108,7 +108,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="35"
             id="city"
-            placeholder={userinfo.city || 'Lodi'}
+            placeholder={userinfo.city || ''}
             ref={(ref) => { city = ref; }}
           />
           <label htmlFor="state">State:</label>
@@ -123,7 +123,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="10"
             id="zip"
-            placeholder={userinfo.zip || '00000'}
+            placeholder={userinfo.zip || ''}
             ref={(ref) => { zip = ref; }}
           />
           <label htmlFor="country">Country:</label>
@@ -132,7 +132,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             type="text"
             maxLength="35"
             id="country"
-            placeholder={userinfo.country || 'USA'}
+            placeholder={userinfo.country || ''}
             ref={(ref) => { country = ref; }}
           />
         </div>
