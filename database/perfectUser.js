@@ -1,17 +1,18 @@
+const moment = require('moment');
+
 // create random date between two dates
 
 function randomDate(start, end) {
   return new Date(start.getTime() + (Math.random() * (end.getTime() - start.getTime())));
 }
 
-const lol = randomDate(new Date(2012, 0, 1), new Date());
-const lel = randomAmount();
-console.log('random date', lol);
-console.log('random amount', lel);
-
 // create random amount between x and y
 
 function randomAmount(lowRange, highRange) {
+  if (lowRange === undefined ||
+      highRange === undefined ||
+      lowRange <= 0 ||
+      highRange < lowRange) throw new Error('please enter a valid range');
   return ((Math.random() * (highRange - lowRange)) + lowRange).toFixed(2);
 }
 
@@ -20,8 +21,26 @@ function randomAmount(lowRange, highRange) {
   // each category needs to be associated to an address and a name, which will constitute a business in our database
 
 // dates and amounts added randomly every time
+
+function budgetMaker({ drinkingOut = 500, eatingOut = 500, entertainment = 200, utilities = 250, clothesShopping = 200, foodShopping = 800, transportation = 200, startDate, endDate }) {
+  const categories = { drinkingOut, eatingOut, entertainment, utilities, clothesShopping, foodShopping, transportation };
+  const categoryKeys = Object.keys(categories);
+  const transactions = [];
+  for (let i = 0; i < categoryKeys.length; i += 1) {
+    let total = 0;
+    while (total < categories[categoryKeys[i]]) {
+      const transaction = purchaseTypes[categoryKeys[i]];
+      transaction.date = moment(randomDate(startDate, endDate)).format('MM-DD-YYYY');
+      transaction.amount = randomAmount(3, 100);
+      total += +transaction.amount;
+      transactions.push(transaction);
+    }
+  }
+  return transactions;
+}
+
 const purchaseTypes = {
-  'Wine Bar': {
+  drinkingOut: {
     category_id: '13001001',
     name: 'Nectar Wine Lounge',
     meta: {
@@ -32,7 +51,7 @@ const purchaseTypes = {
       },
     },
   },
-  'Food Truck': {
+  eatingOut: {
     category_id: '13005029',
     name: 'Senior Sisig',
     meta: {
@@ -43,7 +62,7 @@ const purchaseTypes = {
       },
     },
   },
-  'Movie Theatres': {
+  entertainment: {
     category_id: '17001009',
     name: 'AMC Metreon 16',
     meta: {
@@ -54,7 +73,7 @@ const purchaseTypes = {
       },
     },
   },
-  Utilities: {
+  utilities: {
     category_id: '18068000',
     name: 'PG&E',
     meta: {
@@ -65,7 +84,7 @@ const purchaseTypes = {
       },
     },
   },
-  'Accessories Store': {
+  clothesShopping: {
     category_id: '19012001',
     name: 'Nordstrom',
     meta: {
@@ -76,7 +95,7 @@ const purchaseTypes = {
       },
     },
   },
-  'Food and Beverage Store': {
+  foodShopping: {
     category_id: '19025002',
     name: 'Whole Foods',
     meta: {
@@ -87,7 +106,7 @@ const purchaseTypes = {
       },
     },
   },
-  Taxi: {
+  transportation: {
     category_id: '22016000',
     name: 'Uber',
     meta: {
@@ -100,7 +119,10 @@ const purchaseTypes = {
   },
 };
 
-console.log(purchaseTypes);
+const budget = budgetMaker({ startDate: new Date(2016, 11, 30), endDate: new Date() });
+console.log('BUDGET', JSON.stringify(budget));
+
+// console.log(purchaseTypes);
 
 // set the date the user is created at (probably today)
 // set purchases in the future
