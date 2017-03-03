@@ -85,7 +85,8 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
     goals.increments('id').primary();
     goals.string('name', 63).notNullable();
     goals.integer('amount', 63).notNullable();
-    goals.date('date').notNullable();
+    goals.date('startDate').notNullable();
+    goals.date('endDate').notNullable();
     goals.integer('user_id').unsigned();
     goals.foreign('user_id').references('users.id');
     goals.timestamps();

@@ -40,7 +40,7 @@ const mapCategories = (transactions) => {
       if (mapped[item.categories[0]] === undefined) {
         mapped[item.categories[0]] = item.amount;
       } else {
-        mapped[item.categories[0]] = Math.round(mapped[item.categories[0]] + item.amount);
+        mapped[item.categories[0]] = Math.round(mapped[item.categories[0]] += item.amount);
       }
     }
   });
@@ -117,11 +117,18 @@ const overwriteTransactionCategories = (prev, updated) => {
   });
 }
 
+const getDailySpendingAverage = (transactions) => {
+  const sorted = transactions.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  const days = Math.floor((moment(sorted[0].date).valueOf() - moment(sorted[sorted.length - 1].date).valueOf()) / 86400000);
+  return Math.floor(Math.floor(transactions.reduce((total, transaction) => total += transaction.amount, 0)) / days);
+}
+
 module.exports = {
   budget,
   mapAndRender,
   populateChart,
   convertTransactions,
   renderTransactions,
+  getDailySpendingAverage,
   overwriteTransactionCategories,
 };

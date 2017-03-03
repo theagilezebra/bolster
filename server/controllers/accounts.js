@@ -1,7 +1,6 @@
 const Account = require('../../database/models/account');
 const helpers = require('../helpers');
 
-
 module.exports = {
   create: (req, res) => {
     if (req.body.user_id) {

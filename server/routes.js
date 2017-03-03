@@ -29,7 +29,7 @@ routes.get('/categories', categories.get);
 routes.post('/goals', goals.create);
 routes.get('/goals', goals.get);
 routes.put('/goals/:id', goals.update);
-routes.delete('/goals/:goal_id', goals.delete);
+routes.delete('/goals', goals.delete);
 
 routes.get('/transactions', transactions.get);
 routes.put('/transactions', transactions.update);
