@@ -1,12 +1,8 @@
 const moment = require('moment');
 
-// create random date between two dates
-
 function randomDate(start, end) {
   return new Date(start.getTime() + (Math.random() * (end.getTime() - start.getTime())));
 }
-
-// create random amount between x and y
 
 function randomAmount(lowRange, highRange) {
   if (lowRange === undefined ||
@@ -15,12 +11,6 @@ function randomAmount(lowRange, highRange) {
       highRange < lowRange) throw new Error('please enter a valid range');
   return ((Math.random() * (highRange - lowRange)) + lowRange).toFixed(2);
 }
-
-// create random category given an array or categories
-  // make this an array of objects
-  // each category needs to be associated to an address and a name, which will constitute a business in our database
-
-// dates and amounts added randomly every time
 
 function budgetMaker({ drinkingOut = 500, eatingOut = 500, entertainment = 200, utilities = 250, clothesShopping = 200, foodShopping = 800, transportation = 200, startDate, endDate }) {
   const categories = { drinkingOut, eatingOut, entertainment, utilities, clothesShopping, foodShopping, transportation };
@@ -121,8 +111,6 @@ const purchaseTypes = {
 
 const budget = budgetMaker({ startDate: new Date(2016, 11, 30), endDate: new Date() });
 console.log('BUDGET', JSON.stringify(budget));
-
-// console.log(purchaseTypes);
 
 // set the date the user is created at (probably today)
 // set purchases in the future
