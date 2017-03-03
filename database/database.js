@@ -1,11 +1,16 @@
 const achievementList = require('../server/AchievementsService/achievementTypes'); // import achievements used to seed our database.
 
-const connection = {
-  client: 'pg',
-  connection: process.env.PRODUCTION ? process.env.DATABASE_URL : { user: process.env.PG_USER, database: 'bolster' },
-};
+// const connection = {
+//   client: 'pg',
+//   connection: process.env.PRODUCTION ? process.env.DATABASE_URL : { user: process.env.PG_USER, database: 'bolster' },
+// };
 
-const db = require('knex')(connection);
+// const db = require('knex')(connection);
+
+const db = require('knex')({
+  client: 'pg',
+  connection: process.env.DATABASE_URL,
+});
 
 db.schema.createTableIfNotExists('addresses', (addresses) => {
   addresses.increments('id').primary();
