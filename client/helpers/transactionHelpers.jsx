@@ -119,8 +119,10 @@ const overwriteTransactionCategories = (prev, updated) => {
 
 const getDailySpendingAverage = (transactions) => {
   const sorted = transactions.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-  const days = Math.floor((moment(sorted[0].date).valueOf() - moment(sorted[sorted.length - 1].date).valueOf()) / 86400000);
-  return Math.floor(Math.floor(transactions.reduce((total, transaction) => total += transaction.amount, 0)) / days);
+  if (sorted.length) {
+    const days = Math.floor((moment(sorted[0].date).valueOf() - moment(sorted[sorted.length - 1].date).valueOf()) / 86400000);
+    return Math.floor(Math.floor(transactions.reduce((total, transaction) => total += transaction.amount, 0)) / days);
+  }
 }
 
 module.exports = {
