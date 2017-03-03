@@ -12,6 +12,7 @@ export const defaultState = {
     addBank: '',
     email: '',
     deleteUser: '',
+    deleteBankAccount: '',
   },
   accounts: {
     accountData: [],
