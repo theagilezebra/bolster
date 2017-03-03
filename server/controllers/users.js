@@ -7,6 +7,7 @@ const helpers = require('../helpers');
 
 module.exports = {
   signup: (req, res) => {
+    console.log('OUR SERVER IS HITTING SIGNIN', req.body);
     const { firstName, lastName, email, password, address = 'undefined', city = '', state = '', zip = '', country = '', phone = '' } = req.body;
     const user = { firstName, lastName, email, password, phone };
     const physicalAddress = { address, city, state, zip, country };
@@ -22,6 +23,9 @@ module.exports = {
           res.status(400).json(error);
         });
       });
+    }).catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
     });
   },
 
