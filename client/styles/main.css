@@ -153,6 +153,21 @@
   font-size: 130%;
 }
 
+.limit-inputsize {
+  font-family: 'Quicksand', 'sans-serif';
+  opacity: 0.5;
+  position: absolute;
+  top: 170px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 15%;
+  height: 30px;
+  font-size: 130%;
+}
+
 .introdiv {
   height: 100vh;
   transition: height 0.6s;
