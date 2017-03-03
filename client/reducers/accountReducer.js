@@ -19,6 +19,10 @@ export default function reducer(state, action) {
     console.log('Fetch accounts failed.');
     break;
   }
+  case 'DELETE_INSTITUTION_SUCCESSFUL': {
+    newState.accountData = newState.accountData.filter(account => !account.institutionName === action.payload);
+    break;
+  }
   }
   return newState;
 }
