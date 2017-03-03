@@ -11,7 +11,7 @@ const AddBank = ({ dispatch, error }) => {
   return (
     <div>
       <PlaidLink
-        publicKey="test_key"
+        publicKey="dbfd8ece3efa4dd1d5e6bb674a9791"
         product="connect"
         env="tartan"
         clientName="Bolster"
