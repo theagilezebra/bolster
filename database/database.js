@@ -7,11 +7,6 @@ const connection = {
 
 const db = require('knex')(connection);
 
-// const db = require('knex')({
-//   client: 'pg',
-//   connection: process.env.DATABASE_URL,
-// });
-
 db.schema.createTableIfNotExists('addresses', (addresses) => {
   addresses.increments('id').primary();
   addresses.string('address', 50).unique().notNullable();
