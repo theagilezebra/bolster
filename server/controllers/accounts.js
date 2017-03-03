@@ -1,4 +1,5 @@
 const Account = require('../../database/models/account');
+const User = require('../../database/models/user');
 const helpers = require('../helpers');
 
 module.exports = {
@@ -54,4 +55,14 @@ module.exports = {
       reject(err);
     });
   }),
+
+  delete: (req, res) => {
+    const { user_id, accountName } = req.body;
+    Account.forge({ institutionName: accountName }).fetchAll({ withRelated: ['transactions'] })
+    .then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
+      .then(() => Promise.all(accounts.map(account => account.destroy())))
+      .then(() => User.forge({ id: user_id }).save({ publicToken: null, accessToken: null }))
+      .then(() => res.status(202).end('Institution successfully deleted'))
+      .catch(err => res.status(401).end(err)));
+  },
 };
