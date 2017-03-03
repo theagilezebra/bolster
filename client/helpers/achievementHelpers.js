@@ -1,20 +1,13 @@
 import React from 'react';
 import Game from '../components/Game.jsx';
-
-const displayAchievements = (achievements) => {
-  const elements = [];
-  achievements.forEach((achievement) => {
-    elements.push(
-      <Game
-        name={achievement.name}
-        percentage={achievement.structure === 'profile' ? achievement.status == null ? 0 : 1 : achievement.percentage === null ? 0 : achievement.percentage}
-        structure={achievement.structure}
-        status={achievement.status}
-      />,
-    );
-  });
-  return elements;
-};
+const displayAchievements = achievements => achievements.map(achievement =>
+  <Game
+    name={achievement.name}
+    percentage={achievement.structure === 'profile' ? achievement.status == null ? 0 : 1 : achievement.percentage === null ? 0 : achievement.percentage}
+    structure={achievement.structure}
+    status={achievement.status}
+  />,
+  );
 
 const achievementSubHeading = (achievement) => {
   if (achievement.status === true) {
