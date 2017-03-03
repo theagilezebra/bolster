@@ -1,7 +1,6 @@
 const Account = require('../../database/models/account');
+const User = require('../../database/models/user');
 const helpers = require('../helpers');
-
-// require('dotenv').config({ path: `${__dirname}/../../.env` });
 
 module.exports = {
   create: (req, res) => {
@@ -18,7 +17,7 @@ module.exports = {
   },
 
   get: (req, res) => Account.forge().where(req.query).fetchAll()
-    .then(accounts => Promise.all(accounts.map(account => helpers.formatAccount(account)))) // TODO: check if the promise.all is necessary.
+    .then(accounts => accounts.map(account => helpers.formatAccount(account)))
     .then((accounts) => {
       res.json(accounts);
     }).catch((err) => {
@@ -56,4 +55,14 @@ module.exports = {
       reject(err);
     });
   }),
+
+  delete: (req, res) => {
+    const { user_id, accountName } = req.body;
+    Account.forge({ institutionName: accountName }).fetchAll({ withRelated: ['transactions'] })
+    .then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
+      .then(() => Promise.all(accounts.map(account => account.destroy())))
+      .then(() => User.forge({ id: user_id }).save({ publicToken: null, accessToken: null }))
+      .then(() => res.status(202).end('Institution successfully deleted'))
+      .catch(err => res.status(401).end(err)));
+  },
 };

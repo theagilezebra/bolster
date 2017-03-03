@@ -1,8 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Quicksand');
 
+.achievementDiv {
+  margin-top: 20px;  
+}
+
+.achievementHeading {
+  font-size: 30px; 
+  font-weight: bold; 
+}
 .centertext {
   /*margin-right: 200px;*/
   text-align: center;
+}
+.bankbalances {
+  font-size: 18px;
+}
+
+.banklist {
+  list-style-type: none;
+}
+
+.bigquick {
+  font-family: 'Quicksand', 'sans-serif';
+  font-size: 200%;
+}
+
+.profilepadding {
+  padding-bottom: 100px;
 }
 
 .darkgreenjumbo {
@@ -13,7 +37,6 @@
 
 .darkgreenback {
   background-color: seagreen;
-    padding-top: 7%;
 }
 
 .dashboardjumbo {
@@ -23,7 +46,7 @@
 
 .dashboardone {
   margin-top: -3%;
-  background-color: #00B9B9;
+  background-color: #00CDB4; 
 }
 
 .dashboardone:hover {
@@ -31,7 +54,7 @@
 }
 
 .dashboardtwo {
-  background-color: #00CDB4;
+  background-color: #00B9B9;
 }
 
 .dashboardtwo:hover {
@@ -39,17 +62,37 @@
 }
 
 .dashboardthree {
-  background-color: #00DFAE;
+  background-color: #00A0C3;  
 }
 
 .dashboardthree:hover {
   background-color: #01EFAD;
 }
 
+.dashboardfour {
+  background-color: #2273AA; 
+}
+
+.dashboardfour:hover {
+  background-color: #01EFAD;
+}
 .dashboardtext {
   text-align: center;
   font-family: 'Quicksand', 'sans-serif';
   font-size: 10vmin;
+}
+
+.error-message {
+  color: red;
+}
+
+.explainerdiv {
+  padding: 2%; 
+  height: 15%; 
+  margin: 10px; 
+  -webkit-box-shadow: 10px 15px 48px 0px rgba(0,0,0,0.16);
+  -moz-box-shadow: 10px 15px 48px 0px rgba(0,0,0,0.16);
+   box-shadow: 10px 15px 48px 0px rgba(0,0,0,0.16);  
 }
 
 .fullwidth {
@@ -59,6 +102,7 @@
 .fullheight {
   height: 100%;
 }
+
 .greenback {
   background-color: #37F3A8;
   padding-top: 7%;
@@ -74,21 +118,16 @@
   background-color: #9CF3C9;
 }
 
-.whitenav {
-  padding-top: 10px;
-  height: 80px;
-  background-color: white;
+.hamburger {
+  padding-right: 30px; 
+  font-size: 30px; 
+  color: white; 
+  background-color: #9CF3C9;
 }
-
-.inputsize {
-  margin: auto;
-  border-radius: 5px;
-  margin-top: 5px;
-  width: 500px;
-  height: 60px;
+.helvetica {
+  font-family: Arial, Helvetica, sans-serif; 
   font-size: 25px;
 }
-
 
 .inputmargin {
   margin-right: 10px;
@@ -96,11 +135,51 @@
   margin-bottom: 10px;
 }
 
+.inputsize {
+  margin: auto;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 40%;
+  height: 60px;
+  font-size: 130%;
+}
+
+.goal-inputsize {
+  margin: auto;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 30%;
+  height: 60px;
+  font-size: 130%;
+}
+
+.limit-inputsize {
+  font-family: 'Quicksand', 'sans-serif';
+  opacity: 0.5;
+  position: absolute;
+  top: 170px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 15%;
+  height: 30px;
+  font-size: 130%;
+}
+
+.introdiv {
+  height: 100vh;
+  transition: height 0.6s;
+}
+
+
 .lightgreenjumbo{
   padding-top: 200px;
   text-align: center;
   height: 100vh;
   background-color: #9CF3C9;
+  overflow: scroll;
 }
 
 .logo {
@@ -112,8 +191,9 @@
 .moneyjumbo {
   height: 100vh;
   background-image: url('../assets/pencil_money.png');
-  background-repeat: no-repeat;
-  background-position: center center;
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center;
 }
 
 .littlemoney {
@@ -127,6 +207,20 @@
   font-size: 25px;
   font-family: 'Quicksand', 'sans-serif';
 }
+.navbar-nav > li{
+  font-size: 25px;
+  font-family: 'Quicksand', 'sans-serif';
+  padding-left:30px;
+  padding-right:30px;
+}
+.navbar {
+  border: 0;
+}
+
+.profileinput {
+  width: 75%;
+  height: 10%;
+}
 
 .navBar {
   margin-bottom: -10px;
@@ -135,9 +229,9 @@
 .quicksand {
   font-family: 'Quicksand', 'sans-serif';
 }
-.bigquick {
-  font-family: 'Quicksand', 'sans-serif';
-  font-size: 60px;
+
+.relative {
+  position: relative;
 }
 .topmargin {
   margin-top: 100px;
@@ -148,6 +242,14 @@
   padding-top: 7%;
   }
 
+.whiteback {
+    background-color: white;
+  }
+
+  .twentyheight {
+    height: 20%;
+  }
+
 .submitbutton {
   font-family: 'Quicksand', 'sans-serif';
   margin-left: 10px;
@@ -155,13 +257,14 @@
   width: 120px;
 }
 
-.relative {
-  position: relative;
+.whitenav {
+  padding-top: 10px;
+  height: 80px;
+  background-color: white;
 }
 
-.error-message {
-  color: red;
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
 }
-
 
 

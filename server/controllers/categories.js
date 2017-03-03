@@ -7,8 +7,8 @@ module.exports = {
     res.status(400).json(err);
   }),
 
-  get: (req, res) => Category.forge().where(req.query).fetchAll().then((items) => {
-    res.json(items);
+  get: (req, res) => Category.fetchAll().then((categories) => {
+    res.json(categories);
   }).catch((err) => {
     res.status(404).json(err);
   }),

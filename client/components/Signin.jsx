@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signin } from '../actions/userActions';
 import { fetchAccounts } from '../actions/accountActions';
-import { fetchTransactions } from '../actions/transActions';
+import { fetchTransactions, requestTransactions } from '../actions/transActions';
 import { fetchGoals } from '../actions/goalActions';
 import { fetchBudgets } from '../actions/budgetActions';
+import { fetchCategories } from '../actions/categoryActions';
+import { fetchAchievements } from '../actions/achievementActions';
 
 const Signin = ({ dispatch, error }) => {
   let emailInput = null;
@@ -16,12 +18,17 @@ const Signin = ({ dispatch, error }) => {
       email: emailInput.value,
       password: passwordInput.value,
     }))
-    .then(() => dispatch(fetchAccounts()))
-    .then(() => dispatch(fetchTransactions()))
-    .then(() => dispatch(fetchGoals()))
-    .then(() => dispatch(fetchBudgets()))
-    .catch(() => {
-      console.err('uninformative error: fetching data');
+    .then(() => {
+      dispatch(fetchAccounts());
+      dispatch(requestTransactions())
+      .then(() => dispatch(fetchTransactions()));
+      dispatch(fetchGoals());
+      dispatch(fetchBudgets());
+      dispatch(fetchCategories());
+      dispatch(fetchAchievements());
+    })
+    .catch((err) => {
+      console.error(`error fetching data: ${err}`);
     });
   };
 

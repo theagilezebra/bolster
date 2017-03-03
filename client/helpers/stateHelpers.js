@@ -10,6 +10,9 @@ export const defaultState = {
     signup: '',
     signin: '',
     addBank: '',
+    email: '',
+    deleteUser: '',
+    deleteBankAccount: '',
   },
   accounts: {
     accountData: [],
@@ -19,6 +22,12 @@ export const defaultState = {
   },
   goals: {
     goalsData: [],
+  },
+  categories: {
+    categoryData: {},
+  },
+  achievements: {
+    achievementsData: [],
   },
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signup } from '../actions/userActions';
+import { fetchCategories } from '../actions/categoryActions';
 
 const Signup = ({ dispatch, error }) => {
   let emailInput = null;
@@ -15,7 +16,11 @@ const Signup = ({ dispatch, error }) => {
       password: passwordInput.value,
       firstName: firstNameInput.value,
       lastName: lastNameInput.value,
-    }));
+    }))
+    .then(() => dispatch(fetchCategories()))
+    .catch((err) => {
+      console.error(`error fetching data: ${err}`);
+    });
   };
 
   return (
@@ -70,4 +75,4 @@ const Signup = ({ dispatch, error }) => {
 
 export default connect((state => ({
   error: state.error.signup,
-})), null)(Signup);
+})))(Signup); // ---DONE----TODO: remove the null, and do not pass in dispatch to this component via parent component.

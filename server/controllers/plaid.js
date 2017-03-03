@@ -6,8 +6,6 @@ const transactionsController = require('./transactions');
 const accountsController = require('./accounts');
 const helpers = require('../helpers');
 
-// require('dotenv').config({ path: `${__dirname}/../../.env` });
-
 const { PLAID_CLIENT_ID, PLAID_SECRET } = process.env;
 
 module.exports = {
@@ -43,6 +41,8 @@ module.exports = {
           return account;
         }))).then((accountData) => {
           res.json(accountData);
+        }).catch((err) => {
+          res.status(400).json(err);
         });
       }))
       .catch((err) => {
@@ -65,6 +65,16 @@ module.exports = {
     },
   },
 
+  transactions: {
+    get(id) { // TODO: user this to refactor connect.get, above
+      return helpers.findOrCreate(User, { id }).then(({ attributes }) => axios.post('https://tartan.plaid.com/connect/get', {
+        client_id: PLAID_CLIENT_ID,
+        secret: PLAID_SECRET,
+        access_token: attributes.accessToken,
+      }));
+    },
+  },
+
   categories: {
     get: () => axios.get('https://tartan.plaid.com/categories').then((data) => {
       const categories = {};
@@ -82,5 +92,4 @@ module.exports = {
   },
 };
 
-// module.exports.connect.get({ access_token: 'test_wells', client_id: PLAID_CLIENT_ID, secret: PLAID_SECRET }, 1);
 module.exports.categories.get();

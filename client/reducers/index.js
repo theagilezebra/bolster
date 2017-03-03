@@ -7,12 +7,14 @@ import budgets from './budgetReducer';
 import goals from './goalReducer';
 import categories from './categoryReducer';
 import render from './renderReducer';
+import achievements from './achievementReducer';
 import error from './errorReducer';
 import { defaultState } from '../helpers/stateHelpers';
 
 const appReducer = combineReducers({
   user,
   accounts,
+  achievements,
   transactions,
   businesses,
   budgets,

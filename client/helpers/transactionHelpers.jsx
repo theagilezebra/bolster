@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const budget = {
   Transfer: 200,
@@ -32,16 +33,14 @@ const renderRows = (mappedObj) => {
   return elements;
 };
 
-// this function does not add transactions that have an empty category property. it ignores them.
 const mapCategories = (transactions) => {
   const mapped = {};
   transactions.forEach((item) => {
     if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
-      const lastCat = item.categories.length - 1;
-      if (mapped[item.categories[lastCat]] === undefined) {
-        mapped[item.categories[lastCat]] = item.amount;
+      if (mapped[item.categories[0]] === undefined) {
+        mapped[item.categories[0]] = item.amount;
       } else {
-        mapped[item.categories[lastCat]] = Math.round(mapped[item.categories[lastCat]] + item.amount);
+        mapped[item.categories[0]] = Math.round(mapped[item.categories[0]] += item.amount);
       }
     }
   });
@@ -54,18 +53,36 @@ const labelize = (transactions) => {
   const labels = [];
   transactions.forEach((item) => {
     if (item.categories[0] !== 'Transfer' && item.categories[0] !== 'Interest') {
-      const lastCat = item.categories.length - 1;
-      if (labels.includes(item.categories[lastCat]) === false) {
-        labels.push(item.categories[lastCat]);
+      if (!labels.includes(item.categories[0])) {
+        labels.push(item.categories[0]);
       }
     }
   });
   return labels;
 };
 
+const renderCategoryDropdown = (categories, transactionCategories, tier, width, transactionId, callback) => (
+  <select value={transactionCategories[tier]} onChange={callback} data-id={transactionId} data-tier={tier} style={width}>
+    {
+      categories.map((category, key) => <option key={key}>{category}</option>)
+    }
+  </select>
+)
+
+const renderTransactions = (transactions, categoryList, callback) => transactions
+  .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+  .map(({ name, amount, date, categories, id }, key) => (
+    <tr key={key}>
+      <td>{name}</td>
+      <td>{amount}</td>
+      <td>{moment(date).format('MMMM Do YYYY')}</td>
+      <td>{renderCategoryDropdown(Object.keys(categoryList), categories, 0, {}, id, callback)}</td>
+      <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, {width: "303px"}, id, callback)}</td>
+    </tr>
+  ));
+
 const populateChart = (data) => {
   const chartData = [];
-  console.log(chartConfig);
   chartConfig.datasets[0].backgroundColor = ['#00DFAE', '#00B9B9', '#00CDB4', '#00A0C3', '#01EFAD', '#263650', '#E74E4E', '#57CBFF', '#2273AA'];
   chartConfig.labels = labelize(data);
   const mapped = mapCategories(data);
@@ -76,13 +93,34 @@ const populateChart = (data) => {
   return chartConfig;
 };
 
-const convertTransactions = (transactions) => {
-  return transactions.filter(transaction => !!transaction)
+const convertTransactions = (transactions) => transactions
+  .filter(transaction => !!transaction && transaction.amount)
   .map((transaction) => {
+    if (transaction.categories.length < 2) {
+      transaction.categories[1] = 'Uncategorized';
+    }
     transaction.amount = +transaction.amount;
     transaction.date = transaction.date.slice(0, 10);
     return transaction;
   });
+
+const overwriteTransactionCategories = (prev, updated) => {
+  const updatedTransactions = convertTransactions(updated);
+  return prev.map((transaction) => {
+    let temp = transaction;
+    for (let i = 0; i < updatedTransactions.length; i++) {
+      if (updatedTransactions[i].id === transaction.id) {
+        temp = updatedTransactions[i];
+      }
+    }
+    return temp;
+  });
+}
+
+const getDailySpendingAverage = (transactions) => {
+  const sorted = transactions.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  const days = Math.floor((moment(sorted[0].date).valueOf() - moment(sorted[sorted.length - 1].date).valueOf()) / 86400000);
+  return Math.floor(Math.floor(transactions.reduce((total, transaction) => total += transaction.amount, 0)) / days);
 }
 
 module.exports = {
@@ -90,4 +128,7 @@ module.exports = {
   mapAndRender,
   populateChart,
   convertTransactions,
+  renderTransactions,
+  getDailySpendingAverage,
+  overwriteTransactionCategories,
 };

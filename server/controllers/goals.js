@@ -18,4 +18,10 @@ module.exports = {
   update: (req, res) => {
     const { user_id, goal_id } = req.query;
   },
+
+  delete: (req, res) => Goal.forge().where({ id: req.body.goal_id }).destroy().then((destroyed) => {
+    res.json({ goal_id: req.body.goal_id });
+  }).catch((err) => {
+    res.status(404).json(err);
+  }),
 };

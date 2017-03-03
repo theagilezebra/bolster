@@ -3,7 +3,7 @@ import { getUserId } from '../helpers/stateHelpers';
 
 export function createBudget(data) {
   const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
-  return dispatch => axios.post('/api/budgets/create', data, { headers })
+  return dispatch => axios.post('/api/budgets', data, { headers })
     .then((response) => {
       dispatch({ type: 'CREATE_BUDGET_SUCCESSFUL', payload: response.data });
     })
