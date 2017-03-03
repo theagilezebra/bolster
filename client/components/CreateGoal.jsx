@@ -25,12 +25,14 @@ const CreateGoal = (props) => {
 
   const handleGoalSelect = (e) => {
     const { children } = e.nativeEvent.path[1];
+    const endDate = moment(parseDate(children[3].innerText), 'YYYY-MM-DD')._i;
     e.preventDefault();
     props.dispatch(renderGoal({
       name: children[0].innerText,
       amount: children[1].innerText,
       startDate: moment(parseDate(children[2].innerText), 'YYYY-MM-DD')._i,
-      endDate: moment(parseDate(children[3].innerText), 'YYYY-MM-DD')._i,
+      endDate,
+      originalEndDate: endDate,
     }));
   };
 
