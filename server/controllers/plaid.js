@@ -11,6 +11,7 @@ const { PLAID_CLIENT_ID, PLAID_SECRET } = process.env;
 module.exports = {
   connect: {
     link: (req, res) => {
+      console.log('IN PLAID LINK', req.body);
       let access_token;
       const { id, public_token, institutionName } = req.body;
       axios.post('https://tartan.plaid.com/exchange_token', {
@@ -19,6 +20,7 @@ module.exports = {
         public_token,
       })
       .then(({ data }) => {
+        console.log('RESPONSE FROM PLAID FOR ACCESS TOKEN', data);
         access_token = data.access_token;
         helpers.findOrCreate(User, { id }).then(({ attributes }) => {
           attributes.accessToken = access_token;
@@ -32,6 +34,7 @@ module.exports = {
         access_token,
       })
       .then(({ data }) => {
+        console.log('RESPONSE FROM PLAID FOR DATA', data);
         const { accounts } = data;
         accounts.forEach((account) => { account.institutionName = institutionName; });
         accountsController.bulkCreate(accounts, id).then(records => Promise.all(records.map((account) => {
@@ -51,6 +54,7 @@ module.exports = {
     },
 
     get: (req, res) => {
+      console.log('ABOUT TO REQUEST TO PLAID FOR TRANSACTIONS');
       const { id } = req.body;
       helpers.findOrCreate(User, { id }).then(({ attributes }) => axios.post('https://tartan.plaid.com/connect/get', {
         client_id: PLAID_CLIENT_ID,
@@ -60,6 +64,7 @@ module.exports = {
       .then(({ data }) => transactionsController.bulkCreate(data.transactions, id))
       .then(() => res.json('Transactions stored successfully'))
       .catch((err) => {
+        console.log('GETTING TRANSACTIONS from plaid FAILED', err);
         res.status(400).json(err);
       });
     },
