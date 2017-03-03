@@ -19,6 +19,7 @@ routes.delete('/users', users.delete);
 
 routes.get('/accounts', accounts.get);
 routes.get('/accounts/:id', accounts.getOne); // ----NO NEED--- TODO: refactor this functionality into /accounts with query parameters
+routes.delete('/accounts', accounts.delete);
 
 routes.post('/budgets', budgets.create);
 routes.get('/budgets', budgets.get);
