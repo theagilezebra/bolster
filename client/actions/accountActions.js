@@ -26,3 +26,19 @@ export function fetchAccounts() {
     });
 }
 
+export function deleteAccount(data) {
+  const headers = { Authorization: `Bearer ${window.localStorage.userToken}` };
+  return (dispatch, getState) => {
+    data.user_id = getUserId(getState);
+    const config = { headers, data };
+    return axios.delete('/api/accounts', config)
+    .then((response) => {
+      dispatch({ type: 'DELETE_INSTITUTION_SUCCESSFUL', payload: data.accountName });
+    })
+    .catch(() => {
+      const errorMessage = 'There was an issue deleting your institution, please try again or contact support.';
+      dispatch({ type: 'DELETE_INSTITUTION_FAILED', payload: errorMessage });
+    });
+  };
+}
+

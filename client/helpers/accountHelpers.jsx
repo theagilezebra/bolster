@@ -1,4 +1,5 @@
 import React from 'react';
+import { deleteAccount } from '../actions/accountActions';
 
 const convertBalances = accounts => accounts.map((account) => {
   account.availableBalance = +account.availableBalance;
@@ -25,12 +26,22 @@ const groupAccounts = bankAccounts => bankAccounts.reduce((prev, curr) => {
   return prev;
 }, {});
 
-const renderAccountGroups = (bankAccounts) => {
+const deleteInsitutionHandler = (dispatch, bankAccounts) => {
+  dispatch(deleteAccount({ accountName: bankAccounts[Object.keys(bankAccounts)[0]][0].institutionName }));
+};
+
+const renderAccountGroups = (bankAccounts, dispatch) => {
   const institutionWithAccounts = [];
   for (const key in bankAccounts) {
     institutionWithAccounts.push((
       <div key="key">
-        <h3>{key}</h3>
+        <div>
+          <h3 style={{ display: 'inline-block' }}>{key}</h3>
+          <button
+            style={{ float: 'right', 'margin-top': '20px', 'margin-bottom': '10px' }}
+            onClick={() => { deleteInsitutionHandler(dispatch, bankAccounts); }}
+          >Delete</button>
+        </div>
         <ul className="banklist">
           {bankAccounts[key].map(item => (
             <li key={item.id}><span className="bankbalances">{item.name} </span>: {item.currentBalance}</li>

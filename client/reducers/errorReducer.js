@@ -27,6 +27,10 @@ export default function reducer(state, action) {
     newState.deleteUser = action.payload;
     break;
   }
+  case 'DELETE_INSTITUTION_FAILED': {
+    newState.deleteBankAccount = action.payload;
+    break;
+  }
   case 'RESET_ERRORS': {
     resetState(newState, state.error);
     break;
