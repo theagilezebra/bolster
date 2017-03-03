@@ -3,6 +3,7 @@ const unless = require('express-unless');
 
 module.exports = {
   checkUser: (req, res, next) => {
+    console.log('CHECK USER TOKEN', req.get('Authorization').slice(7));
     const headerAuth = req.get('Authorization').slice(7);
     jwt.verify(headerAuth, process.env.JWT_SECRET || 'super secret', (err, decoded) => {
       if (err) {
