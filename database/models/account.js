@@ -7,6 +7,10 @@ const AchievementType = require('./achievementType');
 module.exports = db.Model.extend({
   tableName: 'accounts',
   hasTimestamps: true,
-  transactions: () => this.hasMany(Transaction),
-  user: () => this.belongsTo(User),
+  transactions() {
+    return this.hasMany(Transaction);
+  },
+  user() {
+    return this.belongsTo(User);
+  },
 });
