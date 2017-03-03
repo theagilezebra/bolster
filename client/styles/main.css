@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Quicksand');
 
+.achievementDiv {
+  margin-top: 20px;  
+}
 .centertext {
   /*margin-right: 200px;*/
   text-align: center;
