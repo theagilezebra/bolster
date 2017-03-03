@@ -18,7 +18,7 @@ const containerStyle = {
 const Game = props => (
   <div>
     <div className="col-md-4">
-      <div className="achievementDiv"> { props.name }</div>
+      <div className="achievementDiv achievementHeading"> { props.name }</div>
       <div className="progressbar">
         <Line progress={props.percentage} containerStyle={containerStyle} initialAnimate options={options} containerClassName={'.progressbar'} />
       </div>
