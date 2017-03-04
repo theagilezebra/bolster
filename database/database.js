@@ -136,6 +136,7 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   achievements.timestamps();
 })).then((achievements) => {
   console.log('Created Table:', achievements);
+  require('../server/controllers/plaid').categories.get();
 }).catch((err) => {
   console.log(err);
 });

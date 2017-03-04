@@ -94,5 +94,3 @@ module.exports = {
     }),
   },
 };
-
-module.exports.categories.get();
