@@ -71,8 +71,3 @@ module.exports = function populatePerfectUser() {
   })
   .catch(err => console.log(err));
 };
-
-console.log(moment(new Date()).subtract(31, 'day').toDate());
-console.log(typeof (moment(new Date()).subtract(31, 'day').toDate()));
-console.log(new Date());
-console.log(typeof (new Date()));
