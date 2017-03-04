@@ -112,6 +112,7 @@ const hero = (start, days, period, transactions) => {
     total,
     average: prevMonthAverage,
     percentage,
+    status: percentage === 1,
   };
 };
 
