@@ -1,6 +1,4 @@
-const chai = require('chai');
-const assert = chai.assert;
-const expect = chai.expect;
+const { expect, assert } = require('chai');
 const { sortByDate, dateLabels } = require('../client/helpers/chartHelpers.jsx');
 
 describe('sortByDate helper function', () => {
