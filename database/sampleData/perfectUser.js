@@ -1,4 +1,5 @@
 const moment = require('moment');
+const purchaseTypes = require('./purchaseTypes');
 
 function randomDate(start, end) {
   return new Date(start.getTime() + (Math.random() * (end.getTime() - start.getTime())));
@@ -13,6 +14,9 @@ function randomAmount(lowRange, highRange) {
 }
 
 function budgetMaker({ drinkingOut = 500, eatingOut = 500, entertainment = 200, utilities = 250, clothesShopping = 200, foodShopping = 800, transportation = 200, startDate, endDate }) {
+  // count length of period
+  // adapt budget values such that what is passed into function is a monthly target
+
   const categories = { drinkingOut, eatingOut, entertainment, utilities, clothesShopping, foodShopping, transportation };
   const categoryKeys = Object.keys(categories);
   const transactions = [];
@@ -28,86 +32,6 @@ function budgetMaker({ drinkingOut = 500, eatingOut = 500, entertainment = 200, 
   }
   return transactions;
 }
-
-const purchaseTypes = {
-  drinkingOut: {
-    category_id: '13001001',
-    name: 'Nectar Wine Lounge',
-    meta: {
-      location: {
-        address: '3330 Steiner St',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-  eatingOut: {
-    category_id: '13005029',
-    name: 'Senior Sisig',
-    meta: {
-      location: {
-        address: '300 Pine St',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-  entertainment: {
-    category_id: '17001009',
-    name: 'AMC Metreon 16',
-    meta: {
-      location: {
-        address: '135 4th St #3000',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-  utilities: {
-    category_id: '18068000',
-    name: 'PG&E',
-    meta: {
-      location: {
-        address: '77 Beale St',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-  clothesShopping: {
-    category_id: '19012001',
-    name: 'Nordstrom',
-    meta: {
-      location: {
-        address: '865 Market St',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-  foodShopping: {
-    category_id: '19025002',
-    name: 'Whole Foods',
-    meta: {
-      location: {
-        address: '2001 Market St',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-  transportation: {
-    category_id: '22016000',
-    name: 'Uber',
-    meta: {
-      location: {
-        address: '1455 Market St #400',
-        city: 'San Francisco',
-        state: 'CA',
-      },
-    },
-  },
-};
 
 const budget = budgetMaker({ startDate: new Date(2016, 11, 30), endDate: new Date() });
 console.log('BUDGET', JSON.stringify(budget));
