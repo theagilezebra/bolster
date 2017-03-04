@@ -35,28 +35,29 @@ const encrypt = pass => new Promise((resolve, reject) => {
   });
 });
 
-User.forge({ email }).fetch()
-.then(userInstance => userInstance || encrypt(password).then((hash) => {
-  user.password = hash;
-  User.forge(user).save();
-}))
-.then((userInstance) => {
-  userId = userInstance.id;
-  return Account.forge({ institutionName: 'Bank of America', user_id: user.id }).fetchAll({ withRelated: ['transactions'] });
-})
-.then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
-  .then(() => Promise.all(accounts.map(account => account.destroy()))))
-.then(() => User.forge({ id: userId }).save({ publicToken: null, accessToken: null }))
-.then(() => Achievement.forge({ user_id: userId }).fetchAll())
-.then(achievements => Promise.all(achievements.map(achievement => achievement.destroy())))
-.then(() => {
-  accountObject.user_id = userId;
-  return Account.forge(accountObject).save();
-})
-.then(() => {
-  const transactions = perfectUser({ startDate: new Date(2016, 11, 30), endDate: new Date() });
-  return transactionsController.bulkCreate(transactions, userId);
-})
-.catch(err => console.log(err));
-
-// TODO: write some middleware for this function and run it every time someone hits index.html
+module.exports = function populatePerfectUser() {
+  User.forge({ email }).fetch()
+  .then(userInstance => userInstance || encrypt(password).then((hash) => {
+    user.password = hash;
+    User.forge(user).save();
+  }))
+  .then((userInstance) => {
+    userId = userInstance.id;
+    return Account.forge({ institutionName: 'Bank of America', user_id: user.id }).fetchAll({ withRelated: ['transactions'] });
+  })
+  .then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
+    .then(() => Promise.all(accounts.map(account => account.destroy()))))
+  .then(() => User.forge({ id: userId }).save({ publicToken: null, accessToken: null }))
+  .then(() => Achievement.where({ user_id: userId }).fetchAll())
+  .then(achievements => Promise.all(achievements.map(achievement => achievement.save({ status: false, percentage: 0 }))))
+  .then(() => {
+    accountObject.user_id = userId;
+    return Account.forge(accountObject).save();
+  })
+  .then(() => {
+    const transactions = perfectUser({ startDate: new Date(2016, 11, 30), endDate: new Date() });
+    return transactionsController.bulkCreate(transactions, userId);
+  })
+  .catch(err => console.log(err));
+};
+module.exports();
