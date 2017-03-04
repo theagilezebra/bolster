@@ -1,4 +1,4 @@
-import trimCategories from '../helpers/categoryHelpers.jsx';
+import { trimCategories } from '../helpers/categoryHelpers.jsx';
 
 export default function reducer(state, action) {
   const newState = Object.assign({}, state);
