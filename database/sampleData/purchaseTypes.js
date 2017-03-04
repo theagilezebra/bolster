@@ -2,6 +2,11 @@ module.exports = {
   drinkingOut: {
     _account: '0123456789',
     category_id: '13001001',
+    category: [
+      'Food and Drink',
+      'Bar',
+      'Wine Bar',
+    ],
     name: 'Nectar Wine Lounge',
     meta: {
       location: {
@@ -14,6 +19,11 @@ module.exports = {
   eatingOut: {
     _account: '0123456789',
     category_id: '13005029',
+    category: [
+      'Food and Drink',
+      'Restaurants',
+      'Food Truck',
+    ],
     name: 'Senior Sisig',
     meta: {
       location: {
@@ -26,6 +36,11 @@ module.exports = {
   entertainment: {
     _account: '0123456789',
     category_id: '17001009',
+    category: [
+      'Recreation',
+      'Arts and Entertainment',
+      'Movie Theatres',
+    ],
     name: 'AMC Metreon 16',
     meta: {
       location: {
@@ -38,6 +53,10 @@ module.exports = {
   utilities: {
     _account: '0123456789',
     category_id: '18068000',
+    category: [
+      'Service',
+      'Utilities',
+    ],
     name: 'PG&E',
     meta: {
       location: {
@@ -50,6 +69,11 @@ module.exports = {
   clothesShopping: {
     _account: '0123456789',
     category_id: '19012001',
+    category: [
+      'Shops',
+      'Clothing and Accessories',
+      'Women\'s Store',
+    ],
     name: 'Nordstrom',
     meta: {
       location: {
@@ -62,6 +86,11 @@ module.exports = {
   foodShopping: {
     _account: '0123456789',
     category_id: '19025002',
+    category: [
+      'Shops',
+      'Food and Beverage Store',
+      'Health Food',
+    ],
     name: 'Whole Foods',
     meta: {
       location: {
@@ -74,6 +103,10 @@ module.exports = {
   transportation: {
     _account: '0123456789',
     category_id: '22016000',
+    category: [
+      'Travel',
+      'Taxi',
+    ],
     name: 'Uber',
     meta: {
       location: {
