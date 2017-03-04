@@ -1,5 +1,13 @@
 const { expect, assert } = require('chai');
-const { mapCategories, labelize, populateChart } = require('../client/helpers/transactionHelpers.jsx');
+const {
+  mapCategories,
+  labelize,
+  populateChart,
+  convertTransactions,
+  overwriteTransactionCategories,
+  getDailySpendingAverage,
+} = require('../client/helpers/transactionHelpers.jsx');
+
 const sampleData = [
   { account_id: 1, amount: 34.23, categories: ['Food and Drink', 'Restaurant'], date: '02/23/2017', id: 1, name: 'TacoPlace', user_id: 1 },
   { account_id: 1, amount: 10.01, categories: ['Transfer'], date: '02/24/2017', id: 2, name: 'Bank Fee', user_id: 1 },
@@ -53,5 +61,50 @@ describe('Transaction Helpers', () => {
       expect(chartConfiguration.datasets[0].data[1]).to.equal(54.23);
     });
   });
-});
 
+  describe('convertTransactions', () => {
+    const convertedTransactions = convertTransactions([
+      { amount: '222.22', date: '2016-06-22T07:00:00.000Z', categories: ['First'] },
+      { amount: '18', date: '2025-11-18T07:00:00.000Z', categories: ['First'] },
+    ]);
+
+    it('should convert transaction amounts to numbers', () => {
+      convertedTransactions.forEach((transaction) => {
+        assert.equal(typeof transaction.amount, 'number');
+      });
+    });
+
+    it('should slice trailing timestamp from transaction dates', () => {
+      convertedTransactions.forEach((transaction) => {
+        assert.equal(transaction.date.length, 10);
+      });
+    });
+
+    it('should append Uncategorized to transactions lacking a subcategory', () => {
+      convertedTransactions.forEach((transaction) => {
+        assert.equal(transaction.categories[1], 'Uncategorized');
+      });
+    });
+  });
+
+  describe('overwriteTransactionCategories', () => {
+    let previousTransaction = [{ id: 1, amount: 10, date: '2016-06-22T', categories: ['First', 'Previous'] }];
+    previousTransaction = overwriteTransactionCategories(previousTransaction, [{ id: 1, amount: 10, date: '2016-06-22T', categories: ['First', 'Updated'] }]);
+
+    it('should overwrite transactions of a specified id', () => {
+      assert.equal(JSON.stringify(previousTransaction[0].categories), '["First","Updated"]');
+    });
+  });
+
+  describe('getDailySpendingAverage', () => {
+    const dailyAverage = getDailySpendingAverage([
+      { amount: 120, date: '2016-06-22' },
+      { amount: 500, date: '2016-06-24' },
+      { amount: 70, date: '2016-06-28' },
+    ]);
+
+    it('should output a daily spending average from a list of transactions', () => {
+      assert.equal(dailyAverage, 115);
+    });
+  });
+});
