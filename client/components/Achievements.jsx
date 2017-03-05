@@ -2,17 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Game from './Game.jsx';
 import NavigationBar from './NavBar.jsx';
-import { displayAchievements } from '../helpers/achievementHelpers.js';
+import { displayAchievements } from '../helpers/achievementHelpers';
 
-const Achievements = props => (
+const Achievements = ({ achievements }) => (
   <div>
     <NavigationBar />
     <div className="container quicksand">
       <div className="row">
-
-        {
-           displayAchievements(props.achievements)
-        }
+        {console.log(achievements)}
+        {displayAchievements(achievements)}
       </div>
     </div>
   </div>
