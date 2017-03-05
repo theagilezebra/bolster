@@ -1,4 +1,4 @@
-export default function (categoryList) {
+const trimCategories = (categoryList) => {
   const categoryObj = categoryList.map((category) => {
     category.categories = JSON.parse(category.categories);
     return category;
@@ -14,4 +14,8 @@ export default function (categoryList) {
     categoryObj[category].unshift('Uncategorized');
   }
   return categoryObj;
-}
+};
+
+module.exports = {
+  trimCategories,
+};
