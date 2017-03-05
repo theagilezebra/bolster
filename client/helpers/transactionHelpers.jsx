@@ -67,7 +67,7 @@ const renderCategoryDropdown = (categories, transactionCategories, tier, width, 
       categories.map((category, key) => <option key={key}>{category}</option>)
     }
   </select>
-)
+);
 
 const renderTransactions = (transactions, categoryList, callback) => transactions
   .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
@@ -77,7 +77,7 @@ const renderTransactions = (transactions, categoryList, callback) => transaction
       <td>{amount}</td>
       <td>{moment(date).format('MMMM Do YYYY')}</td>
       <td>{renderCategoryDropdown(Object.keys(categoryList), categories, 0, {}, id, callback)}</td>
-      <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, {width: "303px"}, id, callback)}</td>
+      <td>{renderCategoryDropdown(categoryList[categories[0]], categories, 1, { width: '303px' }, id, callback)}</td>
     </tr>
   ));
 
@@ -93,7 +93,7 @@ const populateChart = (data) => {
   return chartConfig;
 };
 
-const convertTransactions = (transactions) => transactions
+const convertTransactions = transactions => transactions
   .filter(transaction => !!transaction && transaction.amount)
   .map((transaction) => {
     if (transaction.categories.length < 2) {
@@ -115,7 +115,7 @@ const overwriteTransactionCategories = (prev, updated) => {
     }
     return temp;
   });
-}
+};
 
 const getDailySpendingAverage = (transactions) => {
   const sorted = transactions.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
@@ -123,7 +123,7 @@ const getDailySpendingAverage = (transactions) => {
     const days = Math.floor((moment(sorted[0].date).valueOf() - moment(sorted[sorted.length - 1].date).valueOf()) / 86400000);
     return Math.floor(Math.floor(transactions.reduce((total, transaction) => total += transaction.amount, 0)) / days);
   }
-}
+};
 
 module.exports = {
   budget,
@@ -133,4 +133,6 @@ module.exports = {
   renderTransactions,
   getDailySpendingAverage,
   overwriteTransactionCategories,
+  mapCategories,
+  labelize,
 };
