@@ -33,6 +33,7 @@ export function checkAuth() {
     })
     .catch((err) => {
       dispatch({ type: 'SIGNOUT', payload: err });
+      return err;
     });
 }
 
