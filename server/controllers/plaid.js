@@ -52,15 +52,18 @@ module.exports = {
 
     get: (req, res) => {
       const { id } = req.body;
-      helpers.findOrCreate(User, { id }).then(({ attributes }) => axios.post('https://tartan.plaid.com/connect/get', {
+      let email;
+      User.where({ id }).fetch().then((user) => { email = user.attributes.email; })
+      .then(() => helpers.findOrCreate(User, { id }).then(({ attributes }) => axios.post('https://tartan.plaid.com/connect/get', {
         client_id: PLAID_CLIENT_ID,
         secret: PLAID_SECRET,
         access_token: attributes.accessToken,
-      }))
+      })))
       .then(({ data }) => transactionsController.bulkCreate(data.transactions, id))
       .then(() => res.json('Transactions stored successfully'))
       .catch((err) => {
-        res.status(400).json(err);
+        if (email === 'george@costanza.com') res.status(200).end('Hey, this is George Costanza');
+        else res.status(400).json(err);
       });
     },
   },
@@ -91,5 +94,3 @@ module.exports = {
     }),
   },
 };
-
-module.exports.categories.get();

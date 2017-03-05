@@ -58,7 +58,7 @@ module.exports = {
 
   delete: (req, res) => {
     const { user_id, accountName } = req.body;
-    Account.forge({ institutionName: accountName }).fetchAll({ withRelated: ['transactions'] })
+    Account.forge({ institutionName: accountName, user_id }).fetchAll({ withRelated: ['transactions'] })
     .then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
       .then(() => Promise.all(accounts.map(account => account.destroy())))
       .then(() => User.forge({ id: user_id }).save({ publicToken: null, accessToken: null }))
