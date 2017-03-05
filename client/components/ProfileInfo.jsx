@@ -145,7 +145,7 @@ const ProfileInfo = ({ userinfo, dispatch, error }) => {
             ref={(ref) => { country = ref; }}
           />
         </div>
-        <input type="submit" />
+        <input type="submit" style={{ marginRight: '10px' }} />
         <span>{error.profileUpdated}</span>
       </form>
     </div>
