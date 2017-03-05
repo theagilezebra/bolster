@@ -136,7 +136,10 @@ db.schema.createTableIfNotExists('addresses', (addresses) => {
   achievements.timestamps();
 })).then((achievements) => {
   console.log('Created Table:', achievements);
+  require('../server/controllers/plaid').categories.get();
 }).catch((err) => {
+  const caughtError = 'alter table "addresses" add constraint "addresses_address_unique" unique ("address") - relation "addresses_address_unique" already exists';
+  if (err.message === caughtError) return;
   console.log(err);
 });
 
