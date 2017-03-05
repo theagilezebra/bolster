@@ -8,6 +8,18 @@ const getAverage = (days, transactions) => {
   return (total / days).toFixed(2);
 };
 
+function earliestTransactionDate(transactions) {
+  let earliest = new Date();
+  for (let i = 0; i < transactions.length; i += 1) {
+    if (!transactions[i]) continue;
+    const currentDate = new Date(transactions[i].attributes.date);
+    if (currentDate < earliest) {
+      earliest = currentDate;
+    }
+  }
+  return moment(earliest).format('MM-DD-YYYY');
+}
+
 function slicePurchasesByDate(transactions, startDate, endDate) {
   if (arguments.length === 2 && !Date.parse(startDate)) throw new Error('Please provide a valid date');
   if (arguments.length === 3 && (!Date.parse(startDate) || !Date.parse(endDate))) throw new Error('Please provide a valid date');
@@ -118,15 +130,18 @@ const hero = (start, days, period, transactions) => {
 
 // Generates achievements of the following type: Reduce spending in category x by y% over period z
 const periodicAchievementGenerator = ({ category, percentage = 0.3, period = 30, purchases, creationDate }) => {
-  let historicalAverage = slicePurchasesByDate(purchases, 0, creationDate);
+  const earliestPurchase = earliestTransactionDate(purchases);
+  const timeSpan = moment(creationDate).diff(moment(earliestPurchase), 'days');
+  let historicalAverage = slicePurchasesByDate(purchases, earliestPurchase, creationDate);
   if (category) historicalAverage = filterPurchasesByCategory(historicalAverage, category);
-  historicalAverage = getAverage(period, historicalAverage);
+  historicalAverage = getAverage(timeSpan / period, historicalAverage);
   const periodAgo = moment().subtract(period, 'days').toString();
   const purchasesOfPeriod = slicePurchasesByDate(purchases, periodAgo);
   const spendingOfPeriod = getTotal(purchasesOfPeriod);
-  if (!spendingOfPeriod) return { percentage: 0 };
+  if (!spendingOfPeriod || !historicalAverage) return { percentage: 0 };
   const spendingReduction = 1 - (spendingOfPeriod / historicalAverage);
-  return spendingReduction >= percentage ? { status: true } : { percentage: spendingReduction / percentage };
+  const score = spendingReduction / percentage;
+  return spendingReduction >= percentage ? { status: true } : { percentage: score > 0 ? score : 0 };
 };
 
 
