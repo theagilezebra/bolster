@@ -25,7 +25,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === 'SIGNOUT') {
+  if (action.type === 'SIGNOUT' || action.type === 'DELETE_USER_SUCCESSFUL') {
     state = defaultState;
   }
   return appReducer(state, action);

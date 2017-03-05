@@ -6,7 +6,7 @@ const chartConfig = {
   labels: [],
   datasets: [
     {
-      label: 'Money Blown',
+      label: 'Money Spent',
       lineTension: 0.3,
       data: [],
       borderColor: '#37f3a8',

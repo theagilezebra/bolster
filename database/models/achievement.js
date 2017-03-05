@@ -10,7 +10,7 @@ module.exports = db.Model.extend({
   user: () => this.belongsTo(User),
   initialize() {
     this.on('updating', ({ attributes }) => {
-      if (this._previousAttributes.status) return;
+      if (!this.changed.status) return;
       let name;
       let email;
       let achievementName;

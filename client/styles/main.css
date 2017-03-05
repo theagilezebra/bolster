@@ -267,4 +267,20 @@ input[type="date"]::-webkit-inner-spin-button {
   display: none;
 }
 
+/*EXPERIMENTAL */
 
+.d7 {
+  color: #D7FFF1
+}
+
+.c {
+  color: #8CD790; 
+}
+
+.af {
+  color: #77AF9C; 
+}
+
+.d {
+  color: #285943;  
+}
