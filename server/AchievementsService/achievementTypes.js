@@ -17,17 +17,17 @@ module.exports = [
   {
     name: 'Trappist Monk',
     structure: 'repeatable',
-    description: 'Spent $0 for one day',
+    description: 'Spend $0 for one day',
   },
   {
     name: 'Daily Hero',
     structure: 'repeatable',
-    description: 'Spent less than last month\'s daily average for one day.',
+    description: 'Spend less than last month\'s daily average for one day.',
   },
   {
     name: 'Weekly Hero',
     structure: 'repeatable',
-    description: 'Spent less than last month\'s weekly average for one week.',
+    description: 'Spend less than last month\'s weekly average for one week.',
   },
   {
     name: 'Stay hungry',
@@ -50,5 +50,3 @@ module.exports = [
     description: 'Reduce your monthly clothes budget by 50%',
   },
 ];
-
-// Peanut butter jelly time!
