@@ -22,6 +22,4 @@ class Landing extends React.Component {
 
 export default connect(state => ({
   signForm: state.render.signForm,
-  // some stuff to connect a session to this user
-  // accept user's input to create a session
 }))(Landing);
