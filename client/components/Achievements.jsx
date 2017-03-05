@@ -9,7 +9,6 @@ const Achievements = ({ achievements }) => (
     <NavigationBar />
     <div className="container quicksand">
       <div className="row">
-        {console.log(achievements)}
         {displayAchievements(achievements)}
       </div>
     </div>
