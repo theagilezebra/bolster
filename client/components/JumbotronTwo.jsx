@@ -1,25 +1,27 @@
 import React from 'react';
 const JumbotronTwo = props => (
-  <div className="centertext whiteback">
-    <h1>How Does Bolster Work?</h1>
-    {/* <button type="button" className="btn" data-toggle="collapse" data-target="#intro"><span className="glyphicon glyphicon-menu-down" /></button>*/}
-    <div id="intro" className="container-fluid centertext introdiv" >
-      <div className="row whiteback explainerdiv">
-        <div className="col-md-12 bigquick">You plug in your transaction data. It's easy and we never share your data.</div>
+  <div className=" container-fluid centertext whiteback">
+    <div id="intro" className="centertext introdiv" >
+      <div className="row whiteback">
+        <div className="col-md-12"><h1 className="headline">Saving money has never been so fun</h1></div>
       </div>
-      <div className="row whiteback explainerdiv">
-        <div className="col-md-12 bigquick"><h1 className="d7">Example</h1>We crunch the numbers</div>
+      <div className="row whiteback">
+        <div className="col-md-4 explainerdiv">
+          <div className="creditimg" />
+          <h2>Plug in your data</h2>
+          <h4>It only takes a few seconds and your data remains encrypted</h4>
+        </div>
+        <div className="col-md-4 explainerdiv">
+          <div className="chartimg" />
+          <h2>So many charts!</h2>
+          <h4>We help you analyze your spending with lots of fancy graphs</h4>
+        </div>
+        <div className="col-md-4 explainerdiv">
+          <div className="medalimg" />
+          <h2>Play games<days /></h2>
+          <h4>Reduce your spending with games catered to your spending patterns. It's fun!</h4>
+        </div>
       </div>
-      <div className="row whiteback explainerdiv">
-        <div className="col-md-12 bigquick"><h1 className="c">Example</h1>You get lots of fancy charts </div>
-      </div>
-      <div className="row whiteback explainerdiv">
-        <div className="col-md-12 bigquick"><h1 className="af">Example</h1>We present you with games designed to help you reduce spending</div>
-      </div>
-      <div className="row whiteback explainerdiv">
-        <div className="col-md-12 bigquick"><h1 className="d">Example</h1>You win at life </div>
-      </div>
-      <h1>It's that easy</h1>
     </div>
   </div>
 );
