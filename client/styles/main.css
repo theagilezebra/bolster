@@ -88,11 +88,7 @@
 
 .explainerdiv {
   padding: 2%; 
-  height: 15%; 
-  margin: 10px; 
-  -webkit-box-shadow: 10px 15px 48px 0px rgba(0,0,0,0.16);
-  -moz-box-shadow: 10px 15px 48px 0px rgba(0,0,0,0.16);
-   box-shadow: 10px 15px 48px 0px rgba(0,0,0,0.16);  
+  height: 50vh; 
 }
 
 .fullwidth {
@@ -127,6 +123,11 @@
 .helvetica {
   font-family: Arial, Helvetica, sans-serif; 
   font-size: 25px;
+}
+
+.headline {
+  font-family: 'Quicksand', 'sans-serif';
+  font-size: 400%;
 }
 
 .inputmargin {
@@ -169,8 +170,10 @@
 }
 
 .introdiv {
-  height: 100vh;
-  transition: height 0.6s;
+  height: 30vh;
+  -webkit-box-shadow: 10px 15px 30px 10px rgba(0,0,0,0.16);
+  -moz-box-shadow: 10px 15px 30px 10px rgba(0,0,0,0.16);
+   box-shadow: 10px 15px 30px 10px rgba(0,0,0,0.16);    
 }
 
 
@@ -196,12 +199,6 @@
   background-position:center;
 }
 
-.littlemoney {
-  height: 33.3vh;
-  background-image: url('../assets/stacks.png');
-  background-repeat: no-repeat;
-  background-position: center center;  
-}
 
 .navchoice {
   font-size: 25px;
@@ -267,20 +264,26 @@ input[type="date"]::-webkit-inner-spin-button {
   display: none;
 }
 
-/*EXPERIMENTAL */
-
-.d7 {
-  color: #D7FFF1
+.chartimg {
+  height: 40%; 
+  background-image: url('../assets/laptop.png');
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center; 
 }
 
-.c {
-  color: #8CD790; 
+.medalimg {
+  height: 40%; 
+  background-image: url('../assets/medal.png'); 
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center; 
 }
 
-.af {
-  color: #77AF9C; 
-}
-
-.d {
-  color: #285943;  
+.creditimg {
+  height: 40%; 
+  background-image: url('../assets/credit-card-1.png');
+  background-repeat:no-repeat;
+  background-size: contain;
+  background-position:center; 
 }
