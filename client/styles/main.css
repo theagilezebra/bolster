@@ -171,9 +171,6 @@
 
 .introdiv {
   height: 30vh;
-  -webkit-box-shadow: 10px 15px 30px 10px rgba(0,0,0,0.16);
-  -moz-box-shadow: 10px 15px 30px 10px rgba(0,0,0,0.16);
-   box-shadow: 10px 15px 30px 10px rgba(0,0,0,0.16);    
 }
 
 
