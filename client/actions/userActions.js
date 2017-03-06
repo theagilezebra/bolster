@@ -30,6 +30,7 @@ export function checkAuth() {
   return dispatch => axios.get('api/users/auth', { headers })
     .then((response) => {
       dispatch({ type: 'AUTH_SUCCESSFUL', payload: response.data });
+      return response;
     })
     .catch((err) => {
       dispatch({ type: 'SIGNOUT', payload: err });
