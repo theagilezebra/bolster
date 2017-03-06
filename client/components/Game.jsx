@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Line } from 'react-progressbar.js';
-import { achievementSubHeading } from '../helpers/achievementHelpers.js';
+import { achievementSubHeading } from '../helpers/achievementHelpers';
 
 const options = {
   color: '#FFEA82',
@@ -18,13 +18,12 @@ const containerStyle = {
 const Game = props => (
   <div>
     <div className="col-md-4">
-      <div className="achievementDiv achievementHeading"> { props.name }</div>
+      <div className="achievementDiv achievementHeading"> {props.name}</div>
+      <div>{props.description}</div>
       <div className="progressbar">
         <Line progress={props.percentage} containerStyle={containerStyle} initialAnimate options={options} containerClassName={'.progressbar'} />
       </div>
-      {
-        achievementSubHeading(props)
-      }
+      {achievementSubHeading(props)}
     </div>
   </div>
 );

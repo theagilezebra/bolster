@@ -30,6 +30,6 @@ module.exports = {
     return periodicAchievementGenerator({ purchases, percentage: 0.5, category: '13001000', creationDate });
   },
   'Do you even thrift?': function (purchases, creationDate) {
-    return periodicAchievementGenerator({ purchases, percentage: 0.5, category: '19040000', creationDate });
+    return periodicAchievementGenerator({ purchases, percentage: 0.5, category: '19012001', creationDate });
   },
 };

@@ -24,7 +24,7 @@ class App extends React.Component {
 
     dispatch(checkAuth())
     .then((response) => {
-      if (response.response.status === 401) return;
+      if (response.response && response.response.status === 401) return;
       dispatch(fetchAccounts());
       dispatch(fetchTransactions());
       dispatch(fetchGoals());

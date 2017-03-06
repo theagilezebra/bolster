@@ -18,7 +18,7 @@ const DeleteAccount = ({ userinfo, dispatch, error }) => {
           <input className="form-control profileinput" type="password" id="password" ref={(ref) => { password = ref; }} />
           <br />
           <label htmlFor="delete-button">Careful: deleting your account is irreversible!</label>
-          <input type="submit" id="delete-button" onClick={deletionHandler} />
+          <input type="submit" id="delete-button" onClick={deletionHandler} style={{ marginLeft: '10px' }} />
           <div className="error-message">{error.deleteUser}</div>
         </div>
       </form>

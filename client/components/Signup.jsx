@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signup } from '../actions/userActions';
+import renderForm from '../actions/renderActions';
 import { fetchCategories } from '../actions/categoryActions';
 
 const Signup = ({ dispatch, error }) => {
@@ -25,7 +26,7 @@ const Signup = ({ dispatch, error }) => {
 
   return (
     <form action="#" onSubmit={submitHandler} className="quicksand">
-      <h3>{'Don\'t have an account? Sign up to get started!'}</h3>
+      <h3>Already have an account? <a onClick={() => { dispatch(renderForm('Signin')); }}>Sign in!</a></h3>
       <div>
         <input
           required

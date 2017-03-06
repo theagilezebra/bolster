@@ -4,7 +4,9 @@ const Goal = require('../models/goal');
 const bcrypt = require('bcrypt-nodejs');
 const Account = require('../models/account');
 const Achievement = require('../models/achievement');
+const AchievementType = require('../models/achievementType');
 const transactionsController = require('../../server/controllers/transactions');
+const achievementCalculator = require('../../server/AchievementsService/achievementCalculators');
 
 const helpers = require('../../server/helpers');
 const perfectUser = require('./perfectUser');
@@ -29,6 +31,8 @@ const accountObject = {
 };
 
 let userId;
+let transactions;
+let savedUser;
 
 const encrypt = pass => new Promise((resolve, reject) => {
   bcrypt.hash((pass), null, null, (err, hash) => {
@@ -44,6 +48,7 @@ module.exports = function populatePerfectUser() {
     User.forge(user).save();
   }))
   .then((userInstance) => {
+    savedUser = userInstance;
     userId = userInstance.id;
     return Account.forge({ institutionName: 'Bank of America', user_id: user.id }).fetchAll({ withRelated: ['transactions'] });
   })
@@ -69,5 +74,20 @@ module.exports = function populatePerfectUser() {
     transactions = transactions.concat(perfectUser({ startDate: new Date(), endDate: moment().add(31, 'day').toDate(), drinkingOut: 149 }));
     return transactionsController.bulkCreate(transactions, userId);
   })
+  .then((purchases) => {
+    transactions = purchases;
+    return AchievementType.forge().fetchAll();
+  })
+  .then(achievements => Promise.all(achievements.map((achievement) => {
+    if (achievement.attributes.structure !== 'profile') {
+      const calculation = achievementCalculator[achievement.attributes.name](transactions, savedUser.attributes.created_at);
+      return Achievement.forge({ user_id: userId, achievementtypes_id: achievement.id }).fetch()
+      .then((achievementInstance) => {
+        if (!achievementInstance.attributes.status) {
+          return achievementInstance.save(calculation);
+        }
+      });
+    }
+  })))
   .catch(err => console.log(err));
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signin } from '../actions/userActions';
+import renderForm from '../actions/renderActions';
 import { fetchAccounts } from '../actions/accountActions';
 import { fetchTransactions, requestTransactions } from '../actions/transActions';
 import { fetchGoals } from '../actions/goalActions';
@@ -34,7 +35,7 @@ const Signin = ({ dispatch, error }) => {
 
   return (
     <form action="#" onSubmit={submitHandler} className="quicksand">
-      <h3>{'Already have an account? Sign in here!'}</h3>
+      <h3>Don&apos;t have an account? <a onClick={() => { dispatch(renderForm('Signup')); }}>Sign up</a> to get started!</h3>
       <div>
         <input
           required
