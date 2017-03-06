@@ -83,7 +83,7 @@ const renderTransactions = (transactions, categoryList, callback) => transaction
 
 const populateChart = (data) => {
   const chartData = [];
-  chartConfig.datasets[0].backgroundColor = ['#00DFAE', '#FC4C4D', '#F2B705', '#00B9B9', '#023E73', '#00CDB4', '#FC4C4D', '#00A0C3', '#01EFAD', '#263650', '#E74E4E', '#57CBFF', '#2273AA'];
+  chartConfig.datasets[0].backgroundColor = ['#00DFAE', '#FC4C4D', '#FCDA02', '#00B9B9', '#023E73', '#00CDB4', '#FC4C4D', '#00A0C3', '#01EFAD', '#263650', '#E74E4E', '#57CBFF', '#2273AA'];
   chartConfig.labels = labelize(data);
   const mapped = mapCategories(data);
   for (const key in mapped) {
