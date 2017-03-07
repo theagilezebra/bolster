@@ -42,10 +42,10 @@ const encrypt = pass => new Promise((resolve, reject) => {
 });
 
 module.exports = function populatePerfectUser() {
-  User.forge({ email }).fetch()
+  return User.forge({ email }).fetch()
   .then(userInstance => userInstance || encrypt(password).then((hash) => {
     user.password = hash;
-    User.forge(user).save();
+    return User.forge(user).save();
   }))
   .then((userInstance) => {
     savedUser = userInstance;
@@ -54,7 +54,10 @@ module.exports = function populatePerfectUser() {
   })
   .then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
     .then(() => Promise.all(accounts.map(account => account.destroy()))))
-  .then(() => Goal.where({ user_id: userId }).fetch().then((goal) => { if (goal) goal.destroy(); }))
+  .then(() => Goal.where({ user_id: userId }).fetch().then((goal) => {
+    if (goal) goal.destroy();
+    return goal;
+  }))
   .then(() => User.forge({ id: userId }).save({ publicToken: null, accessToken: null }))
   .then(() => Achievement.where({ user_id: userId }).fetchAll())
   .then(achievements => Promise.all(achievements.map(achievement => achievement.save({ status: false, percentage: 0 }))))
@@ -82,12 +85,9 @@ module.exports = function populatePerfectUser() {
     if (achievement.attributes.structure !== 'profile') {
       const calculation = achievementCalculator[achievement.attributes.name](transactions, savedUser.attributes.created_at);
       return Achievement.forge({ user_id: userId, achievementtypes_id: achievement.id }).fetch()
-      .then((achievementInstance) => {
-        if (!achievementInstance.attributes.status) {
-          return achievementInstance.save(calculation);
-        }
-      });
+      .then(achievementInstance => !achievementInstance.attributes.status ? achievementInstance.save(calculation) : achievementInstance);
     }
+    return achievement;
   })))
-  .catch(err => console.log(err));
+  .catch(err => console.error(err));
 };
