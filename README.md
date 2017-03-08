@@ -10,7 +10,17 @@ You may wonder what gamification is. It is the process of applying game mechanic
 
 With Bolster, you simply plug in your data, we analyze it and present it to you in an easy way to understand (think charts, lots of charts). This allows you to see patterns in your spending. Your habits become clearer. 
 
-After that, we guide you through ways to make reducing bad habits and reach saving goals into a well designed game. You can track your progress through an overall score. You can think of it as a credit score. We call it a SNAZZY NAME score.
+After that, we guide you through ways to make reducing bad habits and reach saving goals into a well designed game. You can track your progress through an overall score. You can think of it as a credit score. We call it a Bolster score.
 
 Once you start the game, you can check in daily, weekly or monthly and watch your score go up. 
 
+## Experiencing the application
+
+Bolster is deployed at [https://bolsterapp.herokuapp.com/](https://bolsterapp.herokuapp.com/). Feel free to browse, plug in your bank account information and set saving goals or start collecting achievements.
+
+An important disclaimer: while your financial transaction data is secure, it is not yet anonimyzed to Bolster's administrators. For this reason, we've made a user available to login and experience Bolster with rich transaction data. To log in with that user, please use the following credentials:
+
+email: `george@costanza.com`
+password: `seinfeld4life`
+
+George's account is rebuilt on a regular basis, so have all the fun you want with his finances!

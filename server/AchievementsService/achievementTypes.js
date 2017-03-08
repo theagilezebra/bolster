@@ -22,12 +22,12 @@ module.exports = [
   {
     name: 'Daily Hero',
     structure: 'repeatable',
-    description: 'Spend less than last month\'s daily average for one day.',
+    description: 'Spend less than average for one day.',
   },
   {
     name: 'Weekly Hero',
     structure: 'repeatable',
-    description: 'Spend less than last month\'s weekly average for one week.',
+    description: 'Spend less than average for one week.',
   },
   {
     name: 'Stay hungry',

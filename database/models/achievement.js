@@ -20,11 +20,13 @@ module.exports = db.Model.extend({
       .then((user) => {
         name = user.attributes.firstName;
         email = user.attributes.email;
+        return user;
       })
       .then(() => AchievementType.where({ id: attributes.achievementtypes_id }).fetch()
       .then((achievementtype) => {
         achievementName = achievementtype.attributes.name;
         description = achievementtype.attributes.description;
+        return achievementtype;
       }))
       .then(() => nodemailer.createTransport({
         service: 'gmail',
