@@ -50,7 +50,7 @@ module.exports = function populatePerfectUser() {
   .then((userInstance) => {
     savedUser = userInstance;
     userId = userInstance.id;
-    return Account.forge({ institutionName: 'Bank of America', user_id: user.id }).fetchAll({ withRelated: ['transactions'] });
+    return Account.where({ institutionName: 'Bank of America', user_id: userId }).fetchAll({ withRelated: ['transactions'] });
   })
   .then(accounts => Promise.all(accounts.models.map(account => Promise.all(account.relations.transactions.map(transaction => transaction.destroy()))))
     .then(() => Promise.all(accounts.map(account => account.destroy()))))
