@@ -16,6 +16,8 @@ Once you start the game, you can check in daily, weekly or monthly and watch you
 
 ## Experiencing the application
 
+#### [VIDEO DEMO](https://youtu.be/NMzfEG75E2c)
+
 Bolster is deployed at [https://bolsterapp.herokuapp.com/](https://bolsterapp.herokuapp.com/). Feel free to browse, plug in your bank account information and set saving goals or start collecting achievements.
 
 An important disclaimer: while your financial transaction data is secure, it is not yet anonimyzed to Bolster's administrators. For this reason, we've made a user available to login and experience Bolster with rich transaction data. To log in with that user, please use the following credentials:
