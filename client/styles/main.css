@@ -86,10 +86,7 @@
   color: red;
 }
 
-.explainerdiv {
-  padding: 2%; 
-  height: 50vh; 
-}
+
 
 .fullwidth {
   width: 100%;
@@ -125,10 +122,7 @@
   font-size: 25px;
 }
 
-.headline {
-  font-family: 'Quicksand', 'sans-serif';
-  font-size: 400%;
-}
+
 
 .inputmargin {
   margin-right: 10px;
@@ -169,9 +163,7 @@
   font-size: 130%;
 }
 
-.introdiv {
-  height: 30vh;
-}
+
 
 
 .lightgreenjumbo{
@@ -240,11 +232,9 @@
   padding-top: 7%;
   }
 
-.whiteback {
-    background-color: white;
-  }
 
-  .twentyheight {
+
+.twentyheight {
     height: 20%;
   }
 
@@ -266,7 +256,7 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .chartimg {
-  height: 40%; 
+  height: 50%; 
   background-image: url('../assets/laptop.png');
   background-repeat:no-repeat;
   background-size: contain;
@@ -274,7 +264,7 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .medalimg {
-  height: 40%; 
+  height: 50%; 
   background-image: url('../assets/medal.png'); 
   background-repeat:no-repeat;
   background-size: contain;
@@ -282,9 +272,40 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .creditimg {
-  height: 40%; 
+  height: 50%; 
   background-image: url('../assets/credit-card-1.png');
   background-repeat:no-repeat;
   background-size: contain;
   background-position:center; 
+}
+
+.flexboxcontainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.explainerdiv {
+  padding: 2%; 
+  height: 75%; 
+  overflow: scroll;
+}
+
+.whiteback {
+    background-color: white;
+  }
+
+.introdiv {
+  height: 50vh;
+}
+
+.headline {
+  font-family: 'Quicksand', 'sans-serif';
+  font-size: 400%;
 }
